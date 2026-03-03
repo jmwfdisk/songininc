@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리 - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업의 제품 설치 사례와 갤러리를 확인하세요.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        .gallery-hero {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .gallery-hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+        }
+
+        .gallery-hero h1::after {
+            display: none;
+        }
+
+        .gallery-hero p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            opacity: 0.95;
+        }
+
+        .gallery-section {
+            padding-top: 20px;
+            padding-bottom: 0px;
+        }
+
+        .gallery-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .gallery-section .inner {
+            margin-top: 20px;
+        }
+
+        .gallery-intro h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .gallery-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .grid-gallery img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .grid-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 2001;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index-kor.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about-us-kor.html">회사소개</a></li>
+                    <li><a href="./Products-kor.html">제품소개</a></li>
+                    <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    <li><a href="./Community-kor.html">커뮤니티</a></li>
+                    <li><a href="./Customer-Support-kor.html">고객지원</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="eng">ENG</button>
+                <button class="lang-btn active" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">문의하기</a></li>
+                <li><a href="#help">도움말</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="inner">
+            <h1>갤러리</h1>
+            <p>설치 프로젝트 및 쇼케이스</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="inner">
+            <div class="gallery-intro">
+                <h2>프로젝트 쇼케이스</h2>
+                <p>
+                    완료된 프로젝트를 탐색하고 송인산업의 가구 솔루션이 전국의 학교와 사무실 공간을 어떻게 변화시키는지 확인하세요. 각 설치 프로젝트는 고객의 특정 요구사항을 충족하기 위해 신중하게 계획되고 실행됩니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">전체 프로젝트</button>
+        <button class="filter-btn" data-filter="chungbuk">S1 등받이</button>
+    </div>
+
+    <div class="grid-gallery" id="galleryGrid">
+        <img src="./img/SI/chung buk/1.JPG" alt="충북 프로젝트 1" data-category="chungbuk">
+        <img src="./img/SI/chung buk/2.JPG" alt="충북 프로젝트 2" data-category="chungbuk">
+        <img src="./img/SI/chung buk/3.JPG" alt="충북 프로젝트 3" data-category="chungbuk">
+        <img src="./img/SI/JANG/1.jpg" alt="장 프로젝트 1" data-category="chungbuk">
+        <img src="./img/SI/JANG/2.jpg" alt="장 프로젝트 2" data-category="chungbuk">
+        <img src="./img/SI/JANG/3.jpg" alt="장 프로젝트 3" data-category="chungbuk">
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img id="lightboxImage" src="" alt="갤러리 이미지">
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <address>
+                        충청북도 옥천군 옥천동이로 389-11<br>
+                        전화: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>회사</h5>
+                    <ul>
+                        <li><a href="./about-us-kor.html">회사소개</a></li>
+                        <li><a href="./Community-kor.html">커뮤니티</a></li>
+                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>제품</h5>
+                    <ul>
+                        <li><a href="./Products-kor.html">학교 가구</a></li>
+                        <li><a href="./Products-kor.html">사무용 가구</a></li>
+                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>고객지원</h5>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
+                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>정책</h5>
+                    <ul>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">사이트맵</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./index.html">ENG</a>
+                    <a href="./index-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const galleryImages = document.querySelectorAll('.grid-gallery img');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        // Mobile Menu
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        const menuLinks = document.querySelectorAll('#gnb a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Header Scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Lightbox
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImage.src = img.src;
+                lightboxImage.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ESC key to close lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Filter Gallery
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                galleryImages.forEach(img => {
+                    if (filter === 'all' || img.getAttribute('data-category') === filter) {
+                        img.style.display = 'block';
+                        setTimeout(() => {
+                            img.style.opacity = '1';
+                            img.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        img.style.opacity = '0';
+                        img.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            img.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

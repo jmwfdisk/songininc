@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품소개 - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업의 다양한 제품을 확인하세요. 사무실 및 학교용 고품질 가구를 제공합니다.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        .products-hero {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .products-hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+        }
+
+        .products-hero h1::after {
+            display: none;
+        }
+
+        .products-hero p {
+            font-size: clamp(14px, 2.5vw, 20px);
+            opacity: 0.95;
+        }
+
+        .products-section {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .swiper-container {
+            padding: 60px 0;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .swiper-slide:hover img {
+            transform: scale(1.05);
+        }
+
+        .swiper-pagination {
+            position: absolute;
+            left: 3px;
+            top: 973px;
+            margin-top: 0;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--primary-color);
+            opacity: 0.5;
+            width: 12px;
+            height: 12px;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-color);
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 20px;
+        }
+
+        .product-info {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .product-info h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .product-info p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .product-submenu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .submenu-btn {
+            padding: 12px 28px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submenu-btn:hover,
+        .submenu-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index-kor.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about-us-kor.html">회사소개</a></li>
+                    <li><a href="./Products-kor.html">제품소개</a></li>
+                    <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    <li><a href="./Community-kor.html">커뮤니티</a></li>
+                    <li><a href="./Customer-Support-kor.html">고객지원</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="eng">ENG</button>
+                <button class="lang-btn active" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">문의하기</a></li>
+                <li><a href="#help">도움말</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Products Hero -->
+    <section class="products-hero">
+        <div class="inner">
+            <h1>제품 라인업 둘러보기</h1>
+            <p>
+                기능성과 미적 아름다움을 모두 고려하여 설계된 사무실 및 학교 가구의 포괄적인 컬렉션을 발견하세요.<br>
+                각 제품은 로봇 용접 시스템을 포함한 최신 제조 기술을 사용하여 제작되어 내구성과 정밀도를 보장합니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="inner">
+            <div class="product-submenu">
+                <button class="submenu-btn active" data-category="all">전체 제품</button>
+                <button class="submenu-btn" data-category="premium">이동식스툴테이블(우수)</button>
+                <button class="submenu-btn" data-category="standard">이동식스툴테이블(일반)</button>
+                <button class="submenu-btn" data-category="cabinet">사물함</button>
+                <button class="submenu-btn" data-category="custom">색상표</button>
+            </div>
+
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-category="premium">
+                        <img src="./img/S1.png" alt="우수 제품">
+                    </div>
+                    <div class="swiper-slide" data-category="standard">
+                        <img src="./img/ENG-P3.png" alt="제품 3">
+                    </div>
+                    <div class="swiper-slide" data-category="standard">
+                        <img src="./img/ENG-P4.png" alt="제품 4">
+                    </div>
+                    <div class="swiper-slide" data-category="cabinet">
+                        <img src="./img/ENG-P5.png" alt="제품 5">
+                    </div>
+                    <div class="swiper-slide" data-category="cabinet">
+                        <img src="./img/ENG-P6.png" alt="제품 6">
+                    </div>
+                    <div class="swiper-slide" data-category="custom">
+                        <img src="./img/Cus.png" alt="커스텀 제품">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-couch"></i>
+                    <h3>편안한 좌석</h3>
+                    <p>학교와 사무실에서 장시간 사용해도 최대한의 편안함을 제공하는 인체공학적 디자인입니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-table"></i>
+                    <h3>내구성 있는 테이블</h3>
+                    <p>고품질 소재로 견고하게 제작되어 오래 지속되는 성능을 보장합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>맞춤 색상</h3>
+                    <p>공간과 선호도에 맞는 다양한 생동감 있는 색상 중에서 선택할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>쉬운 설치</h3>
+                    <p>명확한 지침과 함께 간단한 조립 과정으로 빠르고 번거롭지 않은 설치가 가능합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <address>
+                        충청북도 옥천군 옥천동이로 389-11<br>
+                        전화: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>회사</h5>
+                    <ul>
+                        <li><a href="./about-us-kor.html">회사소개</a></li>
+                        <li><a href="./Community-kor.html">커뮤니티</a></li>
+                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>제품</h5>
+                    <ul>
+                        <li><a href="./Products-kor.html">학교 가구</a></li>
+                        <li><a href="./Products-kor.html">사무용 가구</a></li>
+                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>고객지원</h5>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
+                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>정책</h5>
+                    <ul>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">사이트맵</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./index.html">ENG</a>
+                    <a href="./index-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        let swiper;
+        const swiperWrapper = document.querySelector('.swiper-wrapper');
+        // 원본 슬라이드들을 복제해서 저장
+        const originalSlides = Array.from(document.querySelectorAll('.swiper-slide')).map(slide => slide.cloneNode(true));
+
+        function initSwiper(category = 'all') {
+            // 모든 슬라이드 제거
+            swiperWrapper.innerHTML = '';
+
+            // 사물함 카테고리일 경우 준비중 메시지 표시
+            if (category === 'cabinet') {
+                const comingSoonSlide = document.createElement('div');
+                comingSoonSlide.className = 'swiper-slide';
+                comingSoonSlide.style.display = 'flex';
+                comingSoonSlide.style.justifyContent = 'center';
+                comingSoonSlide.style.alignItems = 'center';
+                comingSoonSlide.innerHTML = '<div style="text-align: center; font-size: 24px; color: var(--text-light);">준비중입니다</div>';
+                swiperWrapper.appendChild(comingSoonSlide);
+            } else {
+                // 필터링된 슬라이드만 추가
+                originalSlides.forEach(slide => {
+                    const slideCategory = slide.getAttribute('data-category');
+                    if (category === 'all' || slideCategory === category) {
+                        const clonedSlide = slide.cloneNode(true);
+                        swiperWrapper.appendChild(clonedSlide);
+                    }
+                });
+            }
+
+            // Swiper 재생성
+            if (swiper) {
+                swiper.destroy(true, true);
+            }
+
+            swiper = new Swiper('.swiper-container', {
+                loop: false,
+                slidesPerView: 1,
+                spaceBetween: 30,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 2,
+                    },
+                },
+            });
+        }
+
+        // 초기화
+        initSwiper();
+
+        // 서브메뉴 버튼 필터링
+        const submenuButtons = document.querySelectorAll('.submenu-btn');
+        submenuButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                submenuButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.getAttribute('data-category');
+                initSwiper(category);
+            });
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        const menuLinks = document.querySelectorAll('#gnb a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+
