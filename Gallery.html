@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업의 제품 설치 사례와 갤러리를 확인하세요.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* Gallery Intro — same style as Products page intro */
+        .gallery-intro-section {
+            padding: 130px 0 52px;
+            background: #f8faff;
+            text-align: center;
+        }
+        .gallery-eyebrow {
+            display: inline-block;
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+        }
+        .gallery-intro-section h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            padding-bottom: 0;
+            line-height: 1.1;
+        }
+        .gallery-intro-section h1::after { display: none; }
+        .gallery-intro-section > .inner > p {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 560px;
+            margin: 16px auto 0;
+            line-height: 1.65;
+        }
+
+        /* Sticky Filter Tab Bar — same as prod-tabs-wrap */
+        .gallery-tabs-wrap {
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            background: rgba(248, 250, 255, 0.92);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        .filter-btn {
+            padding: 10px 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Gallery Grid Section */
+        .gallery-grid-section {
+            background: var(--bg-light);
+            padding: 60px 0 80px;
+        }
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .grid-gallery img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .grid-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 2001;
+            transition: transform 0.3s ease;
+        }
+        .lightbox-close:hover { transform: rotate(90deg); }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about%20us.html">About Us</a></li>
+                    <li><a href="./Products.html">Products</a></li>
+                    <li><a href="./Gallery.html">Gallery</a></li>
+                    <li><a href="./Community.html">Community</a></li>
+                    <li><a href="./Customer%20Support.html">Customer Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="eng">ENG</button>
+                <button class="lang-btn" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Intro -->
+    <section class="gallery-intro-section">
+        <div class="inner">
+            <span class="gallery-eyebrow">Gallery</span>
+            <h1>Project Showcase</h1>
+            <p>Explore our completed projects and see how our furniture solutions transform spaces in schools and offices across South Korea.</p>
+        </div>
+    </section>
+
+    <!-- Sticky Filter Tabs -->
+    <div class="gallery-tabs-wrap">
+        <div class="gallery-tabs">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="chungbuk">S1 Backrest</button>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-grid-section">
+        <div class="grid-gallery" id="galleryGrid">
+            <img src="./img/SI/chung buk/1.JPG" alt="Chungbuk Project 1" data-category="chungbuk">
+            <img src="./img/SI/chung buk/2.JPG" alt="Chungbuk Project 2" data-category="chungbuk">
+            <img src="./img/SI/chung buk/3.JPG" alt="Chungbuk Project 3" data-category="chungbuk">
+            <img src="./img/SI/JANG/1.jpg" alt="Jang Project 1" data-category="chungbuk">
+            <img src="./img/SI/JANG/2.jpg" alt="Jang Project 2" data-category="chungbuk">
+            <img src="./img/SI/JANG/3.jpg" alt="Jang Project 3" data-category="chungbuk">
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img id="lightboxImage" src="" alt="Gallery Image">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <address>
+                        389-11, Okcheondong-i-ro,<br>
+                        Okcheon-gun, Chungcheongbuk-do<br>
+                        TEL: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="./about%20us.html">About Us</a></li>
+                        <li><a href="./Community.html">Community</a></li>
+                        <li><a href="./Gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="./Products.html">School Furniture</a></li>
+                        <li><a href="./Products.html">Office Furniture</a></li>
+                        <li><a href="./Products.html">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
+                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./index.html">ENG</a>
+                    <a href="./index-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const galleryImages = document.querySelectorAll('.grid-gallery img');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        // Mobile Menu
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        const menuLinks = document.querySelectorAll('#gnb a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Header Scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Lightbox
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImage.src = img.src;
+                lightboxImage.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ESC key to close lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Filter Gallery
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                galleryImages.forEach(img => {
+                    if (filter === 'all' || img.getAttribute('data-category') === filter) {
+                        img.style.display = 'block';
+                        setTimeout(() => {
+                            img.style.opacity = '1';
+                            img.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        img.style.opacity = '0';
+                        img.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            img.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

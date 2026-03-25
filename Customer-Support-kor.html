@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객지원 - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업 고객 지원 센터에 문의하세요. 빠르고 친절한 서비스를 제공합니다.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        .support-hero {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .support-hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+        }
+
+        .support-hero h1::after {
+            display: none;
+        }
+
+        .support-hero p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            opacity: 0.95;
+        }
+
+        .support-section {
+            padding: 20px 0 50px;
+        }
+
+        .support-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .support-intro h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .support-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .contact-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .contact-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .contact-card a {
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--secondary-color);
+        }
+
+        .contact-form-section {
+            background: var(--bg-light);
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .contact-form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-form-wrapper h2 {
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .faq-section {
+            padding: 50px 0 30px;
+        }
+
+        .faq-section h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-question i {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 25px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 20px;
+        }
+
+        .faq-answer p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index-kor.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about-us-kor.html">회사소개</a></li>
+                    <li><a href="./Products-kor.html">제품소개</a></li>
+                    <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    <li><a href="./Community-kor.html">커뮤니티</a></li>
+                    <li><a href="./Customer-Support-kor.html">고객지원</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="eng">ENG</button>
+                <button class="lang-btn active" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">문의하기</a></li>
+                <li><a href="#help">도움말</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Support Hero -->
+    <section class="support-hero">
+        <div class="inner">
+            <h1>고객 지원</h1>
+            <p>언제든지 도와드리겠습니다</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="inner">
+            <h2>자주 묻는 질문</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>어떤 종류의 가구를 제조하나요?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>우리는 테이블, 의자, 책상 및 수납 솔루션을 포함한 사무실 및 학교 가구를 전문으로 합니다. 우리의 제품은 교육 기관, 사무실 및 다목적 공간을 위해 설계되었습니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>설치 서비스를 제공하나요?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>네, 모든 제품에 대해 전문 설치 서비스를 제공합니다. 경험이 풍부한 팀이 적절한 설치를 보장하며 모든 규모의 프로젝트를 처리할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>제품 색상을 맞춤 설정할 수 있나요?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>물론입니다! 우리는 좌석 및 가구를 위한 다양한 색상 옵션을 제공합니다. 스카이 블루, 레드 바이올렛 등 다양한 색상 중에서 공간에 맞게 선택할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>보증 정책은 어떻게 되나요?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>우리는 제품의 품질을 보장합니다. 관심 있는 제품에 대한 구체적인 보증 정보는 문의해 주세요.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>배송은 얼마나 걸리나요?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>배송 시간은 제품 및 주문 규모에 따라 다릅니다. 일반 주문은 보통 2-4주가 소요됩니다. 맞춤 주문의 경우 예상 일정을 문의해 주세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="inner">
+            <div class="support-intro">
+                <h2>문의하기</h2>
+                <p>
+                    질문이 있으시거나 도움이 필요하신가요? 고객 지원 팀이 도와드릴 준비가 되어 있습니다. 아래 채널 중 하나를 통해 연락주시면 가능한 한 빨리 답변드리겠습니다.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>전화</h3>
+                    <p>직접 전화주세요</p>
+                    <a href="tel:043-733-9505">043-733-9505</a>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>이메일</h3>
+                    <p>이메일을 보내주세요</p>
+                    <a href="mailto:songin02656@naver.com">songin02656@naver.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>주소</h3>
+                    <p>충청북도 옥천군</p>
+                    <p>옥천동이로 389-11</p>
+                    <p>대한민국</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <address>
+                        충청북도 옥천군 옥천동이로 389-11<br>
+                        전화: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>회사</h5>
+                    <ul>
+                        <li><a href="./about-us-kor.html">회사소개</a></li>
+                        <li><a href="./Community-kor.html">커뮤니티</a></li>
+                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>제품</h5>
+                    <ul>
+                        <li><a href="./Products-kor.html">학교 가구</a></li>
+                        <li><a href="./Products-kor.html">사무용 가구</a></li>
+                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>고객지원</h5>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
+                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>정책</h5>
+                    <ul>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">사이트맵</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./index.html">ENG</a>
+                    <a href="./index-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        // Mobile Menu
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        const menuLinks = document.querySelectorAll('#gnb a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Header Scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Accordion
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all FAQ items
+                faqItems.forEach(faq => faq.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

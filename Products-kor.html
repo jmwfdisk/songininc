@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품소개 - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업의 다양한 제품을 확인하세요. 이동식스툴테이블, 사물함, 맞춤 색상표까지 — 학교 및 사무용 고품질 가구를 제공합니다.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* ===== PRODUCTS PAGE STYLES ===== */
+
+        /* Page Intro — matches tagline-section background */
+        .products-intro {
+            padding: 130px 0 52px;
+            background: #f8faff;
+            text-align: center;
+        }
+        .products-intro .eyebrow-label {
+            display: inline-block;
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+        }
+        .products-intro h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            padding-bottom: 0;
+            line-height: 1.1;
+        }
+        .products-intro h1::after { display: none; }
+        .products-intro p {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 560px;
+            margin: 16px auto 0;
+            line-height: 1.65;
+        }
+
+        /* Sticky Tab Bar */
+        .prod-tabs-wrap {
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            background: rgba(248, 250, 255, 0.92);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .prod-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        /* Matches .submenu-btn from style.css */
+        .prod-tab {
+            padding: 10px 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .prod-tab:hover {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .prod-tab.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Viewer Section */
+        .prod-viewer-section {
+            background: var(--bg-light);
+            padding: 48px 0 72px;
+        }
+
+        /* Panel visibility */
+        .prod-panel { display: none; }
+        .prod-panel.active { display: block; }
+
+        /* White Card */
+        .pvc-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            min-height: 540px;
+        }
+
+        /* Left — Image Viewer */
+        .pvc-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 52px 44px 40px;
+            background: var(--bg-light);
+            position: relative;
+        }
+        .pvc-images {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pvc-img-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pvc-img {
+            display: none;
+            max-width: 100%;
+            max-height: 360px;
+            width: 100%;
+            object-fit: contain;
+        }
+        .pvc-img.active { display: block; }
+
+        .pvc-next-btn,
+        .pvc-prev-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            z-index: 5;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+        .pvc-next-btn { right: -20px; }
+        .pvc-prev-btn { left: -20px; }
+        .pvc-next-btn:hover,
+        .pvc-prev-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pvc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 28px;
+        }
+        .pvc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+        .pvc-dot.active {
+            background: var(--primary-color);
+        }
+
+        /* Right — Product Info */
+        .pvc-right {
+            padding: 52px 52px 44px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+        .pvc-name {
+            font-size: clamp(26px, 2.8vw, 38px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0;
+            padding-bottom: 0;
+            line-height: 1.2;
+        }
+        .pvc-name::after { display: none; }
+
+        .pvc-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pvc-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        /* Matches .submenu-btn.active gradient style */
+        .pvc-cta-btn {
+            display: inline-block;
+            padding: 12px 26px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+        .pvc-cta-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Features */
+        .pvc-features { flex: 1; }
+        .pvc-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pvc-feature:last-child { border-bottom: none; }
+        /* Matches .why-icon style */
+        .pvc-feat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+            font-size: 17px;
+            margin-top: 2px;
+        }
+        .pvc-feat-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-weight: 500;
+            margin: 0;
+            padding-top: 6px;
+        }
+
+        /* Matches .tab-link style */
+        .pvc-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .pvc-learn-more:hover { gap: 14px; }
+
+        /* Coming Soon State */
+        .pvc-coming-soon {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px;
+            text-align: center;
+        }
+        .pvc-coming-soon i {
+            font-size: 56px;
+            color: var(--border-color);
+            margin-bottom: 24px;
+        }
+        .pvc-coming-soon h3 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        .pvc-coming-soon p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 440px;
+        }
+        .pvc-coming-soon .pvc-cta-btn {
+            margin-top: 32px;
+        }
+
+        /* Bottom Info Strip */
+        .prod-info-strip {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 52px 0;
+        }
+        .prod-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+        .prod-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 0 40px 0 0;
+        }
+        .prod-info-item + .prod-info-item {
+            padding: 0 40px 0 40px;
+            border-left: 1px solid var(--border-color);
+        }
+        .prod-info-item:last-child {
+            padding-right: 0;
+        }
+        .pii-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        .prod-info-item strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .prod-info-item p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .pvc-card {
+                grid-template-columns: 1fr;
+            }
+            .pvc-left {
+                padding: 44px 36px 32px;
+                min-height: 320px;
+            }
+            .pvc-right {
+                padding: 36px 32px 44px;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+            }
+            .pvc-next-btn { right: 0; }
+            .pvc-prev-btn { left: 0; }
+        }
+        @media (max-width: 680px) {
+            .prod-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .prod-tabs-wrap { overflow-x: auto; }
+            .prod-info-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .prod-info-item,
+            .prod-info-item + .prod-info-item {
+                padding: 0;
+                border-left: none;
+            }
+            .pvc-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index-kor.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about-us-kor.html">회사소개</a></li>
+                    <li><a href="./Products-kor.html">제품소개</a></li>
+                    <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    <li><a href="./Community-kor.html">커뮤니티</a></li>
+                    <li><a href="./Customer-Support-kor.html">고객지원</a></li>
+                </ul>
+            </nav>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="eng">ENG</button>
+                <button class="lang-btn active" data-lang="kor">KOR</button>
+            </div>
+            <ul class="util">
+                <li><a href="./Customer-Support-kor.html">문의하기</a></li>
+                <li><a href="#">도움말</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Intro -->
+    <section class="products-intro">
+        <div class="inner">
+            <span class="eyebrow-label">제품 라인업</span>
+            <h1>어떤 제품, 당신의 선택은?</h1>
+            <p>학교와 사무 환경을 위해 정밀하게 제작된 송인산업의 전체 제품 라인업을 만나보세요.</p>
+        </div>
+    </section>
+
+    <!-- Sticky Category Tabs -->
+    <div class="prod-tabs-wrap">
+        <div class="prod-tabs">
+            <button class="prod-tab active" data-target="premium">이동식스툴테이블 (우수형)</button>
+            <button class="prod-tab" data-target="standard">이동식스툴테이블 (일반형)</button>
+            <button class="prod-tab" data-target="cabinet">사물함</button>
+            <button class="prod-tab" data-target="colors">색상표</button>
+        </div>
+    </div>
+
+    <!-- Product Viewer -->
+    <section class="prod-viewer-section">
+        <div class="inner">
+
+            <!-- 우수형 패널 -->
+            <div class="prod-panel active" id="panel-premium">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/우수/S2-B4(빨강)-1200.png" alt="이동식스툴테이블 우수형 — 빨강 등받이 4인">
+                                <img class="pvc-img" src="./img/우수/S2-B6(빨강)-1800(1024).png" alt="이동식스툴테이블 우수형 — 빨강 등받이 6인">
+                                <img class="pvc-img" src="./img/우수/S2-B6(연두)-1200(망펄).png" alt="이동식스툴테이블 우수형 — 연두 등받이 6인">
+                                <img class="pvc-img" src="./img/우수/S2-C4(빨강)-1200(2402).png" alt="이동식스툴테이블 우수형 — 빨강 스툴 4인">
+                                <img class="pvc-img" src="./img/우수/S2-B6(파랑)-1800(2402).png" alt="이동식스툴테이블 우수형 — 파랑 등받이 6인">
+                            </div>
+                            <button class="pvc-prev-btn" aria-label="이전 이미지">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="pvc-next-btn" aria-label="다음 이미지">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pvc-dots">
+                            <button class="pvc-dot active" aria-label="사진 1"></button>
+                            <button class="pvc-dot" aria-label="사진 2"></button>
+                            <button class="pvc-dot" aria-label="사진 3"></button>
+                            <button class="pvc-dot" aria-label="사진 4"></button>
+                            <button class="pvc-dot" aria-label="사진 5"></button>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">이동식스툴테이블<br>(우수형)</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">가격 문의</span>
+                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">견적 문의</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                <p class="pvc-feat-text">접이식 수납 구조로 공간 효율을 극대화 — 사용하지 않을 때 깔끔하게 정리되며, 다목적 교실에 최적입니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-robot"></i></div>
+                                <p class="pvc-feat-text">로봇 용접 기술을 적용한 정밀 제조 공정으로 균일한 품질과 뛰어난 내구성을 실현합니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">깨끗한 화이트의 완성. 환경 인증 도료로 마감해, 어떤 공간에도 자연스럽게 어울립니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-school"></i></div>
+                                <p class="pvc-feat-text">30년 이상의 납품 실적과 1만 건 이상의 설치 — 전국 학교 및 공공기관이 신뢰하는 제품입니다.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer-Support-kor.html" class="pvc-learn-more">제품 자세히 알아보기 &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 일반형 패널 -->
+            <div class="prod-panel" id="panel-standard">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/일반/s1-B4(딥옐로우)-1200.png" alt="이동식스툴테이블 일반형 — 딥옐로우 등받이 4인">
+                                <img class="pvc-img" src="./img/일반/s1-B4(레드바이올렛)-1200.png" alt="이동식스툴테이블 일반형 — 레드바이올렛 등받이 4인">
+                                <img class="pvc-img" src="./img/일반/s1-B4(샌드핑크, 스카이블루)-1200.png" alt="이동식스툴테이블 일반형 — 샌드핑크·스카이블루 등받이 4인">
+                                <img class="pvc-img" src="./img/일반/s1-B6(감색)-1200.png" alt="이동식스툴테이블 일반형 — 감색 등받이 6인">
+                                <img class="pvc-img" src="./img/일반/s1-B6(바이올렛)-2100.png" alt="이동식스툴테이블 일반형 — 바이올렛 등받이 6인">
+                            </div>
+                            <button class="pvc-prev-btn" aria-label="이전 이미지">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="pvc-next-btn" aria-label="다음 이미지">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pvc-dots">
+                            <button class="pvc-dot active" aria-label="사진 1"></button>
+                            <button class="pvc-dot" aria-label="사진 2"></button>
+                            <button class="pvc-dot" aria-label="사진 3"></button>
+                            <button class="pvc-dot" aria-label="사진 4"></button>
+                            <button class="pvc-dot" aria-label="사진 5"></button>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">이동식스툴테이블<br>(일반형)</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">가격 문의</span>
+                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">견적 문의</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-feather-alt"></i></div>
+                                <p class="pvc-feat-text">경량 설계로 간편한 이동이 가능 — 교실이나 사무실 배치를 필요에 따라 빠르게 바꿀 수 있습니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-layer-group"></i></div>
+                                <p class="pvc-feat-text">강판 프레스 성형 구조로 안정적인 내구성을 확보하면서도 합리적인 가격으로 제공합니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">다양한 색상 옵션을 통해 학습 환경 또는 업무 공간에 맞는 분위기를 연출하세요.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
+                                <p class="pvc-feat-text">대량 납품 가능 — 학교, 관공서, 공공기관 등 전국 단위 조달에 적합합니다.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer-Support-kor.html" class="pvc-learn-more">제품 자세히 알아보기 &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사물함 패널 (준비중) -->
+            <div class="prod-panel" id="panel-cabinet">
+                <div class="pvc-card">
+                    <div class="pvc-coming-soon">
+                        <i class="fas fa-box-open"></i>
+                        <h3>사물함 — 준비중입니다</h3>
+                        <p>사물함 제품에 대한 상세 정보를 준비 중입니다.<br>사전 문의는 고객지원 페이지를 통해 연락해 주세요.</p>
+                        <a href="./Customer-Support-kor.html" class="pvc-cta-btn">문의하기</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 색상표 패널 -->
+            <div class="prod-panel" id="panel-colors">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/Cus.png" alt="색상표">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">맞춤 색상표</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">50가지 이상 색상 제공</span>
+                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">샘플 요청</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">전 제품 라인에 적용 가능한 50가지 이상의 색상 — 선명한 원색부터 차분한 뉴트럴 톤까지 다양하게 제공합니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-shield-alt"></i></div>
+                                <p class="pvc-feat-text">KS 인증 도료 사용으로 안전하고 선명하며 오래 지속되는 발색을 보장합니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-swatchbook"></i></div>
+                                <p class="pvc-feat-text">색상 컨설팅 서비스를 통해 공간에 가장 잘 어울리는 색상 조합을 전문가가 안내해 드립니다.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-check-double"></i></div>
+                                <p class="pvc-feat-text">대량 주문 시에도 동일한 색상 기준으로 일관된 품질을 제공합니다.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer-Support-kor.html" class="pvc-learn-more">색상 샘플 요청하기 &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bottom Info Strip -->
+    <section class="prod-info-strip">
+        <div class="inner">
+            <div class="prod-info-grid">
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-file-invoice"></i></div>
+                    <div>
+                        <strong>맞춤 견적 안내.</strong>
+                        <p>납품 규모와 사양에 맞게 최적의 견적을 제공합니다. 기관 및 기업 단위 문의를 환영합니다.</p>
+                    </div>
+                </div>
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-truck-loading"></i></div>
+                    <div>
+                        <strong>전국 납품 가능.</strong>
+                        <p>전국 학교, 관공서, 기업을 대상으로 안정적인 물류와 신속한 납품 서비스를 제공합니다.</p>
+                    </div>
+                </div>
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-headset"></i></div>
+                    <div>
+                        <strong>사후 서비스 지원.</strong>
+                        <p>납품 후에도 교체, 수리, 맞춤 수정 요청까지 전담 지원팀이 성심껏 도와드립니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <address>
+                        충청북도 옥천군 옥천동이로 389-11<br>
+                        전화: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>회사</h5>
+                    <ul>
+                        <li><a href="./about-us-kor.html">회사소개</a></li>
+                        <li><a href="./Community-kor.html">커뮤니티</a></li>
+                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>제품</h5>
+                    <ul>
+                        <li><a href="./Products-kor.html">학교 가구</a></li>
+                        <li><a href="./Products-kor.html">사무용 가구</a></li>
+                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>고객지원</h5>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
+                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>정책</h5>
+                    <ul>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">사이트맵</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./Products.html">ENG</a>
+                    <a href="./Products-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Tab switching ──────────────────────────────────────────
+        const tabs = document.querySelectorAll('.prod-tab');
+        const panels = document.querySelectorAll('.prod-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.getElementById('panel-' + tab.dataset.target);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ── Image carousel (prev / next buttons) ─────────────────
+        document.querySelectorAll('.pvc-next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.pvc-card');
+                const imgs = card.querySelectorAll('.pvc-img');
+                const dots = card.querySelectorAll('.pvc-dot');
+                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                const nextIdx = (currentIdx + 1) % imgs.length;
+                imgs[currentIdx].classList.remove('active');
+                imgs[nextIdx].classList.add('active');
+                if (dots.length) {
+                    dots[currentIdx].classList.remove('active');
+                    dots[nextIdx].classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('.pvc-prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.pvc-card');
+                const imgs = card.querySelectorAll('.pvc-img');
+                const dots = card.querySelectorAll('.pvc-dot');
+                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                const prevIdx = (currentIdx - 1 + imgs.length) % imgs.length;
+                imgs[currentIdx].classList.remove('active');
+                imgs[prevIdx].classList.add('active');
+                if (dots.length) {
+                    dots[currentIdx].classList.remove('active');
+                    dots[prevIdx].classList.add('active');
+                }
+            });
+        });
+
+        // ── Dot navigation ────────────────────────────────────────
+        document.querySelectorAll('.pvc-dots').forEach(dotsContainer => {
+            const dots = dotsContainer.querySelectorAll('.pvc-dot');
+            const card = dotsContainer.closest('.pvc-card');
+            const imgs = card.querySelectorAll('.pvc-img');
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    imgs.forEach(img => img.classList.remove('active'));
+                    dots.forEach(d => d.classList.remove('active'));
+                    imgs[i].classList.add('active');
+                    dots[i].classList.add('active');
+                });
+            });
+        });
+
+        // ── Header scroll + mobile menu ───────────────────────────
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#gnb a').forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>

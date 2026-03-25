@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업 커뮤니티에서 최신 소식과 업데이트를 확인하세요.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        .community-hero {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .community-hero h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+        }
+
+        .community-hero h1::after {
+            display: none;
+        }
+
+        .community-hero p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            opacity: 0.95;
+        }
+
+        .community-section {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .community-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .community-intro h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .community-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+            justify-items: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .news-card {
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .news-card .pic {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .news-card .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .news-card:hover .pic img {
+            transform: scale(1.1);
+        }
+
+        .news-card .content {
+            padding: 20px;
+        }
+
+        .news-card .date {
+            font-size: 13px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .news-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .news-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .news-card .read-more:hover {
+            gap: 12px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 80px 0;
+            margin-top: 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: var(--primary-color);
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        @media (max-width: 1024px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about%20us.html">About Us</a></li>
+                    <li><a href="./Products.html">Products</a></li>
+                    <li><a href="./Gallery.html">Gallery</a></li>
+                    <li><a href="./Community.html">Community</a></li>
+                    <li><a href="./Customer%20Support.html">Customer Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="eng">ENG</button>
+                <button class="lang-btn" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Community Hero -->
+    <section class="community-hero">
+        <div class="inner">
+            <h1>Community</h1>
+            <p>Latest News & Updates</p>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="inner">
+            <div class="community-intro">
+                <h2>Stay Connected</h2>
+                <p>
+                    Stay up to date with the latest news, product launches, installation projects, and company updates from SONGIN INDUSTRY. Join our community and be the first to know about new developments.
+                </p>
+            </div>
+
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="pic">
+                        <img src="./img/news.jpg" alt="장곡초등학교 설치">
+                    </div>
+                    <div class="content">
+                        <div class="date">January 15, 2025</div>
+                        <h3>Installation at Janggok Elementary School</h3>
+                        <p>To provide students with an uplifting and functional dining experience, we installed a coordinated setup of vivid, colorful chairs and sleek white tables.</p>
+                        <a href="#" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="pic">
+                        <img src="./img/news2.png" alt="로봇 용접 기술">
+                    </div>
+                    <div class="content">
+                        <div class="date">December 20, 2024</div>
+                        <h3>Industry's First Introduction of Robotic Welding Technology</h3>
+                        <p>Experience Songin Industry's field-driven operations and technological innovation through the introduction of cutting-edge robotic welding technology.</p>
+                        <a href="#" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="pic">
+                        <img src="./img/news3.png" alt="신제품 소개">
+                    </div>
+                    <div class="content">
+                        <div class="date">November 10, 2024</div>
+                        <h3>Discover Our Newest Products</h3>
+                        <p>Optimize your space with this all-in-one integrated folding table and seating system. Designed for efficiency and comfort.</p>
+                        <a href="#" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="pic">
+                        <img src="./img/news4.png" alt="액세서리 옵션">
+                    </div>
+                    <div class="content">
+                        <div class="date">October 5, 2024</div>
+                        <h3>Customize Your Setup with Versatile Accessory Options</h3>
+                        <p>Choose from a vibrant selection of seat colors to match your environment and preferences. From calming Sky Blue to energetic Red Violet.</p>
+                        <a href="#" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <address>
+                        389-11, Okcheondong-i-ro,<br>
+                        Okcheon-gun, Chungcheongbuk-do<br>
+                        TEL: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="./about%20us.html">About Us</a></li>
+                        <li><a href="./Community.html">Community</a></li>
+                        <li><a href="./Gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="./Products.html">School Furniture</a></li>
+                        <li><a href="./Products.html">Office Furniture</a></li>
+                        <li><a href="./Products.html">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
+                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./index.html">ENG</a>
+                    <a href="./index-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        const menuLinks = document.querySelectorAll('#gnb a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate news cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.news-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

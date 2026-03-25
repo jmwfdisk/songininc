@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="Explore SONGIN INDUSTRY's full range of school and office furniture — portable stool tables, cabinets, and custom color options.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* ===== PRODUCTS PAGE STYLES ===== */
+
+        /* Page Intro — matches tagline-section background */
+        .products-intro {
+            padding: 130px 0 52px;
+            background: #f8faff;
+            text-align: center;
+        }
+        .products-intro .eyebrow-label {
+            display: inline-block;
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+        }
+        .products-intro h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            padding-bottom: 0;
+            line-height: 1.1;
+        }
+        .products-intro h1::after { display: none; }
+        .products-intro p {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 560px;
+            margin: 16px auto 0;
+            line-height: 1.65;
+        }
+
+        /* Sticky Tab Bar */
+        .prod-tabs-wrap {
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            background: rgba(248, 250, 255, 0.92);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .prod-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        /* Matches .submenu-btn from style.css */
+        .prod-tab {
+            padding: 10px 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .prod-tab:hover {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .prod-tab.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Viewer Section */
+        .prod-viewer-section {
+            background: var(--bg-light);
+            padding: 48px 0 72px;
+        }
+
+        /* Panel visibility */
+        .prod-panel { display: none; }
+        .prod-panel.active { display: block; }
+
+        /* White Card */
+        .pvc-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            min-height: 540px;
+        }
+
+        /* Left — Image Viewer */
+        .pvc-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 52px 44px 40px;
+            background: var(--bg-light);
+            position: relative;
+        }
+        .pvc-images {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pvc-img-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pvc-img {
+            display: none;
+            max-width: 100%;
+            max-height: 360px;
+            width: 100%;
+            object-fit: contain;
+        }
+        .pvc-img.active { display: block; }
+
+        .pvc-next-btn,
+        .pvc-prev-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            z-index: 5;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+        .pvc-next-btn { right: -20px; }
+        .pvc-prev-btn { left: -20px; }
+        .pvc-next-btn:hover,
+        .pvc-prev-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pvc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 28px;
+        }
+        .pvc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+        .pvc-dot.active {
+            background: var(--primary-color);
+        }
+
+        /* Right — Product Info */
+        .pvc-right {
+            padding: 52px 52px 44px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+        .pvc-name {
+            font-size: clamp(26px, 2.8vw, 38px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0;
+            padding-bottom: 0;
+            line-height: 1.2;
+        }
+        .pvc-name::after { display: none; }
+
+        .pvc-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pvc-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        /* Matches .submenu-btn.active gradient style */
+        .pvc-cta-btn {
+            display: inline-block;
+            padding: 12px 26px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+        .pvc-cta-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Features */
+        .pvc-features { flex: 1; }
+        .pvc-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .pvc-feature:last-child { border-bottom: none; }
+        /* Matches .why-icon style */
+        .pvc-feat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+            font-size: 17px;
+            margin-top: 2px;
+        }
+        .pvc-feat-text {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-weight: 500;
+            margin: 0;
+            padding-top: 6px;
+        }
+
+        /* Matches .tab-link style */
+        .pvc-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .pvc-learn-more:hover { gap: 14px; }
+
+        /* Coming Soon State */
+        .pvc-coming-soon {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px;
+            text-align: center;
+        }
+        .pvc-coming-soon i {
+            font-size: 56px;
+            color: var(--border-color);
+            margin-bottom: 24px;
+        }
+        .pvc-coming-soon h3 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        .pvc-coming-soon p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 440px;
+        }
+        .pvc-coming-soon .pvc-cta-btn {
+            margin-top: 32px;
+        }
+
+        /* Bottom Info Strip */
+        .prod-info-strip {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 52px 0;
+        }
+        .prod-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+        .prod-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 0 40px 0 0;
+        }
+        .prod-info-item + .prod-info-item {
+            padding: 0 40px 0 40px;
+            border-left: 1px solid var(--border-color);
+        }
+        .prod-info-item:last-child {
+            padding-right: 0;
+        }
+        .pii-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        .prod-info-item strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .prod-info-item p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .pvc-card {
+                grid-template-columns: 1fr;
+            }
+            .pvc-left {
+                padding: 44px 36px 32px;
+                min-height: 320px;
+            }
+            .pvc-right {
+                padding: 36px 32px 44px;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+            }
+            .pvc-next-btn { right: 0; }
+            .pvc-prev-btn { left: 0; }
+        }
+        @media (max-width: 680px) {
+            .prod-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .prod-tabs-wrap { overflow-x: auto; }
+            .prod-info-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .prod-info-item,
+            .prod-info-item + .prod-info-item {
+                padding: 0;
+                border-left: none;
+            }
+            .pvc-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about%20us.html">About Us</a></li>
+                    <li><a href="./Products.html">Products</a></li>
+                    <li><a href="./Gallery.html">Gallery</a></li>
+                    <li><a href="./Community.html">Community</a></li>
+                    <li><a href="./Customer%20Support.html">Customer Support</a></li>
+                </ul>
+            </nav>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="eng">ENG</button>
+                <button class="lang-btn" data-lang="kor">KOR</button>
+            </div>
+            <ul class="util">
+                <li><a href="./Customer%20Support.html">Contact</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Intro -->
+    <section class="products-intro">
+        <div class="inner">
+            <span class="eyebrow-label">Product Lineup</span>
+            <h1>Which product is right for you?</h1>
+            <p>Discover our complete range of school and office furniture — crafted with precision and built to last.</p>
+        </div>
+    </section>
+
+    <!-- Sticky Category Tabs -->
+    <div class="prod-tabs-wrap">
+        <div class="prod-tabs">
+            <button class="prod-tab active" data-target="premium">Stool Table (Premium)</button>
+            <button class="prod-tab" data-target="standard">Stool Table (Standard)</button>
+            <button class="prod-tab" data-target="cabinet">Cabinet</button>
+            <button class="prod-tab" data-target="colors">Color Chart</button>
+        </div>
+    </div>
+
+    <!-- Product Viewer -->
+    <section class="prod-viewer-section">
+        <div class="inner">
+
+            <!-- Premium Panel -->
+            <div class="prod-panel active" id="panel-premium">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/우수/S2-B4(빨강)-1200.png" alt="Portable Stool Table Premium — Red Backrest 4-Seat">
+                                <img class="pvc-img" src="./img/우수/S2-B6(빨강)-1800(1024).png" alt="Portable Stool Table Premium — Red Backrest 6-Seat">
+                                <img class="pvc-img" src="./img/우수/S2-B6(연두)-1200(망펄).png" alt="Portable Stool Table Premium — Lime Backrest 6-Seat">
+                                <img class="pvc-img" src="./img/우수/S2-C4(빨강)-1200(2402).png" alt="Portable Stool Table Premium — Red Stool 4-Seat">
+                                <img class="pvc-img" src="./img/우수/S2-B6(파랑)-1800(2402).png" alt="Portable Stool Table Premium — Blue Backrest 6-Seat">
+                            </div>
+                            <button class="pvc-prev-btn" aria-label="Previous image">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="pvc-next-btn" aria-label="Next image">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pvc-dots">
+                            <button class="pvc-dot active" aria-label="Image 1"></button>
+                            <button class="pvc-dot" aria-label="Image 2"></button>
+                            <button class="pvc-dot" aria-label="Image 3"></button>
+                            <button class="pvc-dot" aria-label="Image 4"></button>
+                            <button class="pvc-dot" aria-label="Image 5"></button>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">Portable Stool Table<br>(Premium)</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">Inquiry for pricing</span>
+                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Quote</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                <p class="pvc-feat-text">Compact foldable design for space-efficient storage — stacks neatly when not in use, ideal for multi-purpose rooms.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-robot"></i></div>
+                                <p class="pvc-feat-text">Precision-crafted using robotic welding technology for consistent weld quality and exceptional structural strength.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">A clean, pure white finish. Coated with eco-certified paint that blends naturally into any space.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-school"></i></div>
+                                <p class="pvc-feat-text">Trusted by schools and public institutions across Korea for over 30 years, with 10,000+ successful installations.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standard Panel -->
+            <div class="prod-panel" id="panel-standard">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/일반/s1-B4(딥옐로우)-1200.png" alt="Portable Stool Table Standard — Deep Yellow Backrest 4-Seat">
+                                <img class="pvc-img" src="./img/일반/s1-B4(레드바이올렛)-1200.png" alt="Portable Stool Table Standard — Red Violet Backrest 4-Seat">
+                                <img class="pvc-img" src="./img/일반/s1-B4(샌드핑크, 스카이블루)-1200.png" alt="Portable Stool Table Standard — Sand Pink &amp; Sky Blue Backrest 4-Seat">
+                                <img class="pvc-img" src="./img/일반/s1-B6(감색)-1200.png" alt="Portable Stool Table Standard — Dark Navy Backrest 6-Seat">
+                                <img class="pvc-img" src="./img/일반/s1-B6(바이올렛)-2100.png" alt="Portable Stool Table Standard — Violet Backrest 6-Seat">
+                            </div>
+                            <button class="pvc-prev-btn" aria-label="Previous image">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="pvc-next-btn" aria-label="Next image">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pvc-dots">
+                            <button class="pvc-dot active" aria-label="Image 1"></button>
+                            <button class="pvc-dot" aria-label="Image 2"></button>
+                            <button class="pvc-dot" aria-label="Image 3"></button>
+                            <button class="pvc-dot" aria-label="Image 4"></button>
+                            <button class="pvc-dot" aria-label="Image 5"></button>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">Portable Stool Table<br>(Standard)</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">Inquiry for pricing</span>
+                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Quote</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-feather-alt"></i></div>
+                                <p class="pvc-feat-text">Lightweight construction for easy portability — rearrange your classroom or office layout in seconds.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-layer-group"></i></div>
+                                <p class="pvc-feat-text">Press-formed steel plate structure provides reliable durability and stable seating at an accessible price point.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">Choose from a vibrant range of colors to personalize your learning or working environment.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
+                                <p class="pvc-feat-text">Available for large-volume procurement — ideal for schools, government offices, and public institutions nationwide.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cabinet Panel (Coming Soon) -->
+            <div class="prod-panel" id="panel-cabinet">
+                <div class="pvc-card">
+                    <div class="pvc-coming-soon">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Cabinet — Coming Soon</h3>
+                        <p>We're preparing detailed information for our cabinet product line.<br>Contact us for early inquiries and specifications.</p>
+                        <a href="./Customer%20Support.html" class="pvc-cta-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Chart Panel -->
+            <div class="prod-panel" id="panel-colors">
+                <div class="pvc-card">
+                    <div class="pvc-left">
+                        <div class="pvc-images">
+                            <div class="pvc-img-wrap">
+                                <img class="pvc-img active" src="./img/Cus.png" alt="Color Options Chart">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pvc-right">
+                        <h2 class="pvc-name">Color Options</h2>
+                        <div class="pvc-header-row">
+                            <span class="pvc-subtitle">50+ colors available</span>
+                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Sample</a>
+                        </div>
+                        <div class="pvc-features">
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
+                                <p class="pvc-feat-text">Over 50 curated colors across all product lines — from bold primaries to subtle, professional neutrals.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-shield-alt"></i></div>
+                                <p class="pvc-feat-text">All paints are KS-certified, ensuring safe, vibrant, and long-lasting color for indoor environments.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-swatchbook"></i></div>
+                                <p class="pvc-feat-text">Color consultation available — our team will help you find the perfect palette for your space.</p>
+                            </div>
+                            <div class="pvc-feature">
+                                <div class="pvc-feat-icon"><i class="fas fa-check-double"></i></div>
+                                <p class="pvc-feat-text">Consistent color matching guaranteed across bulk orders — every unit delivered to the same standard.</p>
+                            </div>
+                        </div>
+                        <a href="./Customer%20Support.html" class="pvc-learn-more">Request a color sample &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bottom Info Strip -->
+    <section class="prod-info-strip">
+        <div class="inner">
+            <div class="prod-info-grid">
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-file-invoice"></i></div>
+                    <div>
+                        <strong>Custom Quote.</strong>
+                        <p>Every project is different. Contact us with your specifications and we'll provide a tailored quote for your institution or business.</p>
+                    </div>
+                </div>
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-truck-loading"></i></div>
+                    <div>
+                        <strong>Nationwide Delivery.</strong>
+                        <p>We deliver to schools, government offices, and businesses across Korea — with reliable logistics and on-time support.</p>
+                    </div>
+                </div>
+                <div class="prod-info-item">
+                    <div class="pii-icon"><i class="fas fa-headset"></i></div>
+                    <div>
+                        <strong>After-Sales Support.</strong>
+                        <p>Our dedicated support team is here to help with questions, replacements, or custom modification requests after purchase.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <address>
+                        389-11, Okcheondong-i-ro,<br>
+                        Okcheon-gun, Chungcheongbuk-do<br>
+                        TEL: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="./about%20us.html">About Us</a></li>
+                        <li><a href="./Community.html">Community</a></li>
+                        <li><a href="./Gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="./Products.html">School Furniture</a></li>
+                        <li><a href="./Products.html">Office Furniture</a></li>
+                        <li><a href="./Products.html">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
+                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./Products.html">ENG</a>
+                    <a href="./Products-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Tab switching ──────────────────────────────────────────
+        const tabs = document.querySelectorAll('.prod-tab');
+        const panels = document.querySelectorAll('.prod-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.getElementById('panel-' + tab.dataset.target);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ── Image carousel (prev / next buttons) ─────────────────
+        document.querySelectorAll('.pvc-next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.pvc-card');
+                const imgs = card.querySelectorAll('.pvc-img');
+                const dots = card.querySelectorAll('.pvc-dot');
+                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                const nextIdx = (currentIdx + 1) % imgs.length;
+                imgs[currentIdx].classList.remove('active');
+                imgs[nextIdx].classList.add('active');
+                if (dots.length) {
+                    dots[currentIdx].classList.remove('active');
+                    dots[nextIdx].classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('.pvc-prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.pvc-card');
+                const imgs = card.querySelectorAll('.pvc-img');
+                const dots = card.querySelectorAll('.pvc-dot');
+                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                const prevIdx = (currentIdx - 1 + imgs.length) % imgs.length;
+                imgs[currentIdx].classList.remove('active');
+                imgs[prevIdx].classList.add('active');
+                if (dots.length) {
+                    dots[currentIdx].classList.remove('active');
+                    dots[prevIdx].classList.add('active');
+                }
+            });
+        });
+
+        // ── Dot navigation ────────────────────────────────────────
+        document.querySelectorAll('.pvc-dots').forEach(dotsContainer => {
+            const dots = dotsContainer.querySelectorAll('.pvc-dot');
+            const card = dotsContainer.closest('.pvc-card');
+            const imgs = card.querySelectorAll('.pvc-img');
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    imgs.forEach(img => img.classList.remove('active'));
+                    dots.forEach(d => d.classList.remove('active'));
+                    imgs[i].classList.add('active');
+                    dots[i].classList.add('active');
+                });
+            });
+        });
+
+        // ── Header scroll + mobile menu ───────────────────────────
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#gnb a').forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>
