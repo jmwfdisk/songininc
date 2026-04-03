@@ -82,11 +82,14 @@ If you add new `h1` elements inside sections, check that global `section .inner 
 
 `.news-card` and `.why-card` are intentionally set to `opacity: 0; transform: translateY(24px)` in CSS. They become visible only when an `IntersectionObserver` (inline script at the bottom of the relevant HTML files) adds the `.fade-in` class. If cards appear invisible, verify the inline JS observer is present on that page.
 
+## Deployment
+
+The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at the repo root maps the custom domain. Pushing to the `main` branch deploys automatically.
+
 ## Assets
 
 - `img/` — all images and `visual.mp4` (hero video)
 - `img/SI/` — factory/location images (subfolders: `JANG/`, `chung buk/`)
-- `backup/` — backup copies of all HTML/CSS/JS files (not served; do not edit)
 - External CDNs: Font Awesome 6.4.0, Swiper 8.0
 
 ## Extended Documentation
