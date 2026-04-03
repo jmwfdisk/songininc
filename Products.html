@@ -289,6 +289,29 @@
         }
         .pvc-learn-more:hover { gap: 14px; }
 
+        .pvc-footer-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        .pvc-footer-row .pvc-learn-more { margin-top: 0; }
+        .pvc-catalogue-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .pvc-catalogue-btn:hover { background: #1d4ed8; }
+
         /* Coming Soon State */
         .pvc-coming-soon {
             grid-column: 1 / -1;
@@ -513,7 +536,10 @@
                                 <p class="pvc-feat-text">A clean, pure white finish. Coated with eco-certified paint that blends naturally into any space.</p>
                             </div>
                         </div>
-                        <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                        <div class="pvc-footer-row">
+                            <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -569,7 +595,10 @@
                                 <p class="pvc-feat-text">Available for large-volume procurement — ideal for schools, government offices, and public institutions nationwide.</p>
                             </div>
                         </div>
-                        <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                        <div class="pvc-footer-row">
+                            <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
+                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -620,7 +649,10 @@
                                 <p class="pvc-feat-text">Consistent color matching guaranteed across bulk orders — every unit delivered to the same standard.</p>
                             </div>
                         </div>
-                        <a href="./Customer%20Support.html" class="pvc-learn-more">Request a color sample &rsaquo;</a>
+                        <div class="pvc-footer-row">
+                            <a href="./Customer%20Support.html" class="pvc-learn-more">Request a color sample &rsaquo;</a>
+                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
+                        </div>
                     </div>
                 </div>
             </div>
