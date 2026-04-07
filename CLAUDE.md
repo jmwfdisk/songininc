@@ -33,7 +33,7 @@ Every page exists in two language variants. When editing content, **always updat
 | `Community.html` | `Community-kor.html` |
 | `Customer Support.html` | `Customer-Support-kor.html` |
 
-Language switching is handled by `js/language.js`, which maps page names to their counterparts and stores the user's preference in `localStorage`. English filenames with spaces (e.g. `about us.html`) must be referenced as `%20`-encoded URLs in links and in the `languageMap` object.
+Language switching is handled by `js/language.js`, which maps page names to their counterparts and stores the user's preference in `localStorage`. English filenames with spaces (e.g. `about us.html`) must be referenced as `%20`-encoded URLs in HTML `href` attributes, but the `languageMap` object in `language.js` uses literal spaces as keys (e.g. `'about us.html'`).
 
 ## Architecture
 
@@ -43,7 +43,7 @@ Language switching is handled by `js/language.js`, which maps page names to thei
 3. Page-specific content
 4. Consistent footer
 
-**CSS (`css/style.css`):** Uses CSS custom properties for the design system. Responsive breakpoints at 1024px, 768px, and 480px. Hamburger menu activates below 768px.
+**CSS (`css/style.css`):** Uses CSS custom properties for the design system. Responsive breakpoints at 1024px, 768px, and 480px. Hamburger menu activates below 768px. **Page-specific styles are in an inline `<style>` block inside each HTML file's `<head>`, not in `style.css`.**
 
 **JS (`js/language.js`):** Language switcher only. All other interactivity (scroll effects, Intersection Observer animations, mobile menu toggle) is written inline in `<script>` tags at the bottom of each HTML file.
 
@@ -90,7 +90,7 @@ The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at t
 
 - `img/` — all images and `visual.mp4` (hero video)
 - `img/SI/` — factory/location images (subfolders: `JANG/`, `chung buk/`)
-- External CDNs: Font Awesome 6.4.0, Swiper 8.0
+- External CDNs: Font Awesome 6.4.0 (loaded via `<link>` in every page)
 
 ## Extended Documentation
 
