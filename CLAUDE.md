@@ -90,7 +90,7 @@ Sub-page heroes do the same in their inline `<style>` (e.g. `section.products-in
 
 ## Policy / Sitemap Pages
 
-`privacy*.html`, `terms*.html`, `sitemap*.html` were generated from the Customer Support page template (same header/footer). The privacy policy and terms are **drafts**: items the company must fill in (privacy officer name, effective date, retention period, outsourcing partners) are wrapped in `<mark class="todo">` and render highlighted — fill them and remove the `<mark>` before publishing. `sitemap.xml` / `robots.txt` at the repo root list the public URLs for search engines; update `sitemap.xml` when pages are added or removed.
+`privacy*.html`, `terms*.html`, `sitemap*.html` were generated from the Customer Support page template (same header/footer). The privacy policy and terms are finalised (effective 2026-10-15). The `mark.todo` style is kept for marking any future unconfirmed item — never publish with one left in. Changing these documents legally requires notice on the site 7 days before the new effective date (privacy policy, final article). `sitemap.xml` / `robots.txt` at the repo root list the public URLs for search engines; update `sitemap.xml` when pages are added or removed.
 
 ## Deployment
 
