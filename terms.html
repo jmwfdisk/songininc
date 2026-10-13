@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="SONGIN INDUSTRY website terms of use">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* ===== Policy / sitemap pages ===== */
+        section.doc-hero {
+            margin-top: var(--header-h);
+            padding: 100px 0 56px;
+            text-align: center;
+        }
+        section.doc-hero .inner h1 {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin: 0 auto 16px;
+            padding: 0;
+        }
+        section.doc-hero .inner h1::after { display: none; }
+        .doc-hero .doc-meta {
+            font-size: 15px;
+            color: var(--ink-3);
+        }
+        .doc-section {
+            padding: 0 0 120px;
+        }
+        .doc {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .doc-intro {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--ink-2);
+            padding: 24px 28px;
+            background: var(--surface);
+            border-left: 4px solid var(--brand);
+            margin-bottom: 48px;
+        }
+        .doc h2 {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 48px 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .doc h2 span {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--brand-ink);
+            flex: none;
+        }
+        .doc p,
+        .doc li {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+        .doc ul,
+        .doc ol {
+            margin: 8px 0 8px 4px;
+        }
+        .doc ul li,
+        .doc ol li {
+            position: relative;
+            padding-left: 16px;
+        }
+        .doc ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 0.85em;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--brand);
+        }
+        .doc ol { counter-reset: doc-ol; }
+        .doc ol li { counter-increment: doc-ol; padding-left: 24px; }
+        .doc ol li::before {
+            content: counter(doc-ol) '.';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--brand-ink);
+        }
+        .doc table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .doc th,
+        .doc td {
+            border: 1px solid var(--line);
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+            color: var(--ink-2);
+        }
+        .doc th {
+            background: var(--brand-soft);
+            color: var(--ink);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .doc a { color: var(--brand-ink); text-decoration: underline; }
+        mark.todo {
+            background: #FFF3B0;
+            color: var(--ink);
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        /* Sitemap */
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .sitemap-card {
+            border: 1px solid var(--brand);
+            padding: 24px 24px 20px;
+            background: #fff;
+        }
+        .sitemap-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 0 0 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .sitemap-card h2 a { color: var(--ink); }
+        .sitemap-card h2 a:hover { color: var(--brand-ink); }
+        .sitemap-card ul li a {
+            display: block;
+            padding: 6px 0;
+            font-size: 15px;
+            color: var(--ink-2);
+        }
+        .sitemap-card ul li a::before {
+            content: '–';
+            margin-right: 8px;
+            color: var(--brand);
+        }
+        .sitemap-card ul li a:hover { color: var(--brand-ink); }
+
+        @media (max-width: 900px) {
+            .sitemap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 768px) {
+            section.doc-hero { padding: 64px 0 40px; }
+            .doc-section { padding-bottom: 80px; }
+            .doc-intro { padding: 18px 20px; }
+            .doc table, .doc thead, .doc tbody, .doc tr, .doc th, .doc td { display: block; }
+            .doc th { border-bottom: 0; }
+        }
+        @media (max-width: 480px) {
+            .sitemap-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+              <a href="./index.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+              </a>
+            </h1>
+
+            <nav>
+            <ul id="gnb">
+                <li><a href="./about%20us.html">About Us</a></li>
+                <li><a href="./Products.html">Products</a></li>
+                <li><a href="./Gallery.html">Gallery</a></li>
+                <li><a href="./Customer%20Support.html">Customer Support</a></li>
+            </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="eng">ENG</button>
+                <button class="lang-btn" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Doc Hero -->
+    <section class="doc-hero">
+        <div class="inner">
+            <p class="eyebrow">TERMS OF USE</p>
+            <h1>Terms of Use</h1>
+            <p class="doc-meta">Effective <mark class="todo">[date], 2026</mark></p>
+        </div>
+    </section>
+
+    <section class="doc-section">
+        <div class="inner">
+            <article class="doc">
+                <p class="doc-intro">Thank you for visiting the SONGIN INDUSTRY website. Please read these terms before using the Website.</p>
+                <h2><span>Article 1</span>Purpose</h2>
+                <p>These terms set out the conditions for using the website operated by SONGIN INDUSTRY Co., Ltd. (the “Company”) at songininc.com (the “Website”) and the rights and obligations of the Company and users.</p>
+                <h2><span>Article 2</span>Effect and changes</h2>
+                <ul>
+                    <li>These terms take effect when posted on the Website.</li>
+                    <li>The Company may amend these terms within the limits of applicable law and will announce the effective date and reason at least 7 days in advance.</li>
+                </ul>
+                <h2><span>Article 3</span>Information provided</h2>
+                <p>The Website provides product information, catalogues, delivery references, certification and test results, and contact details. It does not offer membership, online ordering or payment.</p>
+                <h2><span>Article 4</span>Product information and prices</h2>
+                <ul>
+                    <li>Specifications, colours and photos may differ from actual products and may change without notice for product improvement.</li>
+                    <li>Prices shown are reference prices registered on the Korean public procurement service (G2B); actual terms follow individual quotations, contracts or G2B notices.</li>
+                    <li>Test and certification results are as stated in the reports issued by the testing bodies for the samples submitted.</li>
+                </ul>
+                <h2><span>Article 5</span>Intellectual property</h2>
+                <p>All content on the Website and in the catalogue — text, photos, drawings, designs and logos — belongs to the Company or the rightful owner. It may not be copied, transmitted, distributed, modified or used commercially without the Company’s prior written consent.</p>
+                <h2><span>Article 6</span>User obligations</h2>
+                <p>Users must not interfere with the operation of the Website, alter or scrape its content without permission, infringe the intellectual property or reputation of the Company or others, or impersonate the Company.</p>
+                <h2><span>Article 7</span>External links</h2>
+                <p>The Website may contain links to external sites. The Company is not responsible for the content or privacy practices of those sites.</p>
+                <h2><span>Article 8</span>Disclaimer</h2>
+                <ul>
+                    <li>The Company is not liable when it cannot provide the Website due to force majeure such as natural disasters or hosting outages.</li>
+                    <li>While we strive to keep information accurate, please confirm details through an individual quotation or contract before making decisions.</li>
+                </ul>
+                <h2><span>Article 9</span>Governing law and jurisdiction</h2>
+                <p>These terms are governed by the laws of the Republic of Korea. Any dispute relating to the Website shall be subject to the court having jurisdiction under the Korean Civil Procedure Act. In case of any discrepancy, the Korean version prevails.</p>
+                <h2><span>Article 10</span>Effective date</h2>
+                <p>These terms are effective from <mark class="todo">[date], 2026</mark>.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
+                    <address>
+                        389-11, Okcheondong-i-ro,<br>
+                        Okcheon-gun, Chungcheongbuk-do<br>
+                        TEL: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>About Us</h5>
+                    <ul>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./terms.html">ENG</a>
+                    <a href="./terms-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#gnb a').forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>

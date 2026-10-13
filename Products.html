@@ -11,423 +11,527 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/language.js" defer></script>
     <style>
-        /* ===== PRODUCTS PAGE STYLES ===== */
+        /* ===== PRODUCTS PAGE (2026 catalogue layout) ===== */
 
-        /* Page Intro — matches tagline-section background */
-        .products-intro {
-            padding: 130px 0 52px;
-            background: #f8faff;
-            text-align: center;
+        /* ----- Cover hero ----- */
+        section.products-intro {
+            margin-top: var(--header-h);
+            padding: 64px 0 72px;
+            overflow: hidden;
         }
-        .products-intro .eyebrow-label {
-            display: inline-block;
-            font-size: 23px;
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .cover-ghost {
+            font-size: clamp(56px, 7vw, 104px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: #ECECEC;
+        }
+        .cover-series {
+            margin-top: 36px;
+            font-family: var(--font-display);
+            font-size: 14px;
             font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--primary-color);
-            margin-bottom: 14px;
+            letter-spacing: 0.35em;
+            line-height: 2.2;
+            color: #8a8a8a;
         }
-        .products-intro h1 {
-            font-size: clamp(32px, 5vw, 52px);
+        .cover-iso {
+            margin-top: 32px;
+            font-family: var(--font-display);
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-dark);
+            letter-spacing: 0.15em;
+            color: #D98C10;
+        }
+        .cover-certs {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.9;
+            color: #777;
+        }
+        .cover-block {
+            background: var(--brand);
+            color: #fff;
+            padding: clamp(40px, 5vw, 72px) clamp(32px, 4.4vw, 64px);
+        }
+        /* Beats the generic `section .inner h1` rule */
+        section.products-intro .inner .cover-block h1 {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4.4vw, 60px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: 0.01em;
+            color: #fff;
+            text-align: left;
             margin: 0;
-            padding-bottom: 0;
-            line-height: 1.1;
         }
-        .products-intro h1::after { display: none; }
-        .products-intro p {
+        .cover-rule {
+            display: block;
+            width: 96px;
+            height: 2px;
+            background: #fff;
+            margin: 36px 0 28px;
+        }
+        .cover-en {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .cover-s {
+            margin-top: 24px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .cover-desc {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .cover-shots {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 24px;
+            align-items: end;
+            margin: 32px 0 40px;
+        }
+        .cover-shots figcaption {
+            margin-top: 8px;
             font-size: 17px;
-            color: var(--text-light);
-            max-width: 560px;
-            margin: 16px auto 0;
-            line-height: 1.65;
+            font-weight: 300;
+            color: #333;
         }
+        .cover-shots .faded img { opacity: 0.5; }
 
-        /* Sticky Tab Bar */
+        /* ----- Sticky anchor nav ----- */
         .prod-tabs-wrap {
             position: sticky;
-            top: 80px;
+            top: var(--header-h);
             z-index: 100;
-            background: rgba(248, 250, 255, 0.92);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.94);
+            -webkit-backdrop-filter: saturate(180%) blur(16px);
+            backdrop-filter: saturate(180%) blur(16px);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: center;
         }
         .prod-tabs {
             display: flex;
-            justify-content: center;
+            gap: 4px;
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .prod-tabs::-webkit-scrollbar { display: none; }
+        .prod-tab {
+            padding: 9px 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink-2);
+            white-space: nowrap;
+            flex-shrink: 0;
+            border-bottom: 2px solid transparent;
+        }
+        .prod-tab:hover { color: var(--brand-ink); }
+        .prod-tab.active {
+            color: var(--brand-ink);
+            border-bottom-color: var(--brand);
+            font-weight: 700;
+        }
+
+        /* ----- Sections ----- */
+        .cat-section {
+            padding: 96px 0;
+            scroll-margin-top: calc(var(--header-h) + 56px);
+        }
+        .cat-tinted { background: var(--surface); }
+        .cat-head-logos img { height: 34px; }
+        .cat-actions {
+            display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            padding: 0 20px;
+            margin-top: 40px;
         }
-        /* Matches .submenu-btn from style.css */
-        .prod-tab {
-            padding: 10px 24px;
-            background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
+
+        /* Design identity */
+        .identity {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+        .identity-title {
+            font-size: clamp(30px, 3.6vw, 46px);
+            font-weight: 900;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 20px;
+        }
+        .identity-title span { color: #7B58C9; }
+        .identity-text p:last-child {
             font-size: 15px;
-            font-weight: 500;
-            color: var(--text-dark);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+
+        /* Dining table */
+        .dining-top {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .dining-list {
+            margin-top: 24px;
+        }
+        .dining-item .cat-sub { font-size: 20px; }
+        .dining-item p {
+            font-size: 17px;
+            line-height: 2;
+            color: #333;
+            padding-left: 21px;
+            text-wrap: pretty;
+        }
+
+        /* Function cards */
+        .func-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .func-card {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            min-height: 200px;
+            overflow: hidden;
+        }
+        .func-text { padding: 22px 24px; }
+        .func-text h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--brand-ink);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+        .func-text p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #333;
+        }
+        .func-img {
+            position: relative;
+            border-left: 1px solid var(--brand);
+            background: #fff;
+        }
+        .func-img img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .func-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: var(--brand-ink);
+            text-shadow: 0 0 4px #fff, 0 0 4px #fff;
+        }
+
+        /* Performance test cards */
+        .test-card {
+            display: grid;
+            grid-template-columns: 1fr 190px;
+            min-height: 200px;
+            overflow: hidden;
+        }
+        .test-text {
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .test-text h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #333;
+        }
+        .test-text p {
+            font-size: 13px;
+            line-height: 1.65;
+            color: #666;
+            margin-top: 6px;
+        }
+        .test-value {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .test-value strong {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--brand-ink);
             white-space: nowrap;
-            font-family: inherit;
         }
-        .prod-tab:hover {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .test-value span {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
         }
-        .prod-tab.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-color: transparent;
-            box-shadow: var(--shadow-md);
+        .test-value em {
+            font-style: normal;
+            font-size: 13px;
+            color: #666;
+            margin-left: auto;
+            white-space: nowrap;
         }
-
-        /* Viewer Section */
-        .prod-viewer-section {
-            background: var(--bg-light);
-            padding: 48px 0 72px;
+        .test-img {
+            border-left: 1px solid var(--brand);
+            background: #f4f4f4;
         }
-
-        /* Panel visibility */
-        .prod-panel { display: none; }
-        .prod-panel.active { display: block; }
-
-        /* White Card */
-        .pvc-card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: var(--shadow-xl);
+        .test-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .test-logos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            min-height: 540px;
-        }
-
-        /* Left — Image Viewer */
-        .pvc-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 52px 44px 40px;
-            background: var(--bg-light);
-            position: relative;
-        }
-        .pvc-images {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pvc-img-wrap {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pvc-img {
-            display: none;
-            max-width: 100%;
-            max-height: 360px;
-            width: 100%;
-            object-fit: contain;
-        }
-        .pvc-img.active { display: block; }
-
-        .pvc-next-btn,
-        .pvc-prev-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
-            background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            z-index: 5;
-            transition: all 0.3s ease;
-            color: var(--text-dark);
-            font-size: 15px;
-        }
-        .pvc-next-btn { right: -20px; }
-        .pvc-prev-btn { left: -20px; }
-        .pvc-next-btn:hover,
-        .pvc-prev-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pvc-dots {
-            display: flex;
-            justify-content: center;
+            grid-template-rows: repeat(2, minmax(0, 1fr));
             gap: 8px;
-            margin-top: 28px;
+            padding: 12px;
+            background: #fff;
         }
-        .pvc-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border-color);
-            cursor: pointer;
-            transition: background 0.3s ease;
-            border: none;
-            padding: 0;
-        }
-        .pvc-dot.active {
-            background: var(--primary-color);
-        }
+        .test-logos img { object-fit: contain; min-height: 0; }
 
-        /* Right — Product Info */
-        .pvc-right {
-            padding: 52px 52px 44px;
+        /* Antibacterial */
+        .anti-hero {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            min-height: 460px;
+            border-radius: 0 0 0 28px;
+            overflow: hidden;
+        }
+        .anti-block {
+            background: var(--brand);
+            color: #fff;
+            padding: 40px 40px 36px;
             display: flex;
             flex-direction: column;
-            border-left: 1px solid var(--border-color);
-        }
-        .pvc-name {
-            font-size: clamp(26px, 2.8vw, 38px);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0;
-            padding-bottom: 0;
-            line-height: 1.2;
-        }
-        .pvc-name::after { display: none; }
-        .pvc-name .pvc-name-sub { font-size: clamp(22px, 2.4vw, 34px); }
-
-        .pvc-header-row {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 16px 0 24px;
-            border-bottom: 1px solid var(--border-color);
+            gap: 32px;
         }
-        .pvc-subtitle {
-            font-size: 16px;
-            color: var(--text-light);
+        .anti-eyebrow {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
         }
-        /* Matches .submenu-btn.active gradient style */
-        .pvc-cta-btn {
-            display: inline-block;
-            padding: 12px 26px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-md);
+        .anti-lead {
+            font-size: 20px;
+            font-weight: 700;
         }
-        .pvc-cta-btn:hover {
-            opacity: 0.88;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .anti-num {
+            font-family: var(--font-display);
+            font-size: clamp(72px, 10vw, 136px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-top: 12px;
         }
-
-        /* Features */
-        .pvc-features { flex: 1; }
-        .pvc-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 18px 0;
-            border-bottom: 1px solid var(--border-color);
+        .anti-num span {
+            font-size: 0.5em;
+            letter-spacing: 0;
         }
-        .pvc-feature:last-child { border-bottom: none; }
-        /* Matches .why-icon style */
-        .pvc-feat-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        .anti-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-top: 8px;
+        }
+        .anti-foot {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: white;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .anti-foot span {
+            background: #fff;
+            color: var(--brand-ink);
+            font-weight: 900;
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+        }
+        .anti-photo { background: #eee; }
+        .anti-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .bact-card {
+            padding: 22px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .bact-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .bact-top h3 {
             font-size: 17px;
+            font-weight: 700;
+            color: #333;
+        }
+        .bact-top i {
+            display: block;
+            font-size: 12px;
+            color: #888;
             margin-top: 2px;
         }
-        .pvc-feat-text {
-            font-size: 14.5px;
-            color: var(--text-dark);
-            line-height: 1.65;
-            font-weight: 500;
-            margin: 0;
-            padding-top: 6px;
-        }
-
-        /* Matches .tab-link style */
-        .pvc-learn-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 24px;
-            color: var(--primary-color);
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: gap 0.3s ease;
-        }
-        .pvc-learn-more:hover { gap: 14px; }
-
-        .pvc-footer-row {
+        .bact-check {
+            flex: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 24px;
+            justify-content: center;
         }
-        .pvc-footer-row .pvc-learn-more { margin-top: 0; }
-        .pvc-catalogue-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: var(--primary-color);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s ease;
+        .bact-check i { color: #fff; margin: 0; font-size: 12px; }
+        .bact-value {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--brand-ink);
+            margin-top: 8px;
         }
-        .pvc-catalogue-btn:hover { background: #1d4ed8; }
+        .bact-value small { font-size: 0.45em; }
+        .bact-bar {
+            height: 6px;
+            background: var(--brand);
+            border-radius: 3px;
+        }
+        .bact-foot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+        .bact-foot b { color: #333; }
+        .anti-cond {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .anti-cond div {
+            padding: 20px 18px;
+            border-right: 1px solid var(--brand);
+        }
+        .anti-cond div:last-child { border-right: 0; }
+        .anti-cond dt {
+            font-size: 12px;
+            color: #777;
+        }
+        .anti-cond dd {
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
 
-        /* Coming Soon State */
-        .pvc-coming-soon {
-            grid-column: 1 / -1;
+        /* Coming soon */
+        .coming-soon {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 100px 40px;
             text-align: center;
+            padding: 72px 24px;
+            gap: 16px;
         }
-        .pvc-coming-soon i {
-            font-size: 56px;
-            color: var(--border-color);
-            margin-bottom: 24px;
+        .coming-soon i {
+            font-size: 44px;
+            color: var(--brand);
         }
-        .pvc-coming-soon h3 {
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+        .coming-soon h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 900;
+            color: var(--ink);
         }
-        .pvc-coming-soon p {
+        .coming-soon p {
             font-size: 16px;
-            color: var(--text-light);
-            line-height: 1.6;
-            max-width: 440px;
-        }
-        .pvc-coming-soon .pvc-cta-btn {
-            margin-top: 32px;
+            line-height: 1.7;
+            color: var(--ink-2);
+            max-width: 520px;
         }
 
-        /* Bottom Info Strip */
-        .prod-info-strip {
-            background: white;
-            border-top: 1px solid var(--border-color);
-            padding: 52px 0;
+        /* ----- Responsive ----- */
+        @media (max-width: 1024px) {
+            .func-card, .test-card { grid-template-columns: 1fr 140px; }
+            .bact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
-        .prod-info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+        @media (max-width: 900px) {
+            .cover-grid, .identity, .dining-top { grid-template-columns: 1fr; }
+            .func-grid { grid-template-columns: 1fr; }
+            .anti-hero { grid-template-columns: 1fr; }
+            .anti-photo { aspect-ratio: 4 / 3; }
+            .anti-cond { grid-template-columns: repeat(2, 1fr); }
+            .anti-cond div:nth-child(2) { border-right: 0; }
+            .anti-cond div:nth-child(-n+2) { border-bottom: 1px solid var(--brand); }
         }
-        .prod-info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 0 40px 0 0;
+        @media (max-width: 768px) {
+            section.products-intro { padding: 40px 0 48px; }
+            .cover-shots { grid-template-columns: 1fr; }
+            .cover-shots .faded { display: none; }
+            .prod-tabs-wrap { padding: 6px 16px; justify-content: flex-start; }
+            .prod-tab { padding: 8px 12px; font-size: 14px; }
+            .cat-section { padding: 64px 0; }
+            .cat-head-logos { display: none; }
+            .dining-item p { font-size: 15px; line-height: 1.85; }
+            .anti-block { padding: 28px 24px; }
         }
-        .prod-info-item + .prod-info-item {
-            padding: 0 40px 0 40px;
-            border-left: 1px solid var(--border-color);
-        }
-        .prod-info-item:last-child {
-            padding-right: 0;
-        }
-        .pii-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-        .prod-info-item strong {
-            display: block;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-        .prod-info-item p {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 960px) {
-            .pvc-card {
-                grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+            .func-card, .test-card { grid-template-columns: 1fr; }
+            .func-img, .test-img {
+                border-left: 0;
+                border-top: 1px solid var(--brand);
+                height: 180px;
             }
-            .pvc-left {
-                padding: 44px 36px 32px;
-                min-height: 320px;
-            }
-            .pvc-right {
-                padding: 36px 32px 44px;
-                border-left: none;
-                border-top: 1px solid var(--border-color);
-            }
-            .pvc-next-btn { right: 0; }
-            .pvc-prev-btn { left: 0; }
-        }
-        @media (max-width: 680px) {
-            .prod-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-            .prod-tabs-wrap { overflow-x: auto; }
-            .prod-info-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            .prod-info-item,
-            .prod-info-item + .prod-info-item {
-                padding: 0;
-                border-left: none;
-            }
-            .pvc-header-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
+            .test-logos { height: 140px; }
+            .bact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -447,7 +551,6 @@
                     <li><a href="./about%20us.html">About Us</a></li>
                     <li><a href="./Products.html">Products</a></li>
                     <li><a href="./Gallery.html">Gallery</a></li>
-                    <li><a href="./Community.html">Community</a></li>
                     <li><a href="./Customer%20Support.html">Customer Support</a></li>
                 </ul>
             </nav>
@@ -470,226 +573,401 @@
     <!-- Page Intro -->
     <section class="products-intro">
         <div class="inner">
-            <span class="eyebrow-label">Product Lineup</span>
-            <h1>Which product is right for you?</h1>
-            <p>Discover our complete range of school and office furniture — crafted with precision and built to last.</p>
+            <div class="cover-grid">
+                <div class="cover-left">
+                    <p class="cover-ghost">Portable<br>Stool Table</p>
+                    <p class="cover-series">DINING<br>TABLE<br>SERIES</p>
+                    <p class="cover-iso">ISO 9001 / 14001</p>
+                    <p class="cover-certs">Excellent Procurement Product · Public Procurement (MAS) · Patent · Design registration<br>Eco-label · Q-Mark · Group standard · G-PASS company</p>
+                </div>
+                <div class="cover-block">
+                    <h1>SONGIN<br>INDUSTRY</h1>
+                    <span class="cover-rule"></span>
+                    <p class="cover-en">TOTAL OFFICE &amp; SCHOOL<br>FURNITURE</p>
+                    <p class="cover-s">S Series</p>
+                    <p class="cover-desc">Dining tables for group meals at schools, public institutions and companies —<br>an all-in-one table with the seats attached.</p>
+                </div>
+            </div>
+            <div class="cover-shots">
+                <figure><img src="./img/catalog/func/hero-s2.png" alt="S2"><figcaption>S2 Series (Excellent Procurement Product)</figcaption></figure>
+                <figure class="faded"><img src="./img/catalog/func/hero-s1.png" alt="S1"><figcaption>S1 Series (Procurement MAS Product)</figcaption></figure>
+            </div>
+            <div class="cert-strip">
+                        <img src="./img/catalog/logo/logo-excellent.png" alt="Excellent Procurement Product"><img src="./img/catalog/logo/cert-mas-v2.png" alt="MAS"><img src="./img/catalog/logo/logo-eco.png" alt="Eco-label"><img src="./img/catalog/logo/logo-sps.png" alt="SPS"><img src="./img/catalog/logo/logo-q.png" alt="Q"><img src="./img/catalog/logo/logo-gpass.png" alt="G-PASS"><img src="./img/catalog/logo/logo-iso.png" alt="ISO 9001 / 14001"><img src="./img/catalog/logo/logo-patent.png" alt="Patent">
+                    </div>
         </div>
     </section>
 
-    <!-- Sticky Category Tabs -->
-    <div class="prod-tabs-wrap">
+    <!-- Sticky Section Nav -->
+    <nav class="prod-tabs-wrap" aria-label="Product sections">
         <div class="prod-tabs">
-            <button class="prod-tab active" data-target="premium">Stool Table (Premium)</button>
-            <button class="prod-tab" data-target="standard">Stool Table (Standard)</button>
-            <button class="prod-tab" data-target="cabinet">Cabinet</button>
-            <button class="prod-tab" data-target="colors">Color Chart</button>
+            <a class="prod-tab" href="#s2">S2 Series</a>
+            <a class="prod-tab" href="#s1">S1 Series</a>
+            <a class="prod-tab" href="#customizing">Customizing</a>
+            <a class="prod-tab" href="#dining">Features</a>
+            <a class="prod-tab" href="#function">Function</a>
+            <a class="prod-tab" href="#antibacterial">Antibacterial</a>
+            <a class="prod-tab" href="#cabinet">Cabinets</a>
         </div>
-    </div>
+    </nav>
 
-    <!-- Product Viewer -->
-    <section class="prod-viewer-section">
+    <!-- S2 SERIES -->
+    <section class="cat-section" id="s2">
         <div class="inner">
-
-            <!-- Premium Panel -->
-            <div class="prod-panel active" id="panel-premium">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/우수/S2-B4(빨강)-1200.png" alt="Portable Stool Table Premium — Red Backrest 4-Seat">
-                                <img class="pvc-img" src="./img/우수/S2-B6(빨강)-1800(1024).png" alt="Portable Stool Table Premium — Red Backrest 6-Seat">
-                                <img class="pvc-img" src="./img/우수/S2-B6(연두)-1200(망펄).png" alt="Portable Stool Table Premium — Lime Backrest 6-Seat">
-                                <img class="pvc-img" src="./img/우수/S2-C4(빨강)-1200(2402).png" alt="Portable Stool Table Premium — Red Stool 4-Seat">
-                                <img class="pvc-img" src="./img/우수/S2-B6(파랑)-1800(2402).png" alt="Portable Stool Table Premium — Blue Backrest 6-Seat">
-                            </div>
-                            <button class="pvc-prev-btn" aria-label="Previous image">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="pvc-next-btn" aria-label="Next image">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="pvc-dots">
-                            <button class="pvc-dot active" aria-label="Image 1"></button>
-                            <button class="pvc-dot" aria-label="Image 2"></button>
-                            <button class="pvc-dot" aria-label="Image 3"></button>
-                            <button class="pvc-dot" aria-label="Image 4"></button>
-                            <button class="pvc-dot" aria-label="Image 5"></button>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">Portable Stool Table<br><span class="pvc-name-sub">(Premium)</span></h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">Inquiry for pricing</span>
-                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Quote</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-compress-arrows-alt"></i></div>
-                                <p class="pvc-feat-text">Compact foldable design for space-efficient storage — stacks neatly when not in use, ideal for multi-purpose rooms.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-robot"></i></div>
-                                <p class="pvc-feat-text">Precision-crafted using robotic welding technology for consistent weld quality and exceptional structural strength.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">A clean, pure white finish. Coated with eco-certified paint that blends naturally into any space.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
-                                <p class="pvc-feat-text">Bulk supply available — suitable for nationwide procurement including schools, government offices, and public institutions.</p>
-                            </div>
-                        </div>
-                        <div class="pvc-footer-row">
-                            <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
-                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>S2 Series</h2><span class="cat-head-badge"><img src="./img/catalog/logo/logo-excellent.png" alt="">Excellent Procurement Product</span></div>
+                <div class="cert-strip cat-head-logos"><img src="./img/catalog/logo/logo-eco.png" alt=""><img src="./img/catalog/logo/logo-sps.png" alt=""><img src="./img/catalog/logo/logo-q.png" alt=""><img src="./img/catalog/logo/logo-gpass.png" alt=""><img src="./img/catalog/logo/logo-iso.png" alt=""><img src="./img/catalog/logo/logo-patent.png" alt=""></div>
             </div>
-
-            <!-- Standard Panel -->
-            <div class="prod-panel" id="panel-standard">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/일반/s1-B4(딥옐로우)-1200.png" alt="Portable Stool Table Standard — Deep Yellow Backrest 4-Seat">
-                                <img class="pvc-img" src="./img/일반/s1-B4(레드바이올렛)-1200.png" alt="Portable Stool Table Standard — Red Violet Backrest 4-Seat">
-                                <img class="pvc-img" src="./img/일반/s1-B4(샌드핑크, 스카이블루)-1200.png" alt="Portable Stool Table Standard — Sand Pink &amp; Sky Blue Backrest 4-Seat">
-                                <img class="pvc-img" src="./img/일반/s1-B6(감색)-1200.png" alt="Portable Stool Table Standard — Dark Navy Backrest 6-Seat">
-                                <img class="pvc-img" src="./img/일반/s1-B6(바이올렛)-2100.png" alt="Portable Stool Table Standard — Violet Backrest 6-Seat">
-                            </div>
-                            <button class="pvc-prev-btn" aria-label="Previous image">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="pvc-next-btn" aria-label="Next image">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="pvc-dots">
-                            <button class="pvc-dot active" aria-label="Image 1"></button>
-                            <button class="pvc-dot" aria-label="Image 2"></button>
-                            <button class="pvc-dot" aria-label="Image 3"></button>
-                            <button class="pvc-dot" aria-label="Image 4"></button>
-                            <button class="pvc-dot" aria-label="Image 5"></button>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">Portable Stool Table<br><span class="pvc-name-sub">(Standard)</span></h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">Inquiry for pricing</span>
-                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Quote</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-feather-alt"></i></div>
-                                <p class="pvc-feat-text">Lightweight construction for easy portability — rearrange your classroom or office layout in seconds.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-layer-group"></i></div>
-                                <p class="pvc-feat-text">Press-formed steel plate structure provides reliable durability and stable seating at an accessible price point.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">Choose from a vibrant range of colors to personalize your learning or working environment.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
-                                <p class="pvc-feat-text">Available for large-volume procurement — ideal for schools, government offices, and public institutions nationwide.</p>
-                            </div>
-                        </div>
-                        <div class="pvc-footer-row">
-                            <a href="./Customer%20Support.html" class="pvc-learn-more">Learn more about this product &rsaquo;</a>
-                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="cat-lead"><span class="cat-chip">Excellent Procurement · Patented</span><p>An all-in-one dining table with seats attached, built for group meals at schools, public institutions and companies. After use, the seats swing back under the table automatically — keeping the room tidy and making the most of the space.</p></div>
+            <div class="prod-grid">
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b4-1200.png" alt="S2-B4-1200 — Backrest chair : Deep Yellow" loading="lazy"><figcaption>Backrest chair : Deep Yellow</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25349111</span><span>KRW 574,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c4-1200.png" alt="S2-C4-1200 — Round stool : Tomato Red" loading="lazy"><figcaption>Round stool : Tomato Red</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25349110</span><span>KRW 530,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b4-1400.png" alt="S2-B4-1400 — Backrest chair : Sky Blue" loading="lazy"><figcaption>Backrest chair : Sky Blue</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393546</span><span>KRW 641,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c4-1400.png" alt="S2-C4-1400 — Round stool : Sand Pink" loading="lazy"><figcaption>Round stool : Sand Pink</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393545</span><span>KRW 569,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b6-1800.png" alt="S2-B6-1800 — Backrest chair : Deep Orange" loading="lazy"><figcaption>Backrest chair : Deep Orange</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25373133</span><span>KRW 821,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c6-1800.png" alt="S2-C6-1800 — Round stool : Olive Green·Rose Pink" loading="lazy"><figcaption>Round stool : Olive Green·Rose Pink</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25373132</span><span>KRW 711,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b6-2100.png" alt="S2-B6-2100 — Backrest chair : Red Violet" loading="lazy"><figcaption>Backrest chair : Red Violet</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393548</span><span>KRW 986,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c6-2100.png" alt="S2-C6-2100 — Round stool : Rose Pink" loading="lazy"><figcaption>Round stool : Rose Pink</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393547</span><span>KRW 863,000</span></p>
+                </article>
             </div>
-
-            <!-- Cabinet Panel (Coming Soon) -->
-            <div class="prod-panel" id="panel-cabinet">
-                <div class="pvc-card">
-                    <div class="pvc-coming-soon">
-                        <i class="fas fa-box-open"></i>
-                        <h3>Cabinet — Coming Soon</h3>
-                        <p>We're preparing detailed information for our cabinet product line.<br>Contact us for early inquiries and specifications.</p>
-                        <a href="./Customer%20Support.html" class="pvc-cta-btn">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Color Chart Panel -->
-            <div class="prod-panel" id="panel-colors">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/Cus.png" alt="Color Options Chart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">Color Options</h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">50+ colors available</span>
-                            <a href="./Customer%20Support.html" class="pvc-cta-btn">Request Sample</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">Over 50 curated colors across all product lines — from bold primaries to subtle, professional neutrals.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-shield-alt"></i></div>
-                                <p class="pvc-feat-text">All paints are KS-certified, ensuring safe, vibrant, and long-lasting color for indoor environments.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-swatchbook"></i></div>
-                                <p class="pvc-feat-text">Color consultation available — our team will help you find the perfect palette for your space.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-check-double"></i></div>
-                                <p class="pvc-feat-text">Consistent color matching guaranteed across bulk orders — every unit delivered to the same standard.</p>
-                            </div>
-                        </div>
-                        <div class="pvc-footer-row">
-                            <a href="./Customer%20Support.html" class="pvc-learn-more">Request a color sample &rsaquo;</a>
-                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> Download Catalogue</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <p class="cat-note"><b>* Care notice:</b> Strong disinfectants such as bleach may cause rust or corrosion. (Please contact our head office with any questions.)<br>* Designs may change without prior notice.<br>* Prices are as registered on the Korean public procurement service (G2B) and are subject to change.</p>
         </div>
     </section>
 
-    <!-- Bottom Info Strip -->
-    <section class="prod-info-strip">
+    <!-- S1 SERIES -->
+    <section class="cat-section" id="s1">
         <div class="inner">
-            <div class="prod-info-grid">
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-file-invoice"></i></div>
-                    <div>
-                        <strong>Custom Quote.</strong>
-                        <p>Every project is different. Contact us with your specifications and we'll provide a tailored quote for your institution or business.</p>
-                    </div>
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>S1 Series</h2><span class="cat-head-badge"><img src="./img/catalog/logo/cert-mas.png" alt="">Public Procurement (MAS) Product</span></div>
+                <div class="cert-strip cat-head-logos"><img src="./img/catalog/logo/logo-eco.png" alt=""><img src="./img/catalog/logo/logo-sps.png" alt=""><img src="./img/catalog/logo/logo-q.png" alt=""><img src="./img/catalog/logo/logo-gpass.png" alt=""><img src="./img/catalog/logo/logo-iso.png" alt=""><img src="./img/catalog/logo/logo-patent.png" alt=""></div>
+            </div>
+            <div class="cat-lead"><span class="cat-chip">Public Procurement · Patented</span><p>An all-in-one dining table with seats attached, built for group meals at schools, public institutions and companies. After use, the seats swing back under the table automatically — keeping the room tidy and making the most of the space.</p></div>
+            <div class="prod-grid">
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b4-1200.png" alt="S1-B4-1200 — Backrest chair : Red Violet" loading="lazy"><figcaption>Backrest chair : Red Violet</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312119</span><span>KRW 596,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c4-1200.png" alt="S1-C4-1200 — Round stool : Sky Blue·Rose Pink" loading="lazy"><figcaption>Round stool : Sky Blue·Rose Pink</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312121</span><span>KRW 519,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b4-1400.png" alt="S1-B4-1400 — Backrest chair : Deep Yellow" loading="lazy"><figcaption>Backrest chair : Deep Yellow</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236434</span><span>KRW 701,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c4-1400.png" alt="S1-C4-1400 — Round stool : Sky Blue" loading="lazy"><figcaption>Round stool : Sky Blue</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236431</span><span>KRW 603,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b6-1800.png" alt="S1-B6-1800 — Backrest chair : Sky Blue" loading="lazy"><figcaption>Backrest chair : Sky Blue</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312118</span><span>KRW 818,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c6-1800.png" alt="S1-C6-1800 — Round stool : Deep Orange" loading="lazy"><figcaption>Round stool : Deep Orange</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312120</span><span>KRW 697,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b6-2100.png" alt="S1-B6-2100 — Backrest chair : Violet" loading="lazy"><figcaption>Backrest chair : Violet</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236433</span><span>KRW 978,000</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c6-2100.png" alt="S1-C6-2100 — Round stool : Olive Green" loading="lazy"><figcaption>Round stool : Olive Green</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236432</span><span>KRW 863,000</span></p>
+                </article>
+            </div>
+            <p class="cat-note"><b>* Care notice:</b> Strong disinfectants such as bleach may cause rust or corrosion. (Please contact our head office with any questions.)<br>* Designs may change without prior notice.<br>* Prices are as registered on the Korean public procurement service (G2B) and are subject to change.</p>
+            <div class="cat-actions">
+                <a href="./Customer%20Support.html" class="btn-primary">Request a quote</a>
+                <a href="./catalogue.pdf" class="btn-outline-dark" download><i class="fas fa-download"></i> Download Catalogue</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESIGN IDENTITY + CUSTOMIZING -->
+    <section class="cat-section cat-tinted" id="customizing">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Customizing</h2></div>
+                <span class="cat-head-sub">Custom colours</span>
+            </div>
+            <div class="identity">
+                <div class="identity-text">
+                    <p class="identity-title">Pick the colours<br>that suit your <span>space</span>.</p>
+                    <p>7 backrest colours, 8 round-stool colours, 12 side-cover colours and 4 tabletop designs — a colour system you can mix freely to suit any school or dining hall. Every seat is moulded from impact-resistant resin that stays strong and resists fading.</p>
                 </div>
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-truck-loading"></i></div>
-                    <div>
-                        <strong>Nationwide Delivery.</strong>
-                        <p>We deliver to schools, government offices, and businesses across Korea — with reliable logistics and on-time support.</p>
+                <img class="identity-img" src="./img/catalog/func/design-identity.png" alt="" loading="lazy">
+            </div>
+            <div class="cat-lead"><span class="cat-chip">Custom options</span><p>S1 and S2 tables are made to order: choose the tabletop pattern, backrest and seat colours, and side-cover colour (S2 only). Combine 4 tabletops, 7 backrests, 8 seats and 12 side covers freely.</p></div>
+            <h3 class="cat-sub">Tabletop</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-1.png" alt="" loading="lazy"></div><p class="swatch-name">Light Marble(SH-1024)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-2.png" alt="" loading="lazy"></div><p class="swatch-name">Marble(SH-2402)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-3.png" alt="" loading="lazy"></div><p class="swatch-name">Woodgrain(SH-5174)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-4.png" alt="" loading="lazy"></div><p class="swatch-name">Maple Beech(SH-1413)</p></div>
+            </div>
+            <h3 class="cat-sub">Backrest chair</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-violet.png" alt="" loading="lazy"></div><p class="swatch-name">Violet</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-redviolet.png" alt="" loading="lazy"></div><p class="swatch-name">Red Violet</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">Sky Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-deepyellow.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Yellow</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Orange</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-pacificblue.png" alt="" loading="lazy"></div><p class="swatch-name">Pacific Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">Olive Green</p></div>
+            </div>
+            <h3 class="cat-sub">Round stool</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-sandpink.png" alt="" loading="lazy"></div><p class="swatch-name">Sand Pink</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">Sky Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-rosepink.png" alt="" loading="lazy"></div><p class="swatch-name">Rose Pink</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-tomatored.png" alt="" loading="lazy"></div><p class="swatch-name">Tomato Red</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">Olive Green</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-deepblue.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Orange</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-winered.png" alt="" loading="lazy"></div><p class="swatch-name">Wine Red</p></div>
+            </div>
+            <h3 class="cat-sub">Side cover <small class="alert">* Excellent Procurement (S2) only</small></h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-violet.png" alt="" loading="lazy"></div><p class="swatch-name">Violet</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-redviolet.png" alt="" loading="lazy"></div><p class="swatch-name">Red Violet</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-sandpink.png" alt="" loading="lazy"></div><p class="swatch-name">Sand Pink</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-rosepink.png" alt="" loading="lazy"></div><p class="swatch-name">Rose Pink</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">Sky Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-pacificblue.png" alt="" loading="lazy"></div><p class="swatch-name">Pacific Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deepblue.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Blue</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deepyellow.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Yellow</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">Deep Orange</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">Olive Green</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-tomatored.png" alt="" loading="lazy"></div><p class="swatch-name">Tomato Red</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-winered.png" alt="" loading="lazy"></div><p class="swatch-name">Wine Red</p></div>
+            </div>
+            <p class="cat-note"><b>* Custom notice:</b> Available colours may change without notice. (Actual colours may differ from the images shown.)</p>
+        </div>
+    </section>
+
+    <!-- DINING TABLE -->
+    <section class="cat-section" id="dining">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Dining Table</h2></div>
+                <span class="cat-head-sub">Portable stool table series</span>
+            </div>
+            <div class="dining-top">
+                <img src="./img/catalog/func/feature.png" alt="Feature sketch" loading="lazy">
+                <ul class="feat-rows">
+                        <li>Urethane on all four edges prevents injuries</li>
+                        <li>Waterproof coating resists stains</li>
+                        <li>Clean all-in-one design · built-in seat stop</li>
+                        <li>Stainless seat legs — durable and rust-free</li>
+                        <li>Seat stop makes cleaning easy</li>
+                        <li class="strong">10-year after-sales service</li>
+                </ul>
+            </div>
+            <div class="dining-list">
+                <div class="dining-item"><h3 class="cat-sub"><span>Rotation stop</span></h3><p>Seats can be parked outside the table, making it easy to pick up dropped items and clean underneath; the auto-return function is restored after use for the convenience of both users and staff.</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>Automatic seat return / UP &amp; DOWN</span></h3><p>Seats tuck themselves away even if users forget. When someone sits, the post lowers to steady the seat for safety; after use it rises automatically and keeps a constant gap from the floor — quieter and easier to clean.</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>Stainless legs / levelling feet</span></h3><p>Single-pipe stainless legs resist corrosion and rust, and the wide levelling feet protect the pipes during wet cleaning or disinfection, keeping the dining hall hygienic.</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>Urethane-edged top</span></h3><p>Shock-absorbing urethane on all four edges removes sharp corners. Unlike conventional slot-in edging, the urethane is moulded onto the top in one piece — seamless, moisture-resistant and highly impact-resistant.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCTION & PERFORMANCE -->
+    <section class="cat-section cat-tinted" id="function">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Function &amp; Performance</h2></div>
+                <span class="cat-head-sub">Function &amp; performance</span>
+            </div>
+            <div class="cat-lead"><span class="cat-chip">Patent No. 10-2624319</span><p>Portable stool table with rotation control — manufactured and inspected to the function and performance criteria of the Excellent Procurement specification (per KS G 4009 · 4203 · 4215).</p></div>
+            <h3 class="cat-sub">Function &amp; safety</h3>
+            <div class="func-grid">
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>Seats return on their own — cleaning made easy</h3><p>Pull the seat out, sit, stand up — it glides back under the table by itself, slowly and softly, so there is no banging. Pull it all the way out and it stays put, making it easy to clean under the table.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-slow.png" alt="" loading="lazy"><span class="func-label">SLOWLY</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>Safe to sit and stand</h3><p>A spring pulls the seat back gently, so it never snaps. Children can use it safely without the seat hitting their legs.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-safe-v2.png" alt="" loading="lazy"><span class="func-label">SLOW SAFETY</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>Lowers when you sit, rises when you stand</h3><p>The seat dips slightly to support you when you sit, then lifts off the floor when you stand — easy to clean and no scraping noise.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-updown.png" alt="" loading="lazy"><span class="func-label">UP · DOWN</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>Built to stay solid for years</h3><p>Pivot parts are pinned firmly so they never loosen, and the whole frame is robot-welded for strong joints. Passed a 50,000-cycle open/close test.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-robot-v2.png" alt="" loading="lazy"><span class="func-label">ROBOT WELDING</span></div>
+                </article>
+            </div>
+            <h3 class="cat-sub">Performance tests <small>Per KS G 4009 · 4203 · 4215 / Korea Conformity Laboratories (KCL)</small></h3>
+            <div class="func-grid">
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Rotation durability · force</h3><p>12/min · 60° repeated rotation, then minimum opening force</p></div>
+                        <div class="test-value"><strong>50,000</strong><span>cycles</span><em>Passed</em></div>
                     </div>
-                </div>
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-headset"></i></div>
-                    <div>
-                        <strong>After-Sales Support.</strong>
-                        <p>Our dedicated support team is here to help with questions, replacements, or custom modification requests after purchase.</p>
+                    <div class="test-img"><img src="./img/catalog/func/test-rotate.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Vertical durability (seat)</h3><p>KS G 4215 stool standard, repeated load at 12/min</p></div>
+                        <div class="test-value"><strong>950</strong><span>N · 50k</span><em>Passed</em></div>
                     </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-vertical.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Environmental cycling</h3><p>60% R.H. · 12h alternating, 4 cycles</p></div>
+                        <div class="test-value"><strong>-20~80</strong><span>℃</span><em>Passed</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-env.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Drop test</h3><p>Repeated drops per KS G 4203</p></div>
+                        <div class="test-value"><strong>200</strong><span>mm · 100×</span><em>Passed</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-drop.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Operating noise</h3><p>Peak noise on 180° open → auto-return, 10-run average</p></div>
+                        <div class="test-value"><strong>1.0</strong><span>m distance</span><em>Quiet return</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-noise.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>Quality · environmental certification</h3><p>Eco-label 31681 · Q-Mark 2025-032 · Group standard KMFIC-072 · ISO 9001/14001</p></div>
+                        <div class="test-value"><strong>4</strong><span>certifications</span><em>Excellent Procurement</em></div>
+                    </div>
+                    <div class="test-img test-logos"><img src="./img/catalog/logo/logo-eco.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-q.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-sps.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-iso.png" alt="" loading="lazy"></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANTIBACTERIAL -->
+    <section class="cat-section" id="antibacterial">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Antibacterial</h2></div>
+                <span class="cat-head-sub">Antibacterial performance</span>
+            </div>
+            <div class="anti-hero">
+                <div class="anti-block">
+                    <p class="anti-eyebrow">ISO 22196 : 2011 · KCL TEST</p>
+                    <div>
+                        <p class="anti-lead">The tabletop children touch every day,</p>
+                        <p class="anti-num">99.99<span>%</span></p>
+                        <p class="anti-title">antibacterial result</p>
+                    </div>
+                    <p class="anti-foot"><span>6 bacteria</span>all reduced by 99.99% or more</p>
                 </div>
+                <div class="anti-photo"><img src="./img/catalog/site/hoyeon-1.jpg" alt="" loading="lazy"></div>
+            </div>
+            <h3 class="cat-sub">Results <small>KCL · bacteria reduction after 24 hours</small></h3>
+            <div class="bact-grid">
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>E. coli</h3><i>Escherichia coli</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>4.8</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>P. aeruginosa</h3><i>Pseudomonas aeruginosa</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>5.2</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>S. aureus</h3><i>Staphylococcus aureus</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>4.5</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>Salmonella</h3><i>Salmonella enterica</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>4.5</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>K. pneumoniae</h3><i>Klebsiella pneumoniae</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>4.1</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>MRSA (superbug)</h3><i>Methicillin-resistant S. aureus</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>Reduction rate</span><span>Log reduction <b>4.3</b></span></p>
+                </article>
+            </div>
+            <h3 class="cat-sub">Test conditions</h3>
+            <dl class="anti-cond cat-box">
+                <div><dt>Laboratory</dt><dd>Korea Conformity<br>Laboratories (KCL)</dd></div>
+                <div><dt>Method</dt><dd>ISO 22196:2011<br>Film contact method</dd></div>
+                <div><dt>Conditions</dt><dd>35 ± 1℃ · 90% R.H.<br>24-hour contact</dd></div>
+                <div><dt>Report No.</dt><dd>CT26-074976K<br>~ 074979K</dd></div>
+            </dl>
+            <p class="cat-note">* Reduction rates are converted from the log reduction (antibacterial activity) values in the test report. Test period 2026.08.24 – 2026.09.22; results apply only to the samples submitted.</p>
+        </div>
+    </section>
+
+    <!-- CABINET (coming soon) -->
+    <section class="cat-section" id="cabinet">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Cabinet</h2></div>
+                <span class="cat-head-sub">Cabinets</span>
+            </div>
+            <div class="coming-soon cat-box">
+                <i class="fas fa-box-open"></i>
+                <h3>Cabinets — coming soon</h3>
+                <p>Detailed information is on its way. For early enquiries, please contact us via Customer Support.</p>
+                <a href="./Customer%20Support.html" class="btn-primary">Contact us</a>
             </div>
         </div>
     </section>
@@ -700,7 +978,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
                     <address>
                         389-11, Okcheondong-i-ro,<br>
                         Okcheon-gun, Chungcheongbuk-do<br>
@@ -708,35 +986,45 @@
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>Company</h5>
+                    <h5>About Us</h5>
                     <ul>
-                        <li><a href="./about%20us.html">About Us</a></li>
-                        <li><a href="./Community.html">Community</a></li>
-                        <li><a href="./Gallery.html">Gallery</a></li>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Products</h5>
                     <ul>
-                        <li><a href="./Products.html">School Furniture</a></li>
-                        <li><a href="./Products.html">Office Furniture</a></li>
-                        <li><a href="./Products.html">Custom Solutions</a></li>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
-                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Legal</h5>
+                    <h5>Resources</h5>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
@@ -751,67 +1039,19 @@
     </footer>
 
     <script>
-        // ── Tab switching ──────────────────────────────────────────
-        const tabs = document.querySelectorAll('.prod-tab');
-        const panels = document.querySelectorAll('.prod-panel');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-                tab.classList.add('active');
-                const target = document.getElementById('panel-' + tab.dataset.target);
-                if (target) target.classList.add('active');
-            });
-        });
-
-        // ── Image carousel (prev / next buttons) ─────────────────
-        document.querySelectorAll('.pvc-next-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const card = btn.closest('.pvc-card');
-                const imgs = card.querySelectorAll('.pvc-img');
-                const dots = card.querySelectorAll('.pvc-dot');
-                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-                const nextIdx = (currentIdx + 1) % imgs.length;
-                imgs[currentIdx].classList.remove('active');
-                imgs[nextIdx].classList.add('active');
-                if (dots.length) {
-                    dots[currentIdx].classList.remove('active');
-                    dots[nextIdx].classList.add('active');
-                }
-            });
-        });
-
-        document.querySelectorAll('.pvc-prev-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const card = btn.closest('.pvc-card');
-                const imgs = card.querySelectorAll('.pvc-img');
-                const dots = card.querySelectorAll('.pvc-dot');
-                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-                const prevIdx = (currentIdx - 1 + imgs.length) % imgs.length;
-                imgs[currentIdx].classList.remove('active');
-                imgs[prevIdx].classList.add('active');
-                if (dots.length) {
-                    dots[currentIdx].classList.remove('active');
-                    dots[prevIdx].classList.add('active');
-                }
-            });
-        });
-
-        // ── Dot navigation ────────────────────────────────────────
-        document.querySelectorAll('.pvc-dots').forEach(dotsContainer => {
-            const dots = dotsContainer.querySelectorAll('.pvc-dot');
-            const card = dotsContainer.closest('.pvc-card');
-            const imgs = card.querySelectorAll('.pvc-img');
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => {
-                    imgs.forEach(img => img.classList.remove('active'));
-                    dots.forEach(d => d.classList.remove('active'));
-                    imgs[i].classList.add('active');
-                    dots[i].classList.add('active');
+        // ── Highlight the anchor tab of the section in view ───────
+        const tabLinks = document.querySelectorAll('.prod-tab');
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                tabLinks.forEach(link => {
+                    const on = link.getAttribute('href') === '#' + entry.target.id;
+                    link.classList.toggle('active', on);
+                    if (on) link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
                 });
             });
-        });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('.cat-section[id]').forEach(s => sectionObserver.observe(s));
 
         // ── Header scroll + mobile menu ───────────────────────────
         const menuToggle = document.getElementById('menuToggle');

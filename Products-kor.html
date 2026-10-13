@@ -11,423 +11,527 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/language.js" defer></script>
     <style>
-        /* ===== PRODUCTS PAGE STYLES ===== */
+        /* ===== PRODUCTS PAGE (2026 catalogue layout) ===== */
 
-        /* Page Intro — matches tagline-section background */
-        .products-intro {
-            padding: 130px 0 52px;
-            background: #f8faff;
-            text-align: center;
+        /* ----- Cover hero ----- */
+        section.products-intro {
+            margin-top: var(--header-h);
+            padding: 64px 0 72px;
+            overflow: hidden;
         }
-        .products-intro .eyebrow-label {
-            display: inline-block;
-            font-size: 23px;
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .cover-ghost {
+            font-size: clamp(56px, 7vw, 104px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: #ECECEC;
+        }
+        .cover-series {
+            margin-top: 36px;
+            font-family: var(--font-display);
+            font-size: 14px;
             font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--primary-color);
-            margin-bottom: 14px;
+            letter-spacing: 0.35em;
+            line-height: 2.2;
+            color: #8a8a8a;
         }
-        .products-intro h1 {
-            font-size: clamp(32px, 5vw, 52px);
+        .cover-iso {
+            margin-top: 32px;
+            font-family: var(--font-display);
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-dark);
+            letter-spacing: 0.15em;
+            color: #D98C10;
+        }
+        .cover-certs {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.9;
+            color: #777;
+        }
+        .cover-block {
+            background: var(--brand);
+            color: #fff;
+            padding: clamp(40px, 5vw, 72px) clamp(32px, 4.4vw, 64px);
+        }
+        /* Beats the generic `section .inner h1` rule */
+        section.products-intro .inner .cover-block h1 {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4.4vw, 60px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: 0.01em;
+            color: #fff;
+            text-align: left;
             margin: 0;
-            padding-bottom: 0;
-            line-height: 1.1;
         }
-        .products-intro h1::after { display: none; }
-        .products-intro p {
+        .cover-rule {
+            display: block;
+            width: 96px;
+            height: 2px;
+            background: #fff;
+            margin: 36px 0 28px;
+        }
+        .cover-en {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .cover-s {
+            margin-top: 24px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .cover-desc {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .cover-shots {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 24px;
+            align-items: end;
+            margin: 32px 0 40px;
+        }
+        .cover-shots figcaption {
+            margin-top: 8px;
             font-size: 17px;
-            color: var(--text-light);
-            max-width: 560px;
-            margin: 16px auto 0;
-            line-height: 1.65;
+            font-weight: 300;
+            color: #333;
         }
+        .cover-shots .faded img { opacity: 0.5; }
 
-        /* Sticky Tab Bar */
+        /* ----- Sticky anchor nav ----- */
         .prod-tabs-wrap {
             position: sticky;
-            top: 80px;
+            top: var(--header-h);
             z-index: 100;
-            background: rgba(248, 250, 255, 0.92);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.94);
+            -webkit-backdrop-filter: saturate(180%) blur(16px);
+            backdrop-filter: saturate(180%) blur(16px);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: center;
         }
         .prod-tabs {
             display: flex;
-            justify-content: center;
+            gap: 4px;
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .prod-tabs::-webkit-scrollbar { display: none; }
+        .prod-tab {
+            padding: 9px 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink-2);
+            white-space: nowrap;
+            flex-shrink: 0;
+            border-bottom: 2px solid transparent;
+        }
+        .prod-tab:hover { color: var(--brand-ink); }
+        .prod-tab.active {
+            color: var(--brand-ink);
+            border-bottom-color: var(--brand);
+            font-weight: 700;
+        }
+
+        /* ----- Sections ----- */
+        .cat-section {
+            padding: 96px 0;
+            scroll-margin-top: calc(var(--header-h) + 56px);
+        }
+        .cat-tinted { background: var(--surface); }
+        .cat-head-logos img { height: 34px; }
+        .cat-actions {
+            display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            padding: 0 20px;
+            margin-top: 40px;
         }
-        /* Matches .submenu-btn from style.css */
-        .prod-tab {
-            padding: 10px 24px;
-            background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
+
+        /* Design identity */
+        .identity {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+        .identity-title {
+            font-size: clamp(30px, 3.6vw, 46px);
+            font-weight: 900;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 20px;
+        }
+        .identity-title span { color: #7B58C9; }
+        .identity-text p:last-child {
             font-size: 15px;
-            font-weight: 500;
-            color: var(--text-dark);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+
+        /* Dining table */
+        .dining-top {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .dining-list {
+            margin-top: 24px;
+        }
+        .dining-item .cat-sub { font-size: 20px; }
+        .dining-item p {
+            font-size: 17px;
+            line-height: 2;
+            color: #333;
+            padding-left: 21px;
+            text-wrap: pretty;
+        }
+
+        /* Function cards */
+        .func-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .func-card {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            min-height: 200px;
+            overflow: hidden;
+        }
+        .func-text { padding: 22px 24px; }
+        .func-text h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--brand-ink);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+        .func-text p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #333;
+        }
+        .func-img {
+            position: relative;
+            border-left: 1px solid var(--brand);
+            background: #fff;
+        }
+        .func-img img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .func-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: var(--brand-ink);
+            text-shadow: 0 0 4px #fff, 0 0 4px #fff;
+        }
+
+        /* Performance test cards */
+        .test-card {
+            display: grid;
+            grid-template-columns: 1fr 190px;
+            min-height: 200px;
+            overflow: hidden;
+        }
+        .test-text {
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .test-text h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #333;
+        }
+        .test-text p {
+            font-size: 13px;
+            line-height: 1.65;
+            color: #666;
+            margin-top: 6px;
+        }
+        .test-value {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .test-value strong {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--brand-ink);
             white-space: nowrap;
-            font-family: inherit;
         }
-        .prod-tab:hover {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .test-value span {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
         }
-        .prod-tab.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-color: transparent;
-            box-shadow: var(--shadow-md);
+        .test-value em {
+            font-style: normal;
+            font-size: 13px;
+            color: #666;
+            margin-left: auto;
+            white-space: nowrap;
         }
-
-        /* Viewer Section */
-        .prod-viewer-section {
-            background: var(--bg-light);
-            padding: 48px 0 72px;
+        .test-img {
+            border-left: 1px solid var(--brand);
+            background: #f4f4f4;
         }
-
-        /* Panel visibility */
-        .prod-panel { display: none; }
-        .prod-panel.active { display: block; }
-
-        /* White Card */
-        .pvc-card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: var(--shadow-xl);
+        .test-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .test-logos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            min-height: 540px;
-        }
-
-        /* Left — Image Viewer */
-        .pvc-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 52px 44px 40px;
-            background: var(--bg-light);
-            position: relative;
-        }
-        .pvc-images {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pvc-img-wrap {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pvc-img {
-            display: none;
-            max-width: 100%;
-            max-height: 360px;
-            width: 100%;
-            object-fit: contain;
-        }
-        .pvc-img.active { display: block; }
-
-        .pvc-next-btn,
-        .pvc-prev-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
-            background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            z-index: 5;
-            transition: all 0.3s ease;
-            color: var(--text-dark);
-            font-size: 15px;
-        }
-        .pvc-next-btn { right: -20px; }
-        .pvc-prev-btn { left: -20px; }
-        .pvc-next-btn:hover,
-        .pvc-prev-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pvc-dots {
-            display: flex;
-            justify-content: center;
+            grid-template-rows: repeat(2, minmax(0, 1fr));
             gap: 8px;
-            margin-top: 28px;
+            padding: 12px;
+            background: #fff;
         }
-        .pvc-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border-color);
-            cursor: pointer;
-            transition: background 0.3s ease;
-            border: none;
-            padding: 0;
-        }
-        .pvc-dot.active {
-            background: var(--primary-color);
-        }
+        .test-logos img { object-fit: contain; min-height: 0; }
 
-        /* Right — Product Info */
-        .pvc-right {
-            padding: 52px 52px 44px;
+        /* Antibacterial */
+        .anti-hero {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            min-height: 460px;
+            border-radius: 0 0 0 28px;
+            overflow: hidden;
+        }
+        .anti-block {
+            background: var(--brand);
+            color: #fff;
+            padding: 40px 40px 36px;
             display: flex;
             flex-direction: column;
-            border-left: 1px solid var(--border-color);
-        }
-        .pvc-name {
-            font-size: clamp(26px, 2.8vw, 38px);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0;
-            padding-bottom: 0;
-            line-height: 1.2;
-        }
-        .pvc-name::after { display: none; }
-        .pvc-name .pvc-name-sub { font-size: clamp(22px, 2.4vw, 34px); }
-
-        .pvc-header-row {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 16px 0 24px;
-            border-bottom: 1px solid var(--border-color);
+            gap: 32px;
         }
-        .pvc-subtitle {
-            font-size: 16px;
-            color: var(--text-light);
+        .anti-eyebrow {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
         }
-        /* Matches .submenu-btn.active gradient style */
-        .pvc-cta-btn {
-            display: inline-block;
-            padding: 12px 26px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-md);
+        .anti-lead {
+            font-size: 20px;
+            font-weight: 700;
         }
-        .pvc-cta-btn:hover {
-            opacity: 0.88;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .anti-num {
+            font-family: var(--font-display);
+            font-size: clamp(72px, 10vw, 136px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-top: 12px;
         }
-
-        /* Features */
-        .pvc-features { flex: 1; }
-        .pvc-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 18px 0;
-            border-bottom: 1px solid var(--border-color);
+        .anti-num span {
+            font-size: 0.5em;
+            letter-spacing: 0;
         }
-        .pvc-feature:last-child { border-bottom: none; }
-        /* Matches .why-icon style */
-        .pvc-feat-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        .anti-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-top: 8px;
+        }
+        .anti-foot {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: white;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .anti-foot span {
+            background: #fff;
+            color: var(--brand-ink);
+            font-weight: 900;
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+        }
+        .anti-photo { background: #eee; }
+        .anti-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .bact-card {
+            padding: 22px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .bact-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .bact-top h3 {
             font-size: 17px;
+            font-weight: 700;
+            color: #333;
+        }
+        .bact-top i {
+            display: block;
+            font-size: 12px;
+            color: #888;
             margin-top: 2px;
         }
-        .pvc-feat-text {
-            font-size: 14.5px;
-            color: var(--text-dark);
-            line-height: 1.65;
-            font-weight: 500;
-            margin: 0;
-            padding-top: 6px;
-        }
-
-        /* Matches .tab-link style */
-        .pvc-learn-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 24px;
-            color: var(--primary-color);
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: gap 0.3s ease;
-        }
-        .pvc-learn-more:hover { gap: 14px; }
-
-        .pvc-footer-row {
+        .bact-check {
+            flex: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 24px;
+            justify-content: center;
         }
-        .pvc-footer-row .pvc-learn-more { margin-top: 0; }
-        .pvc-catalogue-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: var(--primary-color);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s ease;
+        .bact-check i { color: #fff; margin: 0; font-size: 12px; }
+        .bact-value {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--brand-ink);
+            margin-top: 8px;
         }
-        .pvc-catalogue-btn:hover { background: #1d4ed8; }
+        .bact-value small { font-size: 0.45em; }
+        .bact-bar {
+            height: 6px;
+            background: var(--brand);
+            border-radius: 3px;
+        }
+        .bact-foot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+        .bact-foot b { color: #333; }
+        .anti-cond {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .anti-cond div {
+            padding: 20px 18px;
+            border-right: 1px solid var(--brand);
+        }
+        .anti-cond div:last-child { border-right: 0; }
+        .anti-cond dt {
+            font-size: 12px;
+            color: #777;
+        }
+        .anti-cond dd {
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 6px;
+            line-height: 1.45;
+        }
 
-        /* Coming Soon State */
-        .pvc-coming-soon {
-            grid-column: 1 / -1;
+        /* Coming soon */
+        .coming-soon {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 100px 40px;
             text-align: center;
+            padding: 72px 24px;
+            gap: 16px;
         }
-        .pvc-coming-soon i {
-            font-size: 56px;
-            color: var(--border-color);
-            margin-bottom: 24px;
+        .coming-soon i {
+            font-size: 44px;
+            color: var(--brand);
         }
-        .pvc-coming-soon h3 {
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+        .coming-soon h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 900;
+            color: var(--ink);
         }
-        .pvc-coming-soon p {
+        .coming-soon p {
             font-size: 16px;
-            color: var(--text-light);
-            line-height: 1.6;
-            max-width: 440px;
-        }
-        .pvc-coming-soon .pvc-cta-btn {
-            margin-top: 32px;
+            line-height: 1.7;
+            color: var(--ink-2);
+            max-width: 520px;
         }
 
-        /* Bottom Info Strip */
-        .prod-info-strip {
-            background: white;
-            border-top: 1px solid var(--border-color);
-            padding: 52px 0;
+        /* ----- Responsive ----- */
+        @media (max-width: 1024px) {
+            .func-card, .test-card { grid-template-columns: 1fr 140px; }
+            .bact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
-        .prod-info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+        @media (max-width: 900px) {
+            .cover-grid, .identity, .dining-top { grid-template-columns: 1fr; }
+            .func-grid { grid-template-columns: 1fr; }
+            .anti-hero { grid-template-columns: 1fr; }
+            .anti-photo { aspect-ratio: 4 / 3; }
+            .anti-cond { grid-template-columns: repeat(2, 1fr); }
+            .anti-cond div:nth-child(2) { border-right: 0; }
+            .anti-cond div:nth-child(-n+2) { border-bottom: 1px solid var(--brand); }
         }
-        .prod-info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 0 40px 0 0;
+        @media (max-width: 768px) {
+            section.products-intro { padding: 40px 0 48px; }
+            .cover-shots { grid-template-columns: 1fr; }
+            .cover-shots .faded { display: none; }
+            .prod-tabs-wrap { padding: 6px 16px; justify-content: flex-start; }
+            .prod-tab { padding: 8px 12px; font-size: 14px; }
+            .cat-section { padding: 64px 0; }
+            .cat-head-logos { display: none; }
+            .dining-item p { font-size: 15px; line-height: 1.85; }
+            .anti-block { padding: 28px 24px; }
         }
-        .prod-info-item + .prod-info-item {
-            padding: 0 40px 0 40px;
-            border-left: 1px solid var(--border-color);
-        }
-        .prod-info-item:last-child {
-            padding-right: 0;
-        }
-        .pii-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-        .prod-info-item strong {
-            display: block;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-        .prod-info-item p {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 960px) {
-            .pvc-card {
-                grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+            .func-card, .test-card { grid-template-columns: 1fr; }
+            .func-img, .test-img {
+                border-left: 0;
+                border-top: 1px solid var(--brand);
+                height: 180px;
             }
-            .pvc-left {
-                padding: 44px 36px 32px;
-                min-height: 320px;
-            }
-            .pvc-right {
-                padding: 36px 32px 44px;
-                border-left: none;
-                border-top: 1px solid var(--border-color);
-            }
-            .pvc-next-btn { right: 0; }
-            .pvc-prev-btn { left: 0; }
-        }
-        @media (max-width: 680px) {
-            .prod-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
-            .prod-tabs-wrap { overflow-x: auto; }
-            .prod-info-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            .prod-info-item,
-            .prod-info-item + .prod-info-item {
-                padding: 0;
-                border-left: none;
-            }
-            .pvc-header-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
+            .test-logos { height: 140px; }
+            .bact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -447,7 +551,6 @@
                     <li><a href="./about-us-kor.html">회사소개</a></li>
                     <li><a href="./Products-kor.html">제품소개</a></li>
                     <li><a href="./Gallery-kor.html">갤러리</a></li>
-                    <li><a href="./Community-kor.html">커뮤니티</a></li>
                     <li><a href="./Customer-Support-kor.html">고객지원</a></li>
                 </ul>
             </nav>
@@ -470,223 +573,401 @@
     <!-- Page Intro -->
     <section class="products-intro">
         <div class="inner">
-            <span class="eyebrow-label">제품 라인업</span>
-            <h1>어떤 제품, 당신의 선택은?</h1>
-            <p>송인산업의 전체 제품 라인업을 만나보세요.</p>
+            <div class="cover-grid">
+                <div class="cover-left">
+                    <p class="cover-ghost">이동식스툴<br>테이블</p>
+                    <p class="cover-series">DINING<br>TABLE<br>SERIES</p>
+                    <p class="cover-iso">ISO 9001 / 14001</p>
+                    <p class="cover-certs">정부조달 우수제품 · 정부조달 제품(MAS) · 특허등록 · 디자인등록<br>환경표지인증 · Q마크 품질인증 · 단체표준인증 · G-PASS 기업</p>
+                </div>
+                <div class="cover-block">
+                    <h1>SONGIN<br>INDUSTRY</h1>
+                    <span class="cover-rule"></span>
+                    <p class="cover-en">TOTAL OFFICE &amp; SCHOOL<br>FURNITURE</p>
+                    <p class="cover-s">S 시리즈</p>
+                    <p class="cover-desc">학교 및 공공기관, 기업체 등의 단체급식 용도로 사용되는 식탁<br>의자가 식탁에 부착된 일체형 테이블입니다.</p>
+                </div>
+            </div>
+            <div class="cover-shots">
+                <figure><img src="./img/catalog/func/hero-s2.png" alt="S2"><figcaption>S2 시리즈(정부조달 우수제품)</figcaption></figure>
+                <figure class="faded"><img src="./img/catalog/func/hero-s1.png" alt="S1"><figcaption>S1 시리즈(조달 MAS 제품)</figcaption></figure>
+            </div>
+            <div class="cert-strip">
+                        <img src="./img/catalog/logo/logo-excellent.png" alt="정부조달 우수제품"><img src="./img/catalog/logo/cert-mas-v2.png" alt="MAS"><img src="./img/catalog/logo/logo-eco.png" alt="환경표지"><img src="./img/catalog/logo/logo-sps.png" alt="SPS"><img src="./img/catalog/logo/logo-q.png" alt="Q"><img src="./img/catalog/logo/logo-gpass.png" alt="G-PASS"><img src="./img/catalog/logo/logo-iso.png" alt="ISO 9001 / 14001"><img src="./img/catalog/logo/logo-patent.png" alt="특허">
+                    </div>
         </div>
     </section>
 
-    <!-- Sticky Category Tabs -->
-    <div class="prod-tabs-wrap">
+    <!-- Sticky Section Nav -->
+    <nav class="prod-tabs-wrap" aria-label="제품 섹션">
         <div class="prod-tabs">
-            <button class="prod-tab active" data-target="premium">이동식스툴테이블 (조달우수제품)</button>
-            <button class="prod-tab" data-target="standard">이동식스툴테이블 (일반제품)</button>
-            <button class="prod-tab" data-target="cabinet">사물함</button>
-            <button class="prod-tab" data-target="colors">색상표</button>
+            <a class="prod-tab" href="#s2">S2 시리즈</a>
+            <a class="prod-tab" href="#s1">S1 시리즈</a>
+            <a class="prod-tab" href="#customizing">커스터마이징</a>
+            <a class="prod-tab" href="#dining">제품 특징</a>
+            <a class="prod-tab" href="#function">기능 · 성능</a>
+            <a class="prod-tab" href="#antibacterial">항균</a>
+            <a class="prod-tab" href="#cabinet">사물함</a>
         </div>
-    </div>
+    </nav>
 
-    <!-- Product Viewer -->
-    <section class="prod-viewer-section">
+    <!-- S2 SERIES -->
+    <section class="cat-section" id="s2">
         <div class="inner">
-
-            <!-- 우수형 패널 -->
-            <div class="prod-panel active" id="panel-premium">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/우수/S2-B4(빨강)-1200.png" alt="이동식스툴테이블 우수형 — 빨강 등받이 4인">
-                                <img class="pvc-img" src="./img/우수/S2-B6(빨강)-1800(1024).png" alt="이동식스툴테이블 우수형 — 빨강 등받이 6인">
-                                <img class="pvc-img" src="./img/우수/S2-B6(연두)-1200(망펄).png" alt="이동식스툴테이블 우수형 — 연두 등받이 6인">
-                                <img class="pvc-img" src="./img/우수/S2-C4(빨강)-1200(2402).png" alt="이동식스툴테이블 우수형 — 빨강 스툴 4인">
-                                <img class="pvc-img" src="./img/우수/S2-B6(파랑)-1800(2402).png" alt="이동식스툴테이블 우수형 — 파랑 등받이 6인">
-                            </div>
-                            <button class="pvc-prev-btn" aria-label="이전 이미지">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="pvc-next-btn" aria-label="다음 이미지">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="pvc-dots">
-                            <button class="pvc-dot active" aria-label="사진 1"></button>
-                            <button class="pvc-dot" aria-label="사진 2"></button>
-                            <button class="pvc-dot" aria-label="사진 3"></button>
-                            <button class="pvc-dot" aria-label="사진 4"></button>
-                            <button class="pvc-dot" aria-label="사진 5"></button>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">이동식스툴테이블<br><span class="pvc-name-sub">(조달우수제품)</span></h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">가격 문의</span>
-                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">견적 문의</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-compress-arrows-alt"></i></div>
-                                <p class="pvc-feat-text">접이식 수납 구조로 공간 효율을 극대화 — 사용하지 않을 때 깔끔하게 정리되며, 다목적 교실에 최적입니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-robot"></i></div>
-                                <p class="pvc-feat-text">로봇 용접 기술을 적용한 정밀 제조 공정으로 균일한 품질과 뛰어난 내구성을 실현합니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">깨끗한 화이트의 완성. 환경 인증 도료로 마감해, 어떤 공간에도 자연스럽게 어울립니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
-                                <p class="pvc-feat-text">대량 납품 가능 — 학교, 관공서, 공공기관 등 전국 단위 조달에 적합합니다.</p>
-                            </div>
-                        </div>
-                        <div class="pvc-footer-row">
-                            <a href="./Customer-Support-kor.html" class="pvc-learn-more">제품 자세히 알아보기 &rsaquo;</a>
-                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> 카달로그 다운로드</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>S2 Series</h2><span class="cat-head-badge"><img src="./img/catalog/logo/logo-excellent.png" alt="">정부조달우수제품</span></div>
+                <div class="cert-strip cat-head-logos"><img src="./img/catalog/logo/logo-eco.png" alt=""><img src="./img/catalog/logo/logo-sps.png" alt=""><img src="./img/catalog/logo/logo-q.png" alt=""><img src="./img/catalog/logo/logo-gpass.png" alt=""><img src="./img/catalog/logo/logo-iso.png" alt=""><img src="./img/catalog/logo/logo-patent.png" alt=""></div>
             </div>
-
-            <!-- 일반형 패널 -->
-            <div class="prod-panel" id="panel-standard">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/일반/s1-B4(딥옐로우)-1200.png" alt="이동식스툴테이블 일반형 — 딥옐로우 등받이 4인">
-                                <img class="pvc-img" src="./img/일반/s1-B4(레드바이올렛)-1200.png" alt="이동식스툴테이블 일반형 — 레드바이올렛 등받이 4인">
-                                <img class="pvc-img" src="./img/일반/s1-B4(샌드핑크, 스카이블루)-1200.png" alt="이동식스툴테이블 일반형 — 샌드핑크·스카이블루 등받이 4인">
-                                <img class="pvc-img" src="./img/일반/s1-B6(감색)-1200.png" alt="이동식스툴테이블 일반형 — 감색 등받이 6인">
-                                <img class="pvc-img" src="./img/일반/s1-B6(바이올렛)-2100.png" alt="이동식스툴테이블 일반형 — 바이올렛 등받이 6인">
-                            </div>
-                            <button class="pvc-prev-btn" aria-label="이전 이미지">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="pvc-next-btn" aria-label="다음 이미지">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="pvc-dots">
-                            <button class="pvc-dot active" aria-label="사진 1"></button>
-                            <button class="pvc-dot" aria-label="사진 2"></button>
-                            <button class="pvc-dot" aria-label="사진 3"></button>
-                            <button class="pvc-dot" aria-label="사진 4"></button>
-                            <button class="pvc-dot" aria-label="사진 5"></button>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">이동식스툴테이블<br><span class="pvc-name-sub">(일반제품)</span></h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">가격 문의</span>
-                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">견적 문의</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-feather-alt"></i></div>
-                                <p class="pvc-feat-text">경량 설계로 간편한 이동이 가능 — 교실이나 사무실 배치를 필요에 따라 빠르게 바꿀 수 있습니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-layer-group"></i></div>
-                                <p class="pvc-feat-text">강판 프레스 성형 구조로 안정적인 내구성을 확보하면서도 합리적인 가격으로 제공합니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">다양한 색상 옵션을 통해 학습 환경 또는 업무 공간에 맞는 분위기를 연출하세요.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-truck"></i></div>
-                                <p class="pvc-feat-text">대량 납품 가능 — 학교, 관공서, 공공기관 등 전국 단위 조달에 적합합니다.</p>
-                            </div>
-                        </div>
-                        <div class="pvc-footer-row">
-                            <a href="./Customer-Support-kor.html" class="pvc-learn-more">제품 자세히 알아보기 &rsaquo;</a>
-                            <a href="./catalogue.pdf" class="pvc-catalogue-btn" download><i class="fas fa-download"></i> 카달로그 다운로드</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="cat-lead"><span class="cat-chip">정부조달 우수제품 (특허제품)</span><p>학교 및 공공기관, 기업체 등의 단체급식 용도로 사용되는 식탁으로, 식탁과 의자가 하나로 연결된 일체형 테이블입니다. 사용 후 의자가 자동으로 식탁 밑으로 정리되어 따로 의자를 정돈할 필요 없이 편리하며, 공간을 넓고 깔끔하게 활용할 수 있습니다.</p></div>
+            <div class="prod-grid">
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b4-1200.png" alt="S2-B4-1200 — 등받이 의자 : 딥옐로우" loading="lazy"><figcaption>등받이 의자 : 딥옐로우</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25349111</span><span>574,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c4-1200.png" alt="S2-C4-1200 — 원형 의자 : 토마토레드" loading="lazy"><figcaption>원형 의자 : 토마토레드</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25349110</span><span>530,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b4-1400.png" alt="S2-B4-1400 — 등받이 의자 : 스카이블루" loading="lazy"><figcaption>등받이 의자 : 스카이블루</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393546</span><span>641,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c4-1400.png" alt="S2-C4-1400 — 원형 의자 : 샌드핑크" loading="lazy"><figcaption>원형 의자 : 샌드핑크</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393545</span><span>569,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b6-1800.png" alt="S2-B6-1800 — 등받이 의자 : 딥오렌지" loading="lazy"><figcaption>등받이 의자 : 딥오렌지</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25373133</span><span>821,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c6-1800.png" alt="S2-C6-1800 — 원형 의자 : 올리브그린·로즈핑크" loading="lazy"><figcaption>원형 의자 : 올리브그린·로즈핑크</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25373132</span><span>711,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-b6-2100.png" alt="S2-B6-2100 — 등받이 의자 : 레드바이올렛" loading="lazy"><figcaption>등받이 의자 : 레드바이올렛</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-B6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393548</span><span>986,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s2-c6-2100.png" alt="S2-C6-2100 — 원형 의자 : 로즈핑크" loading="lazy"><figcaption>원형 의자 : 로즈핑크</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S2-C6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25393547</span><span>863,000원</span></p>
+                </article>
             </div>
-
-            <!-- 사물함 패널 (준비중) -->
-            <div class="prod-panel" id="panel-cabinet">
-                <div class="pvc-card">
-                    <div class="pvc-coming-soon">
-                        <i class="fas fa-box-open"></i>
-                        <h3>사물함 — 준비중입니다</h3>
-                        <p>사물함 제품에 대한 상세 정보를 준비 중입니다.<br>사전 문의는 고객지원 페이지를 통해 연락해 주세요.</p>
-                        <a href="./Customer-Support-kor.html" class="pvc-cta-btn">문의하기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 색상표 패널 -->
-            <div class="prod-panel" id="panel-colors">
-                <div class="pvc-card">
-                    <div class="pvc-left">
-                        <div class="pvc-images">
-                            <div class="pvc-img-wrap">
-                                <img class="pvc-img active" src="./img/Cus.png" alt="색상표">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pvc-right">
-                        <h2 class="pvc-name">맞춤 색상표</h2>
-                        <div class="pvc-header-row">
-                            <span class="pvc-subtitle">상판 5가지 · 등받이 의자 7가지 ·<br>원형 의자 8가지 색상 제공</span>
-                            <a href="./Customer-Support-kor.html" class="pvc-cta-btn">샘플 요청</a>
-                        </div>
-                        <div class="pvc-features">
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-palette"></i></div>
-                                <p class="pvc-feat-text">상판 5가지, 등받이 의자 7가지, 원형 의자 8가지 색상을 제공합니다. 선명한 원색부터 차분한 뉴트럴 톤까지 다양하게 선택 가능합니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-shield-alt"></i></div>
-                                <p class="pvc-feat-text">KS 인증 도료 사용으로 안전하고 선명하며 오래 지속되는 발색을 보장합니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-swatchbook"></i></div>
-                                <p class="pvc-feat-text">색상 컨설팅 서비스를 통해 공간에 가장 잘 어울리는 색상 조합을 전문가가 안내해 드립니다.</p>
-                            </div>
-                            <div class="pvc-feature">
-                                <div class="pvc-feat-icon"><i class="fas fa-check-double"></i></div>
-                                <p class="pvc-feat-text">대량 주문 시에도 동일한 색상 기준으로 일관된 품질을 제공합니다.</p>
-                            </div>
-                        </div>
-                        <a href="./Customer-Support-kor.html" class="pvc-learn-more">색상 샘플 요청하기 &rsaquo;</a>
-                    </div>
-                </div>
-            </div>
-
+            <p class="cat-note"><b>* 관리시 주의사항 :</b> 락스 등 강한 소독제를 사용할 경우 녹이나 부식이 발생할 수 있으니 주의하시기 바랍니다. (문의사항은 본사로 연락 바랍니다.)<br>* 상기 제품은 사전 예고 없이 디자인이 변경될 수 있습니다.<br>* 표시 가격은 조달청 나라장터(G2B) 등록 기준이며 변경될 수 있습니다.</p>
         </div>
     </section>
 
-    <!-- Bottom Info Strip -->
-    <section class="prod-info-strip">
+    <!-- S1 SERIES -->
+    <section class="cat-section" id="s1">
         <div class="inner">
-            <div class="prod-info-grid">
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-file-invoice"></i></div>
-                    <div>
-                        <strong>맞춤 견적 안내.</strong>
-                        <p>납품 규모와 사양에 맞게 최적의 견적을 제공합니다. 기관 및 기업 단위 문의를 환영합니다.</p>
-                    </div>
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>S1 Series</h2><span class="cat-head-badge"><img src="./img/catalog/logo/cert-mas.png" alt="">정부조달(MAS)제품</span></div>
+                <div class="cert-strip cat-head-logos"><img src="./img/catalog/logo/logo-eco.png" alt=""><img src="./img/catalog/logo/logo-sps.png" alt=""><img src="./img/catalog/logo/logo-q.png" alt=""><img src="./img/catalog/logo/logo-gpass.png" alt=""><img src="./img/catalog/logo/logo-iso.png" alt=""><img src="./img/catalog/logo/logo-patent.png" alt=""></div>
+            </div>
+            <div class="cat-lead"><span class="cat-chip">정부조달 제품 (특허제품)</span><p>학교 및 공공기관, 기업체 등의 단체급식 용도로 사용되는 식탁으로, 식탁과 의자가 하나로 연결된 일체형 테이블입니다. 사용 후 의자가 자동으로 식탁 밑으로 정리되어 따로 의자를 정돈할 필요 없이 편리하며, 공간을 넓고 깔끔하게 활용할 수 있습니다.</p></div>
+            <div class="prod-grid">
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b4-1200.png" alt="S1-B4-1200 — 등받이 의자 : 레드바이올렛" loading="lazy"><figcaption>등받이 의자 : 레드바이올렛</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312119</span><span>596,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c4-1200.png" alt="S1-C4-1200 — 원형 의자 : 스카이블루·로즈핑크" loading="lazy"><figcaption>원형 의자 : 스카이블루·로즈핑크</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C4-1200</span><span class="model-size">W1200XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312121</span><span>519,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b4-1400.png" alt="S1-B4-1400 — 등받이 의자 : 딥옐로우" loading="lazy"><figcaption>등받이 의자 : 딥옐로우</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236434</span><span>701,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c4-1400.png" alt="S1-C4-1400 — 원형 의자 : 스카이블루" loading="lazy"><figcaption>원형 의자 : 스카이블루</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C4-1400</span><span class="model-size">W1400XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236431</span><span>603,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b6-1800.png" alt="S1-B6-1800 — 등받이 의자 : 스카이블루" loading="lazy"><figcaption>등받이 의자 : 스카이블루</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312118</span><span>818,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c6-1800.png" alt="S1-C6-1800 — 원형 의자 : 딥오렌지" loading="lazy"><figcaption>원형 의자 : 딥오렌지</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C6-1800</span><span class="model-size">W1800XD750XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 25312120</span><span>697,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-b6-2100.png" alt="S1-B6-2100 — 등받이 의자 : 바이올렛" loading="lazy"><figcaption>등받이 의자 : 바이올렛</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-B6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236433</span><span>978,000원</span></p>
+                </article>
+                <article class="prod-card">
+                    <figure class="prod-card-img"><img src="./img/catalog/product/s1-c6-2100.png" alt="S1-C6-2100 — 원형 의자 : 올리브그린" loading="lazy"><figcaption>원형 의자 : 올리브그린</figcaption></figure>
+                    <div class="prod-card-meta"><span class="model-tag">S1-C6-2100</span><span class="model-size">W2100XD800XH730</span></div>
+                    <p class="prod-card-price"><span class="g2b">G2B 26236432</span><span>863,000원</span></p>
+                </article>
+            </div>
+            <p class="cat-note"><b>* 관리시 주의사항 :</b> 락스 등 강한 소독제를 사용할 경우 녹이나 부식이 발생할 수 있으니 주의하시기 바랍니다. (문의사항은 본사로 연락 바랍니다.)<br>* 상기 제품은 사전 예고 없이 디자인이 변경될 수 있습니다.<br>* 표시 가격은 조달청 나라장터(G2B) 등록 기준이며 변경될 수 있습니다.</p>
+            <div class="cat-actions">
+                <a href="./Customer-Support-kor.html" class="btn-primary">견적 문의</a>
+                <a href="./catalogue.pdf" class="btn-outline-dark" download><i class="fas fa-download"></i> 카달로그 다운로드</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESIGN IDENTITY + CUSTOMIZING -->
+    <section class="cat-section cat-tinted" id="customizing">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Customizing</h2></div>
+                <span class="cat-head-sub">커스터마이징</span>
+            </div>
+            <div class="identity">
+                <div class="identity-text">
+                    <p class="identity-title">우리 <span>공간</span>에 어울리는<br>색을 골라보세요.</p>
+                    <p>등받이 의자 7색, 원형 의자 8색, 측면커버 12색, 상판 4디자인. 학교와 급식실 분위기에 맞춰 자유롭게 조합할 수 있는 송인산업의 컬러 시스템입니다. 모든 의자는 충격에 강한 합성수지로 제작되어 단단하고, 색이 쉽게 바래지 않습니다.</p>
                 </div>
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-truck-loading"></i></div>
-                    <div>
-                        <strong>전국 납품 가능.</strong>
-                        <p>전국 학교, 관공서, 기업을 대상으로 안정적인 물류와 신속한 납품 서비스를 제공합니다.</p>
+                <img class="identity-img" src="./img/catalog/func/design-identity.png" alt="" loading="lazy">
+            </div>
+            <div class="cat-lead"><span class="cat-chip">맞춤 제작 옵션</span><p>S1 · S2 시리즈는 상판 무늬와 등받이·좌판 사출 색상, 측면커버(S2만 가능) 색상을 선택하여 주문 제작할 수 있습니다. 학교·급식실 분위기에 맞춰 상판 4종, 등받이 7색, 좌판 8색, 측면커버 12색을 자유롭게 조합하실 수 있습니다.</p></div>
+            <h3 class="cat-sub">상판 색상</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-1.png" alt="" loading="lazy"></div><p class="swatch-name">밝은대리석 무늬(SH-1024)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-2.png" alt="" loading="lazy"></div><p class="swatch-name">대리석 무늬(SH-2402)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-3.png" alt="" loading="lazy"></div><p class="swatch-name">나무무늬(SH-5174)</p></div>
+                <div class="swatch"><div class="swatch-box fill"><img src="./img/catalog/color/top-4.png" alt="" loading="lazy"></div><p class="swatch-name">망플비치(SH-1413)</p></div>
+            </div>
+            <h3 class="cat-sub">등받이 의자</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-violet.png" alt="" loading="lazy"></div><p class="swatch-name">바이올렛</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-redviolet.png" alt="" loading="lazy"></div><p class="swatch-name">레드바이올렛</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">스카이블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-deepyellow.png" alt="" loading="lazy"></div><p class="swatch-name">딥옐로우</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">딥오렌지</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-pacificblue.png" alt="" loading="lazy"></div><p class="swatch-name">퍼시픽블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/back-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">올리브그린</p></div>
+            </div>
+            <h3 class="cat-sub">원형 의자</h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-sandpink.png" alt="" loading="lazy"></div><p class="swatch-name">샌드핑크</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">스카이블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-rosepink.png" alt="" loading="lazy"></div><p class="swatch-name">로즈핑크</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-tomatored.png" alt="" loading="lazy"></div><p class="swatch-name">토마토레드</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">올리브그린</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-deepblue.png" alt="" loading="lazy"></div><p class="swatch-name">딥블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">딥오렌지</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/round-winered.png" alt="" loading="lazy"></div><p class="swatch-name">와인레드</p></div>
+            </div>
+            <h3 class="cat-sub">측면커버 <small class="alert">* 우수제품만 가능</small></h3>
+            <div class="swatch-grid">
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-violet.png" alt="" loading="lazy"></div><p class="swatch-name">바이올렛</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-redviolet.png" alt="" loading="lazy"></div><p class="swatch-name">레드바이올렛</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-sandpink.png" alt="" loading="lazy"></div><p class="swatch-name">샌드핑크</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-rosepink.png" alt="" loading="lazy"></div><p class="swatch-name">로즈핑크</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-skyblue.png" alt="" loading="lazy"></div><p class="swatch-name">스카이블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-pacificblue.png" alt="" loading="lazy"></div><p class="swatch-name">퍼시픽블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deepblue.png" alt="" loading="lazy"></div><p class="swatch-name">딥블루</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deepyellow.png" alt="" loading="lazy"></div><p class="swatch-name">딥옐로우</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-deeporange.png" alt="" loading="lazy"></div><p class="swatch-name">딥오렌지</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-olivegreen.png" alt="" loading="lazy"></div><p class="swatch-name">올리브그린</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-tomatored.png" alt="" loading="lazy"></div><p class="swatch-name">토마토레드</p></div>
+                <div class="swatch"><div class="swatch-box pad"><img src="./img/catalog/color/cover-winered.png" alt="" loading="lazy"></div><p class="swatch-name">와인레드</p></div>
+            </div>
+            <p class="cat-note"><b>* 커스텀 안내 :</b> 커스텀 가능한 제품의 색상은 사전 예고 없이 변경될 수 있습니다. (상기 이미지와 실물은 차이가 있을 수 있습니다.)</p>
+        </div>
+    </section>
+
+    <!-- DINING TABLE -->
+    <section class="cat-section" id="dining">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Dining Table</h2></div>
+                <span class="cat-head-sub">이동식 스툴 테이블 시리즈</span>
+            </div>
+            <div class="dining-top">
+                <img src="./img/catalog/func/feature.png" alt="제품 특징 스케치" loading="lazy">
+                <ul class="feat-rows">
+                        <li>상판 4면 우레탄 적용으로 안전사고 방지</li>
+                        <li>방수코팅으로 이물질 이염방지</li>
+                        <li>깔끔한 일체형 디자인 · 의자정지 기능 내장</li>
+                        <li>스테인레스 의자 다리로 내구성 확보 및 녹방지</li>
+                        <li>의자 정지기능으로 청소의 편리함</li>
+                        <li class="strong">책임 있게 10년간 A/S</li>
+                </ul>
+            </div>
+            <div class="dining-list">
+                <div class="dining-item"><h3 class="cat-sub"><span>회전정지 기능</span></h3><p>식탁외측으로 의자를 정지할 수 있는 기능으로 식탁아래의 낙하물 회수, 청소작업에 용이하고, 사용후 원점복귀 기능이 복원되도록 제작하여 사용자 및 관리자의 편의성을 고려한 기능</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>의자 자동 입기능 / 상하 UP&amp;DOWN 기능</span></h3><p>사용자가 사용후 의자를 정리하지 않아도 자동으로 정리되는 자동 입기능과, 사용자가 의자에 착석시 의자기둥의 DOWN기능으로 의자의 중심을 잡아주어 착석자의 안전성을 확보하며, 사용후 자동 UP기능으로 항상 지면과 일정간격이 유지되어 소음방지 및 청소에 용이합니다.</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>스테인레스 다리 / 수평조절발굽</span></h3><p>스테인레스 다리는 원파이프를 사용하여 부식 및 녹을 방지하며, 식탁하부 발굽부분의 넓은 바닥지면이 물청소나 소독 시 파이프 부식을 방지해 식당내부의 청결한 환경 유지 가능</p></div>
+                <div class="dining-item"><h3 class="cat-sub"><span>우레탄 엣지 상판</span></h3><p>상판 4면에 충격흡수에 탁월한 우레탄을 사용하여 날카로운 모서리를 방지하고, 기존의 제품 (홈을 파서 끼워 넣는 방식)과 달리 금형에 의해 4면의 테두리 우레탄이 상판과 결합되는 특수 공정을 거쳐 습기/물기에 강하며 이음새가 없으며 외부 충격에 강함</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCTION & PERFORMANCE -->
+    <section class="cat-section cat-tinted" id="function">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Function &amp; Performance</h2></div>
+                <span class="cat-head-sub">기능 및 성능</span>
+            </div>
+            <div class="cat-lead"><span class="cat-chip">특허 제10-2624319호</span><p>회전제어기능을 갖는 이동식스툴테이블, 우수조달물품 규격서(KS G 4009 · 4203 · 4215 준용) 기능 및 성능 기준에 따라 제작·검사됩니다.</p></div>
+            <h3 class="cat-sub">기능 &amp; 안전</h3>
+            <div class="func-grid">
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>의자가 스스로 제자리로, 청소도 편하게</h3><p>의자를 당겨 앉고 일어나면 저절로 테이블 아래로 들어갑니다. 천천히 부드럽게 들어가 “쾅” 소리나 부딪힘 소음이 최소화됩니다. 의자를 끝까지 당기면 바깥에 멈춰 있어 테이블 아래 청소도 편합니다.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-slow.png" alt="" loading="lazy"><span class="func-label">SLOWLY</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>앉고 일어날 때 안전하게</h3><p>스프링이 의자를 부드럽게 당겨 주어 급하게 움직이지 않습니다. 아이들도 다리에 부딪히지 않고 안전하게 사용할 수 있습니다.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-safe-v2.png" alt="" loading="lazy"><span class="func-label">SLOW SAFETY</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>앉으면 내려가고, 일어나면 올라가는 의자</h3><p>앉으면 의자가 살짝 내려가 든든하게 받쳐 주고, 일어나면 다시 올라가 바닥에서 떠 있습니다. 청소가 쉽고 끌리는 소음이 없습니다.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-updown.png" alt="" loading="lazy"><span class="func-label">UP · DOWN</span></div>
+                </article>
+                <article class="cat-box func-card">
+                    <div class="func-text"><h3>오래 써도 흔들리지 않는 튼튼함</h3><p>회전 부품을 핀으로 단단히 고정해 헐거워지지 않고, 뼈대 전체를 로봇이 용접해 이음새가 튼튼합니다. 5만 번 여닫는 시험을 통과했습니다.</p></div>
+                    <div class="func-img"><img src="./img/catalog/func/func-robot-v2.png" alt="" loading="lazy"><span class="func-label">ROBOT WELDING</span></div>
+                </article>
+            </div>
+            <h3 class="cat-sub">성능 시험 <small>KS G 4009 · 4203 · 4215 준용 / 한국건설생활환경시험연구원</small></h3>
+            <div class="func-grid">
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>회전반복내구성 · 회전력</h3><p>12회/min · 60° 회전 반복 후 개방 최소힘 측정</p></div>
+                        <div class="test-value"><strong>50,000</strong><span>회</span><em>이상 없음</em></div>
                     </div>
-                </div>
-                <div class="prod-info-item">
-                    <div class="pii-icon"><i class="fas fa-headset"></i></div>
-                    <div>
-                        <strong>사후 서비스 지원.</strong>
-                        <p>납품 후에도 교체, 수리, 맞춤 수정 요청까지 전담 지원팀이 성심껏 도와드립니다.</p>
+                    <div class="test-img"><img src="./img/catalog/func/test-rotate.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>수직내구성(좌면부)</h3><p>KS G 4215 스툴 기준, 12회/min 반복 하중</p></div>
+                        <div class="test-value"><strong>950</strong><span>N·5만회</span><em>이상 없음</em></div>
                     </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-vertical.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>환경변화시험</h3><p>60% R.H. · 12h 교차, 총 4사이클</p></div>
+                        <div class="test-value"><strong>-20~80</strong><span>℃</span><em>이상 없음</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-env.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>낙하시험</h3><p>KS G 4203 준용 낙하 반복</p></div>
+                        <div class="test-value"><strong>200</strong><span>mm·100회</span><em>이상 없음</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-drop.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>작동소음</h3><p>180° 개방 → 자동 복귀 시 최대 소음도, 10회 평균</p></div>
+                        <div class="test-value"><strong>1.0</strong><span>m 측정</span><em>저소음 복귀</em></div>
+                    </div>
+                    <div class="test-img"><img src="./img/catalog/func/test-noise.png" alt="" loading="lazy"></div>
+                </article>
+                <article class="cat-box test-card">
+                    <div class="test-text">
+                        <div><h3>품질 · 환경 인증</h3><p>환경표지 31681 · Q마크 2025-032 · 단체표준 KMFIC-072 · ISO 9001/14001</p></div>
+                        <div class="test-value"><strong>4</strong><span>종 인증</span><em>우수조달물품</em></div>
+                    </div>
+                    <div class="test-img test-logos"><img src="./img/catalog/logo/logo-eco.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-q.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-sps.png" alt="" loading="lazy"><img src="./img/catalog/logo/logo-iso.png" alt="" loading="lazy"></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANTIBACTERIAL -->
+    <section class="cat-section" id="antibacterial">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Antibacterial</h2></div>
+                <span class="cat-head-sub">항균 성능</span>
+            </div>
+            <div class="anti-hero">
+                <div class="anti-block">
+                    <p class="anti-eyebrow">ISO 22196 : 2011 · KCL 시험</p>
+                    <div>
+                        <p class="anti-lead">아이들이 매일 닿는 테이블 상판,</p>
+                        <p class="anti-num">99.99<span>%</span></p>
+                        <p class="anti-title">항균 시험 결과</p>
+                    </div>
+                    <p class="anti-foot"><span>세균 6종</span>모두 99.99% 이상 감소</p>
                 </div>
+                <div class="anti-photo"><img src="./img/catalog/site/hoyeon-1.jpg" alt="" loading="lazy"></div>
+            </div>
+            <h3 class="cat-sub">시험 결과 <small>한국건설생활환경시험연구원(KCL) · 24시간 반응 후 세균 감소율</small></h3>
+            <div class="bact-grid">
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>대장균</h3><i>Escherichia coli</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>4.8</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>녹농균</h3><i>Pseudomonas aeruginosa</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>5.2</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>황색포도상구균</h3><i>Staphylococcus aureus</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>4.5</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>살모넬라균</h3><i>Salmonella enterica</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>4.5</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>폐렴균</h3><i>Klebsiella pneumoniae</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>4.1</b></span></p>
+                </article>
+                <article class="cat-box bact-card">
+                    <div class="bact-top"><div><h3>MRSA균(슈퍼박테리아)</h3><i>Methicillin-resistant S. aureus</i></div><span class="bact-check"><i class="fas fa-check"></i></span></div>
+                    <p class="bact-value">99.99<small>%</small></p>
+                    <div class="bact-bar"></div>
+                    <p class="bact-foot"><span>세균 감소율</span><span>로그감소값 <b>4.3</b></span></p>
+                </article>
+            </div>
+            <h3 class="cat-sub">시험 조건</h3>
+            <dl class="anti-cond cat-box">
+                <div><dt>시험기관</dt><dd>한국건설생활<br>환경시험연구원</dd></div>
+                <div><dt>시험방법</dt><dd>ISO 22196:2011<br>필름밀착법</dd></div>
+                <div><dt>시험조건</dt><dd>35 ± 1℃ · 90% R.H.<br>24시간 반응</dd></div>
+                <div><dt>성적서 번호</dt><dd>CT26-074976K<br>~ 074979K</dd></div>
+            </dl>
+            <p class="cat-note">* 감소율은 성적서의 로그감소값(항균활성치)을 환산한 값입니다. 시험기간 2026.08.24 ~ 2026.09.22 / 의뢰자가 제시한 시료에 한정된 결과입니다.</p>
+        </div>
+    </section>
+
+    <!-- CABINET (coming soon) -->
+    <section class="cat-section" id="cabinet">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Cabinet</h2></div>
+                <span class="cat-head-sub">사물함</span>
+            </div>
+            <div class="coming-soon cat-box">
+                <i class="fas fa-box-open"></i>
+                <h3>사물함 — 준비중입니다</h3>
+                <p>사물함 제품에 대한 상세 정보를 준비 중입니다. 사전 문의는 고객지원 페이지를 통해 연락해 주세요.</p>
+                <a href="./Customer-Support-kor.html" class="btn-primary">문의하기</a>
             </div>
         </div>
     </section>
@@ -697,42 +978,52 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업<br>정밀함, 품질, 그리고 정성으로 만듭니다.</p>
                     <address>
                         충청북도 옥천군 옥천동이로 389-11<br>
                         전화: 043-733-9505
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>회사</h5>
+                    <h5>회사소개</h5>
                     <ul>
-                        <li><a href="./about-us-kor.html">회사소개</a></li>
-                        <li><a href="./Community-kor.html">커뮤니티</a></li>
-                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                        <li><a href="./about-us-kor.html#story">회사 소개</a></li>
+                        <li><a href="./about-us-kor.html#values">핵심 가치</a></li>
+                        <li><a href="./about-us-kor.html#certs">인증 현황</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>제품</h5>
+                    <h5>제품소개</h5>
                     <ul>
-                        <li><a href="./Products-kor.html">학교 가구</a></li>
-                        <li><a href="./Products-kor.html">사무용 가구</a></li>
-                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                        <li><a href="./Products-kor.html#s2">S2 시리즈</a></li>
+                        <li><a href="./Products-kor.html#s1">S1 시리즈</a></li>
+                        <li><a href="./Products-kor.html#customizing">커스터마이징</a></li>
+                        <li><a href="./Products-kor.html#dining">제품 특징</a></li>
+                        <li><a href="./Products-kor.html#function">기능 · 성능 시험</a></li>
+                        <li><a href="./Products-kor.html#antibacterial">항균 성능</a></li>
+                        <li><a href="./Products-kor.html#cabinet">사물함</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>갤러리</h5>
+                    <ul>
+                        <li><a href="./Gallery-kor.html">납품사진</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>고객지원</h5>
                     <ul>
-                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
-                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
-                        <li><a href="#">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#faq">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#contact">문의하기</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>정책</h5>
+                    <h5>자료 · 정책</h5>
                     <ul>
-                        <li><a href="#">개인정보처리방침</a></li>
-                        <li><a href="#">이용약관</a></li>
-                        <li><a href="#">사이트맵</a></li>
+                        <li><a href="./catalogue.pdf">카탈로그 다운로드</a></li>
+                        <li><a href="./privacy-kor.html">개인정보처리방침</a></li>
+                        <li><a href="./terms-kor.html">이용약관</a></li>
+                        <li><a href="./sitemap-kor.html">사이트맵</a></li>
                     </ul>
                 </div>
             </div>
@@ -747,67 +1038,19 @@
     </footer>
 
     <script>
-        // ── Tab switching ──────────────────────────────────────────
-        const tabs = document.querySelectorAll('.prod-tab');
-        const panels = document.querySelectorAll('.prod-panel');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-                tab.classList.add('active');
-                const target = document.getElementById('panel-' + tab.dataset.target);
-                if (target) target.classList.add('active');
-            });
-        });
-
-        // ── Image carousel (prev / next buttons) ─────────────────
-        document.querySelectorAll('.pvc-next-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const card = btn.closest('.pvc-card');
-                const imgs = card.querySelectorAll('.pvc-img');
-                const dots = card.querySelectorAll('.pvc-dot');
-                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-                const nextIdx = (currentIdx + 1) % imgs.length;
-                imgs[currentIdx].classList.remove('active');
-                imgs[nextIdx].classList.add('active');
-                if (dots.length) {
-                    dots[currentIdx].classList.remove('active');
-                    dots[nextIdx].classList.add('active');
-                }
-            });
-        });
-
-        document.querySelectorAll('.pvc-prev-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const card = btn.closest('.pvc-card');
-                const imgs = card.querySelectorAll('.pvc-img');
-                const dots = card.querySelectorAll('.pvc-dot');
-                const currentIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-                const prevIdx = (currentIdx - 1 + imgs.length) % imgs.length;
-                imgs[currentIdx].classList.remove('active');
-                imgs[prevIdx].classList.add('active');
-                if (dots.length) {
-                    dots[currentIdx].classList.remove('active');
-                    dots[prevIdx].classList.add('active');
-                }
-            });
-        });
-
-        // ── Dot navigation ────────────────────────────────────────
-        document.querySelectorAll('.pvc-dots').forEach(dotsContainer => {
-            const dots = dotsContainer.querySelectorAll('.pvc-dot');
-            const card = dotsContainer.closest('.pvc-card');
-            const imgs = card.querySelectorAll('.pvc-img');
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => {
-                    imgs.forEach(img => img.classList.remove('active'));
-                    dots.forEach(d => d.classList.remove('active'));
-                    imgs[i].classList.add('active');
-                    dots[i].classList.add('active');
+        // ── Highlight the anchor tab of the section in view ───────
+        const tabLinks = document.querySelectorAll('.prod-tab');
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                tabLinks.forEach(link => {
+                    const on = link.getAttribute('href') === '#' + entry.target.id;
+                    link.classList.toggle('active', on);
+                    if (on) link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
                 });
             });
-        });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('.cat-section[id]').forEach(s => sectionObserver.observe(s));
 
         // ── Header scroll + mobile menu ───────────────────────────
         const menuToggle = document.getElementById('menuToggle');

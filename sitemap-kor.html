@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이트맵 - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="송인산업 홈페이지 사이트맵">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* ===== Policy / sitemap pages ===== */
+        section.doc-hero {
+            margin-top: var(--header-h);
+            padding: 100px 0 56px;
+            text-align: center;
+        }
+        section.doc-hero .inner h1 {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin: 0 auto 16px;
+            padding: 0;
+        }
+        section.doc-hero .inner h1::after { display: none; }
+        .doc-hero .doc-meta {
+            font-size: 15px;
+            color: var(--ink-3);
+        }
+        .doc-section {
+            padding: 0 0 120px;
+        }
+        .doc {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .doc-intro {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--ink-2);
+            padding: 24px 28px;
+            background: var(--surface);
+            border-left: 4px solid var(--brand);
+            margin-bottom: 48px;
+        }
+        .doc h2 {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 48px 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .doc h2 span {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--brand-ink);
+            flex: none;
+        }
+        .doc p,
+        .doc li {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+        .doc ul,
+        .doc ol {
+            margin: 8px 0 8px 4px;
+        }
+        .doc ul li,
+        .doc ol li {
+            position: relative;
+            padding-left: 16px;
+        }
+        .doc ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 0.85em;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--brand);
+        }
+        .doc ol { counter-reset: doc-ol; }
+        .doc ol li { counter-increment: doc-ol; padding-left: 24px; }
+        .doc ol li::before {
+            content: counter(doc-ol) '.';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--brand-ink);
+        }
+        .doc table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .doc th,
+        .doc td {
+            border: 1px solid var(--line);
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+            color: var(--ink-2);
+        }
+        .doc th {
+            background: var(--brand-soft);
+            color: var(--ink);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .doc a { color: var(--brand-ink); text-decoration: underline; }
+        mark.todo {
+            background: #FFF3B0;
+            color: var(--ink);
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        /* Sitemap */
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .sitemap-card {
+            border: 1px solid var(--brand);
+            padding: 24px 24px 20px;
+            background: #fff;
+        }
+        .sitemap-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 0 0 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .sitemap-card h2 a { color: var(--ink); }
+        .sitemap-card h2 a:hover { color: var(--brand-ink); }
+        .sitemap-card ul li a {
+            display: block;
+            padding: 6px 0;
+            font-size: 15px;
+            color: var(--ink-2);
+        }
+        .sitemap-card ul li a::before {
+            content: '–';
+            margin-right: 8px;
+            color: var(--brand);
+        }
+        .sitemap-card ul li a:hover { color: var(--brand-ink); }
+
+        @media (max-width: 900px) {
+            .sitemap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 768px) {
+            section.doc-hero { padding: 64px 0 40px; }
+            .doc-section { padding-bottom: 80px; }
+            .doc-intro { padding: 18px 20px; }
+            .doc table, .doc thead, .doc tbody, .doc tr, .doc th, .doc td { display: block; }
+            .doc th { border-bottom: 0; }
+        }
+        @media (max-width: 480px) {
+            .sitemap-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+                <a href="./index-kor.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+                </a>
+            </h1>
+
+            <nav>
+                <ul id="gnb">
+                    <li><a href="./about-us-kor.html">회사소개</a></li>
+                    <li><a href="./Products-kor.html">제품소개</a></li>
+                    <li><a href="./Gallery-kor.html">갤러리</a></li>
+                    <li><a href="./Customer-Support-kor.html">고객지원</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="eng">ENG</button>
+                <button class="lang-btn active" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">문의하기</a></li>
+                <li><a href="#help">도움말</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Doc Hero -->
+    <section class="doc-hero">
+        <div class="inner">
+            <p class="eyebrow">SITEMAP</p>
+            <h1>사이트맵</h1>
+            <p class="doc-meta">송인산업 홈페이지의 모든 메뉴를 한눈에 확인하세요.</p>
+        </div>
+    </section>
+
+    <section class="doc-section">
+        <div class="inner">
+            <div class="sitemap-grid">
+                <div class="sitemap-card">
+                    <h2><a href="./index-kor.html">홈</a></h2>
+                    <ul>
+                        <li><a href="./index-kor.html#series">S 시리즈</a></li>
+                        <li><a href="./index-kor.html#antibacterial">항균 · 인증</a></li>
+                        <li><a href="./index-kor.html#news">최신 소식</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-card">
+                    <h2><a href="./about-us-kor.html">회사소개</a></h2>
+                    <ul>
+                        <li><a href="./about-us-kor.html#story">회사 소개</a></li>
+                        <li><a href="./about-us-kor.html#values">핵심 가치</a></li>
+                        <li><a href="./about-us-kor.html#certs">인증 현황</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-card">
+                    <h2><a href="./Products-kor.html">제품소개</a></h2>
+                    <ul>
+                        <li><a href="./Products-kor.html#s2">S2 시리즈 (정부조달 우수제품)</a></li>
+                        <li><a href="./Products-kor.html#s1">S1 시리즈 (정부조달 MAS 제품)</a></li>
+                        <li><a href="./Products-kor.html#customizing">커스터마이징</a></li>
+                        <li><a href="./Products-kor.html#dining">제품 특징</a></li>
+                        <li><a href="./Products-kor.html#function">기능 · 성능 시험</a></li>
+                        <li><a href="./Products-kor.html#antibacterial">항균 성능</a></li>
+                        <li><a href="./Products-kor.html#cabinet">사물함</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-card">
+                    <h2><a href="./Gallery-kor.html">갤러리</a></h2>
+                    <ul>
+                        <li><a href="./Gallery-kor.html">납품사진</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-card">
+                    <h2><a href="./Customer-Support-kor.html">고객지원</a></h2>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html#faq">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#contact">문의하기</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-card">
+                    <h2><a href="./privacy-kor.html">자료 · 정책</a></h2>
+                    <ul>
+                        <li><a href="./catalogue.pdf">카탈로그 다운로드 (PDF)</a></li>
+                        <li><a href="./privacy-kor.html">개인정보처리방침</a></li>
+                        <li><a href="./terms-kor.html">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업<br>정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <address>
+                        충청북도 옥천군 옥천동이로 389-11<br>
+                        전화: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>회사소개</h5>
+                    <ul>
+                        <li><a href="./about-us-kor.html#story">회사 소개</a></li>
+                        <li><a href="./about-us-kor.html#values">핵심 가치</a></li>
+                        <li><a href="./about-us-kor.html#certs">인증 현황</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>제품소개</h5>
+                    <ul>
+                        <li><a href="./Products-kor.html#s2">S2 시리즈</a></li>
+                        <li><a href="./Products-kor.html#s1">S1 시리즈</a></li>
+                        <li><a href="./Products-kor.html#customizing">커스터마이징</a></li>
+                        <li><a href="./Products-kor.html#dining">제품 특징</a></li>
+                        <li><a href="./Products-kor.html#function">기능 · 성능 시험</a></li>
+                        <li><a href="./Products-kor.html#antibacterial">항균 성능</a></li>
+                        <li><a href="./Products-kor.html#cabinet">사물함</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>갤러리</h5>
+                    <ul>
+                        <li><a href="./Gallery-kor.html">납품사진</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>고객지원</h5>
+                    <ul>
+                        <li><a href="./Customer-Support-kor.html#faq">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#contact">문의하기</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>자료 · 정책</h5>
+                    <ul>
+                        <li><a href="./catalogue.pdf">카탈로그 다운로드</a></li>
+                        <li><a href="./privacy-kor.html">개인정보처리방침</a></li>
+                        <li><a href="./terms-kor.html">이용약관</a></li>
+                        <li><a href="./sitemap-kor.html">사이트맵</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./sitemap.html">ENG</a>
+                    <a href="./sitemap-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#gnb a').forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>
+

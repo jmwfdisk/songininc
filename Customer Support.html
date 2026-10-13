@@ -11,256 +11,331 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/language.js" defer></script>
     <style>
-        .support-hero {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 80px;
-            color: white;
+        /* ===== Sub-page hero ===== */
+        section.support-hero {
+            margin-top: var(--header-h);
+            padding: 120px 0 80px;
             text-align: center;
         }
 
-        .support-hero h1 {
-            font-size: clamp(36px, 6vw, 56px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            padding-bottom: 0;
+        section.support-hero .inner h1 {
+            font-size: clamp(48px, 8vw, 112px);
+            font-weight: 700;
+            line-height: 0.98;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin: 0 auto 24px;
+            padding: 0;
+            text-wrap: balance;
         }
 
-        .support-hero h1::after {
+        section.support-hero .inner h1::after {
             display: none;
         }
 
-        .support-hero p {
-            font-size: clamp(18px, 2.5vw, 24px);
-            opacity: 0.95;
+        .support-hero p.support-sub {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: clamp(17px, 1.4vw, 20px);
+            line-height: 1.5;
+            color: var(--ink-2);
+            text-wrap: balance;
         }
 
+        /* ===== Shared split layout (heading left, content right) ===== */
+        .split {
+            display: grid;
+            grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+            gap: 64px;
+            align-items: start;
+        }
+
+        .split-head {
+            position: sticky;
+            top: calc(var(--header-h) + 32px);
+        }
+
+        .split-head .section-heading {
+            margin-bottom: 24px;
+        }
+
+        .support-intro .split-head {
+            position: static;
+        }
+
+        .support-intro .section-heading {
+            margin-bottom: 0;
+        }
+
+        .support-intro-text {
+            align-self: end;
+            font-size: clamp(17px, 1.4vw, 20px);
+            line-height: 1.6;
+            color: var(--ink-2);
+            max-width: 34em;
+            text-wrap: pretty;
+        }
+
+        /* ===== FAQ accordion ===== */
+        .faq-section {
+            padding: 40px 0 140px;
+        }
+
+        .faq-list {
+            border-top: 1px solid var(--line);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            width: 100%;
+            padding: 32px 0;
+            background: none;
+            border: 0;
+            text-align: left;
+            cursor: pointer;
+            color: var(--ink);
+            font-size: clamp(20px, 1.8vw, 24px);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        .faq-question:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .faq-icon {
+            position: relative;
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-pill);
+            background: var(--brand-soft);
+            transition: background-color 0.2s ease, transform 0.4s var(--ease);
+        }
+
+        .faq-question:hover .faq-icon {
+            background: #F9E2BC;
+        }
+
+        .faq-icon::before,
+        .faq-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 2px;
+            margin: -1px 0 0 -7px;
+            border-radius: 2px;
+            background: var(--brand-ink);
+            transition: transform 0.4s var(--ease), opacity 0.3s ease;
+        }
+
+        .faq-icon::after {
+            transform: rotate(90deg);
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--brand);
+        }
+
+        .faq-item.active .faq-icon::before,
+        .faq-item.active .faq-icon::after {
+            background: #fff;
+        }
+
+        .faq-item.active .faq-icon::after {
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+
+        .faq-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s var(--ease);
+        }
+
+        .faq-item.active .faq-answer {
+            grid-template-rows: 1fr;
+        }
+
+        .faq-answer-inner {
+            overflow: hidden;
+        }
+
+        .faq-answer p {
+            max-width: 46em;
+            padding: 0 68px 32px 0;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--ink-2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer p {
+            opacity: 1;
+            transition: opacity 0.4s ease 0.1s;
+        }
+
+        /* ===== Contact tiles ===== */
         .support-section {
-            padding: 20px 0 50px;
-        }
-
-        .support-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-
-        .support-intro h2 {
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-
-        .support-intro p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-light);
+            padding: 0 0 160px;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 64px;
         }
 
         .contact-card {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            transition: background-color 0.2s ease;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+            background: var(--surface-2);
         }
 
-        .contact-card i {
-            font-size: 48px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .contact-card h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
-        .contact-card p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-
-        .contact-card a {
-            color: var(--primary-color);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .contact-card a:hover {
-            color: var(--secondary-color);
-        }
-
-        .contact-form-section {
-            background: var(--bg-light);
-            padding: 80px 0;
-            margin-top: 60px;
-        }
-
-        .contact-form-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            padding: 50px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .contact-form-wrapper h2 {
-            font-size: clamp(28px, 4vw, 36px);
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-dark);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-            font-size: 15px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            font-weight: 600;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .faq-section {
-            padding: 50px 0 30px;
-        }
-
-        .faq-section h2 {
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--text-dark);
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item.active {
-            box-shadow: var(--shadow-md);
-        }
-
-        .faq-question {
-            padding: 20px 25px;
-            cursor: pointer;
+        .contact-label {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ink-3);
         }
 
-        .faq-question:hover {
-            background: var(--bg-light);
+        .contact-label i {
+            font-size: 14px;
+            color: var(--ink-3);
         }
 
-        .faq-question i {
-            color: var(--primary-color);
-            transition: transform 0.3s ease;
+        .contact-value {
+            margin-top: auto;
+            padding-top: 48px;
+            font-size: clamp(20px, 1.7vw, 26px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            overflow-wrap: break-word;
         }
 
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
+        .contact-value a {
+            color: inherit;
+            background-image: linear-gradient(currentColor, currentColor);
+            background-size: 0% 1px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.4s var(--ease);
         }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 25px;
+        .contact-value a:hover {
+            background-size: 100% 1px;
         }
 
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 25px 20px;
+        .contact-note {
+            margin-top: 12px;
+            font-size: 15px;
+            color: var(--ink-2);
         }
 
-        .faq-answer p {
-            color: var(--text-light);
-            line-height: 1.7;
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .split {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .split-head {
+                position: static;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contact-card.contact-address {
+                grid-column: 1 / -1;
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section.support-hero {
+                padding: 72px 0 48px;
+            }
+
+            .faq-section {
+                padding: 24px 0 96px;
+            }
+
+            .support-section {
+                padding: 0 0 96px;
+            }
+
+            .faq-question {
+                padding: 24px 0;
+                gap: 16px;
+            }
+
+            .faq-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .faq-answer p {
+                padding: 0 0 24px;
+                font-size: 16px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                margin-top: 40px;
+            }
+
+            .contact-card,
+            .contact-card.contact-address {
+                min-height: 0;
+                padding: 28px;
+            }
+
+            .contact-value {
+                padding-top: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-question {
+                font-size: 18px;
+            }
+
+            .contact-card,
+            .contact-card.contact-address {
+                padding: 24px;
+                border-radius: var(--radius-md);
+            }
         }
     </style>
 </head>
@@ -281,7 +356,6 @@
                 <li><a href="./about%20us.html">About Us</a></li>
                 <li><a href="./Products.html">Products</a></li>
                 <li><a href="./Gallery.html">Gallery</a></li>
-                <li><a href="./Community.html">Community</a></li>
                 <li><a href="./Customer%20Support.html">Customer Support</a></li>
             </ul>
             </nav>
@@ -307,99 +381,143 @@
     <!-- Support Hero -->
     <section class="support-hero">
         <div class="inner">
+            <p class="eyebrow">Support Center</p>
             <h1>Customer Support</h1>
-            <p>We're Here to Help You</p>
+            <p class="support-sub">We're Here to Help You</p>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="inner">
-            <h2>Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>What types of furniture do you manufacture?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>We specialize in office and school furniture, including tables, chairs, desks, and storage solutions. Our products are designed for educational institutions, offices, and multi-purpose spaces.</p>
-                </div>
+    <section class="faq-section" id="faq">
+        <div class="inner split">
+            <div class="split-head">
+                <p class="eyebrow">FAQ</p>
+                <h2 class="section-heading">Frequently Asked Questions</h2>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Do you offer installation services?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes, we provide professional installation services for all our products. Our experienced team ensures proper setup and can handle projects of any size.</p>
-                </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>What types of furniture do you manufacture?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We specialize in office and school furniture, including tables, chairs, desks, and storage solutions. Our products are designed for educational institutions, offices, and multi-purpose spaces.</p>
+                        </div>
                     </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Can I customize the colors of your products?</span>
-                    <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="faq-answer">
-                    <p>Absolutely! We offer a wide range of color options for our seating and furniture. You can choose from various colors including Sky Blue, Red Violet, and many more to match your space.</p>
-                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Do you offer installation services?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes, we provide professional installation services for all our products. Our experienced team ensures proper setup and can handle projects of any size.</p>
+                        </div>
                     </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>What is your warranty policy?</span>
-                    <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="faq-answer">
-                    <p>We stand behind the quality of our products. Please contact us for specific warranty information based on the product you're interested in.</p>
-                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>How long does delivery take after ordering?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>It depends on quantity and specification; typically delivery and installation are completed within about 3–4 weeks of order confirmation.</p>
+                        </div>
                     </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How long does delivery take?</span>
-                    <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="faq-answer">
-                    <p>Delivery times vary depending on the product and order size. Standard orders typically take 2-4 weeks. For custom orders, please contact us for an estimated timeline.</p>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Can I mix seat colours in one order?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. You can combine colours freely to suit your space — 4 tabletops, 7 backrest colours, 8 round-stool colours and 12 side-cover colours (S2 series only).</p>
+                        </div>
                     </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>What is the after-sales warranty period?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Key parts (springs, plastic seats, stainless legs, etc.) are covered by free after-sales service for 10 years from delivery, and requests are handled promptly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Can you tell us how many tables will fit our space (dining hall, meeting room, etc.)?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. Our staff will visit the site, measure the actual space, draw up a layout and provide a tailored quote.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>How should the furniture be cleaned?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Wipe off dust with a soft cloth; for heavier dirt, use a damp cloth and finish with a dry one. Abrasives, harsh detergents and rough scourers can damage the surface, and strong disinfectants such as bleach may cause rust or corrosion.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>What is the tabletop surface made of?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We use eco-friendly HPM (high-pressure melamine) tops, densely compressed under high pressure. They resist scratches, heat, stains and moisture — ideal for multi-purpose furniture such as dining tables. The surface reduced 6 types of bacteria by 99.99% in KCL testing.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Support Section -->
-    <section class="support-section">
+    <section class="support-section" id="contact">
         <div class="inner">
-            <div class="support-intro">
-                <h2>Get in Touch</h2>
-                <p>
+            <div class="support-intro split">
+                <div class="split-head">
+                    <p class="eyebrow">Contact</p>
+                    <h2 class="section-heading">Get in Touch</h2>
+                </div>
+                <p class="support-intro-text">
                     Have a question or need assistance? Our customer support team is ready to help you. Reach out to us through any of the following channels, and we'll get back to you as soon as possible.
                 </p>
             </div>
 
             <div class="contact-grid">
                 <div class="contact-card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p>Call us directly</p>
-                    <a href="tel:043-733-9505">043-733-9505</a>
+                    <h3 class="contact-label">Phone<i class="fas fa-phone" aria-hidden="true"></i></h3>
+                    <p class="contact-value"><a href="tel:043-733-9505">043-733-9505</a><br><a href="tel:043-733-8999">043-733-8999</a></p>
+                    <p class="contact-note">Fax 043-733-7999</p>
                 </div>
 
                 <div class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>Send us an email</p>
-                    <a href="mailto:songin02656@naver.com">songin02656@naver.com</a>
+                    <h3 class="contact-label">Email<i class="fas fa-envelope" aria-hidden="true"></i></h3>
+                    <p class="contact-value"><a href="mailto:songin02656@naver.com">songin02656@naver.com</a></p>
+                    <p class="contact-note">Send us an email</p>
                 </div>
 
-                <div class="contact-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Address</h3>
-                    <p>389-11, Okcheondong-i-ro</p>
-                    <p>Okcheon-gun, Chungcheongbuk-do</p>
-                    <p>South Korea</p>
+                <div class="contact-card contact-address">
+                    <h3 class="contact-label">Address<i class="fas fa-map-marker-alt" aria-hidden="true"></i></h3>
+                    <p class="contact-value">389-11, Okcheondong-i-ro<br>Okcheon-gun, Chungcheongbuk-do</p>
+                    <p class="contact-note">South Korea</p>
                 </div>
             </div>
         </div>
@@ -411,7 +529,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
                     <address>
                         389-11, Okcheondong-i-ro,<br>
                         Okcheon-gun, Chungcheongbuk-do<br>
@@ -419,35 +537,45 @@
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>Company</h5>
+                    <h5>About Us</h5>
                     <ul>
-                        <li><a href="./about%20us.html">About Us</a></li>
-                        <li><a href="./Community.html">Community</a></li>
-                        <li><a href="./Gallery.html">Gallery</a></li>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Products</h5>
                     <ul>
-                        <li><a href="./Products.html">School Furniture</a></li>
-                        <li><a href="./Products.html">Office Furniture</a></li>
-                        <li><a href="./Products.html">Custom Solutions</a></li>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
-                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Legal</h5>
+                    <h5>Resources</h5>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
@@ -496,13 +624,17 @@
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                
+
                 // Close all FAQ items
-                faqItems.forEach(faq => faq.classList.remove('active'));
-                
+                faqItems.forEach(faq => {
+                    faq.classList.remove('active');
+                    faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+
                 // Open clicked item if it wasn't active
                 if (!isActive) {
                     item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
                 }
             });
         });

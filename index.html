@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // 사이트 루트(index.html)는 영문 → 외부에서 처음 들어온 방문자는 한국어 홈으로 보냄.
+        // 영어를 고른 적이 있거나(localStorage) 사이트 내부 링크로 온 경우는 영문 유지.
+        (function () {
+            var pref = null;
+            try { pref = localStorage.getItem('preferredLanguage'); } catch (e) {}
+            var internal = document.referrer && document.referrer.indexOf(location.origin) === 0;
+            if (pref !== 'eng' && !internal) location.replace('index-kor.html' + location.hash);
+        })();
+    </script>
     <title>송인산업 - SONGIN INDUSTRY | Total Office & School Furniture</title>
     <meta name="description" content="Songin Industry is South Korea's leading manufacturer of office and school furniture. Transform your space with premium quality furniture.">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -28,7 +38,6 @@
                     <li><a href="./about%20us.html">About Us</a></li>
                     <li><a href="./Products.html">Products</a></li>
                     <li><a href="./Gallery.html">Gallery</a></li>
-                    <li><a href="./Community.html">Community</a></li>
                     <li><a href="./Customer%20Support.html">Customer Support</a></li>
                 </ul>
             </nav>
@@ -46,160 +55,58 @@
         </div>
     </header>
 
-    <!-- Hero Section - Split Layout -->
+    <!-- Hero Section -->
     <section class="hero-section" id="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="./img/visual.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
         <div class="inner hero-inner">
-            <div class="hero-left">
-                <p class="eyebrow">South Korea's Premier Furniture Manufacturer</p>
-                <h1 class="hero-title">Furniture built<br>for <em>people</em>,<br>not just spaces</h1>
-                <p class="hero-desc">From school cafeterias to executive offices, Songin Industry crafts durable, ergonomic furniture that transforms how people work and learn.</p>
-                <div class="hero-actions">
-                    <a href="./Products.html" class="btn-primary">View Products</a>
-                    <a href="./Customer%20Support.html" class="btn-outline-white">Request a Quote</a>
-                </div>
+            <p class="eyebrow">South Korea's Premier Furniture Manufacturer</p>
+            <h1 class="hero-title">Furniture built for <span class="hero-stack" aria-hidden="true"><img src="./img/catalog/product/thumb-s2-b4-1200.jpg" alt="" style="--chair: #F9D11D"><img src="./img/catalog/product/thumb-s1-c4-1200.jpg" alt="" style="--chair: #99C2D8"><img src="./img/catalog/product/thumb-s2-b6-2100.jpg" alt="" style="--chair: #B667BA"><img src="./img/catalog/product/thumb-s1-c6-1800.jpg" alt="" style="--chair: #DF9B44"></span><em>people</em>, not just spaces</h1>
+            <p class="hero-desc">From school cafeterias to executive offices, Songin Industry crafts durable, ergonomic furniture that transforms how people work and learn.</p>
+            <div class="hero-actions">
+                <a href="./Products.html" class="btn-primary">View Products</a>
+                <a href="./Customer%20Support.html" class="btn-outline-dark">Request a Quote</a>
             </div>
-            <div class="hero-right">
-                <div class="hero-collage">
-
-                    <!-- Col 1 Row 1-2: main product (tall) -->
-                    <div class="hc hc-main">
-                        <img src="./img/일반/s1-B4(딥옐로우)-1200.png" alt="Standard — Deep Yellow">
-                        <img src="./img/main.png" alt="Songin Industry Products">
-                        <img src="./img/일반/s1-B4(샌드핑크, 스카이블루)-1200.png" alt="Standard — Sand Pink Sky Blue">
-                        <span class="hc-main-label">Standard</span>
-                    </div>
-
-                    <!-- Col 2-3 Row 1: stat card -->
-                    <div class="hc hc-stat">
-                        <span class="hc-eyebrow">SONGIN INDUSTRY</span>
-                        <div class="hc-stat-nums">
-                            <div>
-                                <strong>Korea's First</strong>
-                                <span>Robotic Welding</span>
-                            </div>
-                            <div>
-                                <strong>20+ Years</strong>
-                                <span>of Expertise</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Col 2 Row 2: installation photo -->
-                    <div class="hc hc-install">
-                        <img src="./img/news.jpg" alt="School Installation">
-                    </div>
-
-                    <!-- Col 3 Row 2: color options photo -->
-                    <div class="hc hc-colors">
-                        <img src="./img/news4.png" alt="Color Options">
-                    </div>
-
-                    <!-- Col 1 Row 3: robotic info card -->
-                    <div class="hc hc-robotic">
-                        <i class="fas fa-industry"></i>
-                        <p>Robotic Welding<br>Technology</p>
-                    </div>
-
-                    <!-- Col 2 Row 3: product photo -->
-                    <div class="hc hc-product">
-                        <img src="./img/S2-B6(올리브그린)-1200(망펄).png" alt="New Product">
-                        <span class="hc-product-label">Premium</span>
-                    </div>
-
-                    <!-- Col 3 Row 3: factory photo -->
-                    <div class="hc hc-factory">
-                        <img src="./img/news2.png" alt="Manufacturing">
-                    </div>
-
-                </div>
+            <div class="hero-meta">
+                <span>Korea's first robotic welding</span>
+                <span>20+ years of expertise</span>
+                <span>Made in Korea</span>
             </div>
         </div>
     </section>
 
     <!-- Tagline Section -->
     <section class="tagline-section">
-        <div class="tagline-blob"></div>
         <div class="inner tagline-inner">
             <h2>Don't just fill a room,<br><strong>define it</strong></h2>
             <p>Songin Industry combines precision manufacturing, ergonomic design, and full customization options — making it easy to create spaces that inspire productivity and comfort.</p>
         </div>
     </section>
 
-    <!-- Product Tabs Section -->
-    <section class="product-tabs-section">
+    <!-- S Series Section -->
+    <section class="home-series" id="series">
         <div class="inner">
-            <nav class="tabs-nav" role="tablist">
-                <button class="tab-btn active" data-tab="school" role="tab">School Furniture</button>
-                <button class="tab-btn" data-tab="office" role="tab">Office Furniture</button>
-                <button class="tab-btn" data-tab="custom" role="tab">Custom Solutions</button>
-            </nav>
-
-            <div class="tab-panel active" id="tab-school">
-                <div class="tab-text">
-                    <h3>Built for students,<br>designed to last</h3>
-                    <p>Our school furniture is engineered for durability and safety. From cafeteria tables to classroom chairs, every piece meets strict safety standards while creating an inviting learning environment.</p>
-                    <a href="./Products.html" class="tab-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="tab-img">
-                    <img src="./img/news.jpg" alt="School Furniture — Janggok Elementary Installation">
-                </div>
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>S Series</h2></div>
+                <span class="cat-head-sub">Portable stool tables for group dining</span>
             </div>
-
-            <div class="tab-panel" id="tab-office">
-                <div class="tab-text">
-                    <h3>Elevate every<br>workspace</h3>
-                    <p>From executive suites to open-plan offices, our furniture combines elegant design with ergonomic comfort. Each piece is crafted to support productivity and well-being throughout the workday.</p>
-                    <a href="./Products.html" class="tab-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="tab-img">
-                    <img src="./img/ENG-P1.png" alt="Office Furniture">
-                </div>
-            </div>
-
-            <div class="tab-panel" id="tab-custom">
-                <div class="tab-text">
-                    <h3>Your vision,<br>our craftsmanship</h3>
-                    <p>Have a unique space or specific requirements? Our custom solutions team works directly with you to design and manufacture furniture that perfectly fits your needs, dimensions, and aesthetic.</p>
-                    <a href="./Customer%20Support.html" class="tab-link">Get in touch <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="tab-img">
-                    <img src="./img/news3.png" alt="Custom Integrated Folding Solution">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature Strip -->
-    <section class="feature-strip">
-        <div class="inner strip-inner">
-            <p>With Songin, it all comes together. Schools and offices across Korea trust our furniture for quality, durability, and innovation in every product we make.</p>
-        </div>
-        <div class="marquee-track">
-            <div class="marquee-content" aria-hidden="true">
-                <span class="tag-pill">Robotic Welding</span>
-                <span class="tag-pill">Ergonomic Design</span>
-                <span class="tag-pill">Color Customization</span>
-                <span class="tag-pill">Made in Korea</span>
-                <span class="tag-pill">School Furniture</span>
-                <span class="tag-pill">Office Systems</span>
-                <span class="tag-pill">Folding Tables</span>
-                <span class="tag-pill">Safety Certified</span>
-                <span class="tag-pill">Nationwide Delivery</span>
-                <span class="tag-pill">20+ Years Experience</span>
-                <span class="tag-pill">Robotic Welding</span>
-                <span class="tag-pill">Ergonomic Design</span>
-                <span class="tag-pill">Color Customization</span>
-                <span class="tag-pill">Made in Korea</span>
-                <span class="tag-pill">School Furniture</span>
-                <span class="tag-pill">Office Systems</span>
-                <span class="tag-pill">Folding Tables</span>
-                <span class="tag-pill">Safety Certified</span>
-                <span class="tag-pill">Nationwide Delivery</span>
-                <span class="tag-pill">20+ Years Experience</span>
+            <div class="home-series-grid">
+                <a class="home-series-card" href="./Products.html#s2">
+                    <div class="hsc-img"><img src="./img/catalog/product/s2-family.png" alt="S2" loading="lazy"></div>
+                    <div class="hsc-body">
+                        <span class="cat-head-badge"><img src="./img/catalog/logo/logo-excellent.png" alt="">Excellent Procurement Product</span>
+                        <h3>S2 Series</h3>
+                        <p>Patented rotation control, 12 side-cover colours. 7 backrest colours · 8 round-stool colours.</p>
+                        <span class="hsc-link">View models &amp; prices <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+                <a class="home-series-card" href="./Products.html#s1">
+                    <div class="hsc-img"><img src="./img/catalog/product/s1-family.png" alt="S1" loading="lazy"></div>
+                    <div class="hsc-body">
+                        <span class="cat-head-badge"><img src="./img/catalog/logo/cert-mas.png" alt="">Public Procurement (MAS)</span>
+                        <h3>S1 Series</h3>
+                        <p>All-in-one tables whose seats tuck away automatically after use. 7 backrest colours · 8 round-stool colours.</p>
+                        <span class="hsc-link">View models &amp; prices <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -244,8 +151,31 @@
         </div>
     </section>
 
+    <!-- Antibacterial & Certification Section -->
+    <section class="home-anti" id="antibacterial">
+        <div class="inner">
+            <div class="home-anti-grid">
+                <div class="home-anti-block">
+                    <p class="hab-eyebrow">ISO 22196 : 2011 · KCL</p>
+                    <p class="hab-lead">The tabletop children touch every day,</p>
+                    <p class="hab-num">99.99<span>%</span></p>
+                    <p class="hab-title">antibacterial result</p>
+                    <a href="./Products.html#antibacterial" class="hab-link">See results for 6 bacteria <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="home-anti-photo"><img src="./img/catalog/site/hoyeon-1.jpg" alt="" loading="lazy"></div>
+            </div>
+            <div class="home-certs">
+                <p class="hab-eyebrow">ISO 9001 / 14001</p>
+                <p>Excellent Procurement Product · Public Procurement (MAS) · Patent · Design registration · Eco-label · Q-Mark · Group standard · G-PASS company</p>
+                <div class="cert-strip">
+                    <img src="./img/catalog/logo/logo-excellent.png" alt=""><img src="./img/catalog/logo/cert-mas-v2.png" alt="MAS"><img src="./img/catalog/logo/logo-eco.png" alt=""><img src="./img/catalog/logo/logo-sps.png" alt=""><img src="./img/catalog/logo/logo-q.png" alt=""><img src="./img/catalog/logo/logo-gpass.png" alt="G-PASS"><img src="./img/catalog/logo/logo-iso.png" alt="ISO"><img src="./img/catalog/logo/logo-patent.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Recent News Section -->
-    <section class="news-section">
+    <section class="news-section" id="news">
         <div class="inner">
             <p class="eyebrow">Latest Updates</p>
             <h2 class="section-heading">Recent News</h2>
@@ -254,7 +184,7 @@
                     <div class="pic">
                         <img src="./img/news.jpg" alt="장곡초등학교 설치 사례">
                     </div>
-                    <h3><a href="#">Installation at Janggok Elementary School</a></h3>
+                    <h3><a href="./Gallery.html">Supplying Schools Nationwide</a></h3>
                     <p>To provide students with an uplifting dining experience, we installed a coordinated setup of vivid, colorful chairs and sleek white tables designed for both harmony and function.</p>
                 </article>
 
@@ -262,23 +192,23 @@
                     <div class="pic">
                         <img src="./img/news2.png" alt="로봇 용접 기술 도입">
                     </div>
-                    <h3><a href="#">Industry's First Robotic Welding Technology</a></h3>
+                    <h3><a href="./about%20us.html">Industry's First Robotic Welding Technology</a></h3>
                     <p>Experience Songin Industry's field-driven operations and technological innovation through the introduction of cutting-edge robotic welding technology.</p>
                 </article>
 
                 <article class="news-card">
-                    <div class="pic">
-                        <img src="./img/일반/s1-B6(바이올렛)-2100(2).png" alt="New Product">
+                    <div class="pic pic--contain">
+                        <img src="./img/catalog/product/s2-family.png" alt="S2 Series — new product">
                     </div>
-                    <h3><a href="#">Discover Our Newest Products</a></h3>
+                    <h3><a href="./Products.html#s2">Discover Our Newest Products</a></h3>
                     <p>Optimize your space with this all-in-one integrated folding table and seating system. Designed for efficiency and comfort for school cafeterias and multipurpose areas.</p>
                 </article>
 
                 <article class="news-card">
-                    <div class="pic">
-                        <img src="./img/news4.png" alt="액세서리 옵션">
+                    <div class="pic pic--contain">
+                        <img src="./img/catalog/func/design-identity.png" alt="Backrest and round seat colour options">
                     </div>
-                    <h3><a href="#">Versatile Accessory Color Options</a></h3>
+                    <h3><a href="./Products.html#customizing">Versatile Accessory Color Options</a></h3>
                     <p>Choose from a vibrant selection of seat colors — from Sky Blue to Red Violet — to create a more personalized and dynamic space for any environment.</p>
                 </article>
             </div>
@@ -302,7 +232,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
                     <address>
                         389-11, Okcheondong-i-ro,<br>
                         Okcheon-gun, Chungcheongbuk-do<br>
@@ -310,35 +240,45 @@
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>Company</h5>
+                    <h5>About Us</h5>
                     <ul>
-                        <li><a href="./about%20us.html">About Us</a></li>
-                        <li><a href="./Community.html">Community</a></li>
-                        <li><a href="./Gallery.html">Gallery</a></li>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Products</h5>
                     <ul>
-                        <li><a href="./Products.html">School Furniture</a></li>
-                        <li><a href="./Products.html">Office Furniture</a></li>
-                        <li><a href="./Products.html">Custom Solutions</a></li>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
-                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Legal</h5>
+                    <h5>Resources</h5>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
@@ -388,22 +328,6 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
-        });
-
-        // Product Tabs
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabPanels = document.querySelectorAll('.tab-panel');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.tab;
-
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabPanels.forEach(p => p.classList.remove('active'));
-
-                btn.classList.add('active');
-                document.getElementById('tab-' + target).classList.add('active');
             });
         });
 

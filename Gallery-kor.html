@@ -11,143 +11,206 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/language.js" defer></script>
     <style>
-        /* Gallery Intro — same style as Products page intro */
-        .gallery-intro-section {
-            padding: 130px 0 52px;
-            background: #f8faff;
+        /* ===== Gallery hero (light, centered) ===== */
+        .gallery-hero {
+            margin-top: var(--header-h);
+            padding: 120px 0 72px;
             text-align: center;
         }
-        .gallery-eyebrow {
-            display: inline-block;
-            font-size: 23px;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--primary-color);
-            margin-bottom: 14px;
-        }
-        .gallery-intro-section h1 {
-            font-size: clamp(32px, 5vw, 52px);
+        .gallery-hero .eyebrow { margin-bottom: 24px; }
+        .gallery-hero .inner h1 {
+            font-size: clamp(48px, 8vw, 112px);
             font-weight: 700;
-            color: var(--text-dark);
-            margin: 0;
-            padding-bottom: 0;
-            line-height: 1.1;
+            line-height: .98;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin: 0 auto;
+            padding: 0;
+            max-width: 14ch;
+            text-wrap: balance;
+            background: none;
+            -webkit-text-fill-color: currentColor;
         }
-        .gallery-intro-section h1::after { display: none; }
-        .gallery-intro-section > .inner > p {
-            font-size: 17px;
-            color: var(--text-light);
-            max-width: 560px;
-            margin: 16px auto 0;
-            line-height: 1.65;
+        .gallery-hero .inner h1::after { display: none; }
+        .gallery-hero .inner > p {
+            font-size: clamp(17px, 1.4vw, 20px);
+            color: var(--ink-2);
+            max-width: 600px;
+            margin: 28px auto 0;
+            line-height: 1.55;
+            text-wrap: balance;
         }
 
-        /* Sticky Filter Tab Bar — same as prod-tabs-wrap */
+        /* ===== Sticky pill filter ===== */
         .gallery-tabs-wrap {
             position: sticky;
-            top: 80px;
+            top: var(--header-h);
             z-index: 100;
-            background: rgba(248, 250, 255, 0.92);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.92);
+            -webkit-backdrop-filter: saturate(180%) blur(16px);
+            backdrop-filter: saturate(180%) blur(16px);
+            padding: 14px 16px;
+            text-align: center;
         }
         .gallery-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            padding: 0 20px;
+            display: inline-flex;
+            gap: 2px;
+            padding: 4px;
+            background: var(--surface);
+            border-radius: var(--radius-pill);
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+            vertical-align: top;
         }
+        .gallery-tabs::-webkit-scrollbar { display: none; }
         .filter-btn {
-            padding: 10px 24px;
-            background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
+            padding: 10px 22px;
             font-size: 15px;
             font-weight: 500;
-            color: var(--text-dark);
+            color: var(--ink-2);
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-pill);
             cursor: pointer;
-            transition: all 0.3s ease;
             white-space: nowrap;
             font-family: inherit;
+            transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
         }
-        .filter-btn:hover,
+        .filter-btn:hover { color: var(--ink); }
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            background: var(--brand);
+            color: #fff;
         }
 
-        /* Gallery Grid Section */
+        /* ===== Masonry grid (3 / 2 / 1 columns) ===== */
         .gallery-grid-section {
-            background: var(--bg-light);
-            padding: 60px 0 80px;
+            padding: 32px 0 160px;
         }
+        /* Uniform 3-column grid: every tile has the same 4:3 frame */
         .grid-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 0 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            padding: 0;
+            max-width: none;
         }
-        @media (max-width: 1024px) {
-            .grid-gallery { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 768px) {
+            .grid-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 480px) {
             .grid-gallery { grid-template-columns: 1fr; }
         }
-        .grid-gallery img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            margin: 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--surface);
+            cursor: zoom-in;
+            transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
         }
-        .grid-gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-xl);
+        .grid-gallery .gallery-item img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: auto;
+            object-fit: cover;
+            display: block;
+            border-radius: 0;
+            opacity: 1;
+            cursor: inherit;
+            transition: transform 0.6s var(--ease);
+        }
+        .grid-gallery .gallery-item:hover img { transform: scale(1.03); opacity: 1; }
+        /* Catalogue-style caption: dark gradient band at the bottom, always visible */
+        .gallery-item figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 48px 18px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #fff;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+            pointer-events: none;
+        }
+        .gallery-item figcaption strong {
+            display: block;
+            font-size: 15px;
+        }
+        .gallery-item figcaption span {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .gallery-item:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 3px;
+        }
+        @media (hover: none) {
+            .gallery-item figcaption { opacity: 1; transform: none; }
         }
 
-        /* Lightbox */
+        /* ===== Lightbox ===== */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            inset: 0;
+            background: rgba(255, 255, 255, 0.96);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             z-index: 2000;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
+            gap: 16px;
+            padding: 72px 24px 40px;
+            cursor: zoom-out;
         }
         .lightbox.active { display: flex; }
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+            max-width: 100%;
+            max-height: calc(100% - 40px);
+            object-fit: contain;
+            border-radius: var(--radius-md);
+        }
+        .lightbox-caption {
+            font-size: 13px;
+            color: var(--ink-3);
+            text-align: center;
         }
         .lightbox-close {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            line-height: 1;
+            color: var(--ink);
+            background: var(--surface);
+            border-radius: var(--radius-pill);
             cursor: pointer;
             z-index: 2001;
-            transition: transform 0.3s ease;
+            transition: background-color 0.2s ease;
         }
-        .lightbox-close:hover { transform: rotate(90deg); }
+        .lightbox-close:hover { background: var(--surface-2); }
+
+        @media (max-width: 768px) {
+            .gallery-hero { padding: 72px 0 48px; }
+            .gallery-grid-section { padding: 24px 0 80px; }
+            .grid-gallery { column-gap: 12px; padding: 0; }
+            .gallery-item { border-radius: var(--radius-md); }
+            .filter-btn { padding: 9px 18px; font-size: 14px; }
+        }
     </style>
 </head>
 
@@ -167,7 +230,6 @@
                     <li><a href="./about-us-kor.html">회사소개</a></li>
                     <li><a href="./Products-kor.html">제품소개</a></li>
                     <li><a href="./Gallery-kor.html">갤러리</a></li>
-                    <li><a href="./Community-kor.html">커뮤니티</a></li>
                     <li><a href="./Customer-Support-kor.html">고객지원</a></li>
                 </ul>
             </nav>
@@ -190,10 +252,10 @@
         </div>
     </header>
 
-    <!-- Gallery Intro -->
-    <section class="gallery-intro-section">
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
         <div class="inner">
-            <span class="gallery-eyebrow">갤러리</span>
+            <span class="eyebrow">갤러리</span>
             <h1>프로젝트 쇼케이스</h1>
             <p>완료된 프로젝트를 통해 송인산업의 가구 솔루션이 전국의 학교와 사무 공간을 어떻게 변화시키는지 확인하세요.</p>
         </div>
@@ -210,14 +272,77 @@
 
     <!-- Gallery Grid -->
     <section class="gallery-grid-section">
+        <div class="inner">
         <div class="grid-gallery" id="galleryGrid">
-            <img src="./img/SI/chung buk/1.JPG" alt="충북 프로젝트 1" data-category="chungbuk">
-            <img src="./img/SI/chung buk/2.JPG" alt="충북 프로젝트 2" data-category="chungbuk">
-            <img src="./img/SI/chung buk/3.JPG" alt="충북 프로젝트 3" data-category="chungbuk">
-            <img src="./img/SI/JANG/1.jpg" alt="장 프로젝트 1" data-category="chungbuk">
-            <img src="./img/SI/JANG/2.jpg" alt="장 프로젝트 2" data-category="chungbuk">
-            <img src="./img/SI/JANG/3.jpg" alt="장 프로젝트 3" data-category="chungbuk">
-            <img src="./img/SI/S1-round/현천고등학교.png" alt="S1 원형 - 현천고등학교" data-category="s1-round">
+            <figure class="gallery-item" data-category="chungbuk" tabindex="0">
+                <img src="./img/catalog/site/janggok-3.jpg" alt="S1 시리즈 / S1-B6-1800 — 상판 : 1024 / 등받이 의자 : 전 색상(7색)" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-B6-1800</strong><span>상판 : 1024 / 등받이 의자 : 전 색상(7색)</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/naru-1.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/yeokbuk-1.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/yeokbuk-2.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hamhyun-6.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 샌드핑크, 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 샌드핑크, 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hoyeon-1.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 2402 / 원형 의자 : 딥오렌지" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 2402 / 원형 의자 : 딥오렌지</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hoyeon-2.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 2402 / 원형 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 2402 / 원형 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hoyeon-3.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 2402 / 원형 의자 : 딥오렌지" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 2402 / 원형 의자 : 딥오렌지</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hyuncheon-1.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="chungbuk" tabindex="0">
+                <img src="./img/catalog/site/janggok-2.jpg" alt="S1 시리즈 / S1-B6-1800 — 상판 : 1024 / 등받이 의자 : 전 색상(7색)" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-B6-1800</strong><span>상판 : 1024 / 등받이 의자 : 전 색상(7색)</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="chungbuk" tabindex="0">
+                <img src="./img/catalog/site/janggok-2-wide.jpg" alt="S1 시리즈 / S1-B6-1800 — 상판 : 1024 / 등받이 의자 : 전 색상" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-B6-1800</strong><span>상판 : 1024 / 등받이 의자 : 전 색상</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/hamhyun-1.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 올리브그린, 샌드핑크" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 올리브그린, 샌드핑크</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/extra-1.jpg" alt="S1 시리즈 / S1-C4-1400 — 상판 : 1024 / 원형 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C4-1400</strong><span>상판 : 1024 / 원형 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="chungbuk" tabindex="0">
+                <img src="./img/catalog/site/extra-2.jpg" alt="S1 시리즈 / S1-B6-1800 — 상판 : 1024 / 등받이 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-B6-1800</strong><span>상판 : 1024 / 등받이 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/extra-3.jpg" alt="S1 시리즈 / S1-C6-1800 — 상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1800</strong><span>상판 : 1024 / 원형 의자 : 샌드핑크, 스카이블루, 로즈핑크</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/catalog/site/extra-4.jpg" alt="S1 시리즈 / S1-C6-1400 · 1800 — 상판 : 1024 / 원형 의자 : 올리브그린" loading="lazy">
+                <figcaption><strong>S1 시리즈 / S1-C6-1400 · 1800</strong><span>상판 : 1024 / 원형 의자 : 올리브그린</span></figcaption>
+            </figure>
+            <figure class="gallery-item" data-category="s1-round" tabindex="0">
+                <img src="./img/SI/S1-round/현천고등학교.png" alt="S1 원형 - 현천고등학교" loading="lazy">
+                <figcaption>S1 원형 - 현천고등학교</figcaption>
+            </figure>
+        </div>
         </div>
     </section>
 
@@ -225,6 +350,7 @@
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightboxClose">&times;</span>
         <img id="lightboxImage" src="" alt="갤러리 이미지">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
 
     <!-- 푸터 -->
@@ -233,42 +359,52 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업 — 정밀함, 품질, 그리고 정성으로 만듭니다.</p>
+                    <p>대한민국 최고의 사무·학교 가구 전문 제조 기업<br>정밀함, 품질, 그리고 정성으로 만듭니다.</p>
                     <address>
                         충청북도 옥천군 옥천동이로 389-11<br>
                         전화: 043-733-9505
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>회사</h5>
+                    <h5>회사소개</h5>
                     <ul>
-                        <li><a href="./about-us-kor.html">회사소개</a></li>
-                        <li><a href="./Community-kor.html">커뮤니티</a></li>
-                        <li><a href="./Gallery-kor.html">갤러리</a></li>
+                        <li><a href="./about-us-kor.html#story">회사 소개</a></li>
+                        <li><a href="./about-us-kor.html#values">핵심 가치</a></li>
+                        <li><a href="./about-us-kor.html#certs">인증 현황</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>제품</h5>
+                    <h5>제품소개</h5>
                     <ul>
-                        <li><a href="./Products-kor.html">학교 가구</a></li>
-                        <li><a href="./Products-kor.html">사무용 가구</a></li>
-                        <li><a href="./Products-kor.html">맞춤 제작</a></li>
+                        <li><a href="./Products-kor.html#s2">S2 시리즈</a></li>
+                        <li><a href="./Products-kor.html#s1">S1 시리즈</a></li>
+                        <li><a href="./Products-kor.html#customizing">커스터마이징</a></li>
+                        <li><a href="./Products-kor.html#dining">제품 특징</a></li>
+                        <li><a href="./Products-kor.html#function">기능 · 성능 시험</a></li>
+                        <li><a href="./Products-kor.html#antibacterial">항균 성능</a></li>
+                        <li><a href="./Products-kor.html#cabinet">사물함</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>갤러리</h5>
+                    <ul>
+                        <li><a href="./Gallery-kor.html">납품사진</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>고객지원</h5>
                     <ul>
-                        <li><a href="./Customer-Support-kor.html">문의하기</a></li>
-                        <li><a href="./Customer-Support-kor.html">견적 요청</a></li>
-                        <li><a href="#">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#faq">자주 묻는 질문</a></li>
+                        <li><a href="./Customer-Support-kor.html#contact">문의하기</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>정책</h5>
+                    <h5>자료 · 정책</h5>
                     <ul>
-                        <li><a href="#">개인정보처리방침</a></li>
-                        <li><a href="#">이용약관</a></li>
-                        <li><a href="#">사이트맵</a></li>
+                        <li><a href="./catalogue.pdf">카탈로그 다운로드</a></li>
+                        <li><a href="./privacy-kor.html">개인정보처리방침</a></li>
+                        <li><a href="./terms-kor.html">이용약관</a></li>
+                        <li><a href="./sitemap-kor.html">사이트맵</a></li>
                     </ul>
                 </div>
             </div>
@@ -290,7 +426,8 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxClose = document.getElementById('lightboxClose');
-        const galleryImages = document.querySelectorAll('.grid-gallery img');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const galleryItems = document.querySelectorAll('.grid-gallery .gallery-item');
         const filterButtons = document.querySelectorAll('.filter-btn');
 
         // Mobile Menu
@@ -317,18 +454,28 @@
         });
 
         // Lightbox
-        galleryImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImage.src = img.src;
-                lightboxImage.alt = img.alt;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        function openLightbox(item) {
+            const img = item.querySelector('img');
+            lightboxImage.src = img.src;
+            lightboxImage.alt = img.alt;
+            lightboxCaption.textContent = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openLightbox(item));
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(item);
+                }
             });
         });
 
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
+            if (e.target !== lightboxImage) {
                 closeLightbox();
             }
         });
@@ -354,18 +501,18 @@
                 btn.classList.add('active');
 
                 const filter = btn.getAttribute('data-filter');
-                galleryImages.forEach(img => {
-                    if (filter === 'all' || img.getAttribute('data-category') === filter) {
-                        img.style.display = 'block';
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
                         setTimeout(() => {
-                            img.style.opacity = '1';
-                            img.style.transform = 'scale(1)';
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
                         }, 10);
                     } else {
-                        img.style.opacity = '0';
-                        img.style.transform = 'scale(0.8)';
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.96)';
                         setTimeout(() => {
-                            img.style.display = 'none';
+                            item.style.display = 'none';
                         }, 300);
                     }
                 });

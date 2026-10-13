@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - 송인산업 | SONGIN INDUSTRY</title>
+    <meta name="description" content="SONGIN INDUSTRY website privacy policy">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/language.js" defer></script>
+    <style>
+        /* ===== Policy / sitemap pages ===== */
+        section.doc-hero {
+            margin-top: var(--header-h);
+            padding: 100px 0 56px;
+            text-align: center;
+        }
+        section.doc-hero .inner h1 {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin: 0 auto 16px;
+            padding: 0;
+        }
+        section.doc-hero .inner h1::after { display: none; }
+        .doc-hero .doc-meta {
+            font-size: 15px;
+            color: var(--ink-3);
+        }
+        .doc-section {
+            padding: 0 0 120px;
+        }
+        .doc {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .doc-intro {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--ink-2);
+            padding: 24px 28px;
+            background: var(--surface);
+            border-left: 4px solid var(--brand);
+            margin-bottom: 48px;
+        }
+        .doc h2 {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 48px 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .doc h2 span {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--brand-ink);
+            flex: none;
+        }
+        .doc p,
+        .doc li {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--ink-2);
+        }
+        .doc ul,
+        .doc ol {
+            margin: 8px 0 8px 4px;
+        }
+        .doc ul li,
+        .doc ol li {
+            position: relative;
+            padding-left: 16px;
+        }
+        .doc ul li::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 0.85em;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--brand);
+        }
+        .doc ol { counter-reset: doc-ol; }
+        .doc ol li { counter-increment: doc-ol; padding-left: 24px; }
+        .doc ol li::before {
+            content: counter(doc-ol) '.';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--brand-ink);
+        }
+        .doc table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .doc th,
+        .doc td {
+            border: 1px solid var(--line);
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+            color: var(--ink-2);
+        }
+        .doc th {
+            background: var(--brand-soft);
+            color: var(--ink);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .doc a { color: var(--brand-ink); text-decoration: underline; }
+        mark.todo {
+            background: #FFF3B0;
+            color: var(--ink);
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        /* Sitemap */
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .sitemap-card {
+            border: 1px solid var(--brand);
+            padding: 24px 24px 20px;
+            background: #fff;
+        }
+        .sitemap-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 0 0 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+        .sitemap-card h2 a { color: var(--ink); }
+        .sitemap-card h2 a:hover { color: var(--brand-ink); }
+        .sitemap-card ul li a {
+            display: block;
+            padding: 6px 0;
+            font-size: 15px;
+            color: var(--ink-2);
+        }
+        .sitemap-card ul li a::before {
+            content: '–';
+            margin-right: 8px;
+            color: var(--brand);
+        }
+        .sitemap-card ul li a:hover { color: var(--brand-ink); }
+
+        @media (max-width: 900px) {
+            .sitemap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 768px) {
+            section.doc-hero { padding: 64px 0 40px; }
+            .doc-section { padding-bottom: 80px; }
+            .doc-intro { padding: 18px 20px; }
+            .doc table, .doc thead, .doc tbody, .doc tr, .doc th, .doc td { display: block; }
+            .doc th { border-bottom: 0; }
+        }
+        @media (max-width: 480px) {
+            .sitemap-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>
+              <a href="./index.html">
+                    <img src="./img/logo.png" alt="송인산업 로고">
+                    <span>SONGIN INDUSTRY</span>
+              </a>
+            </h1>
+
+            <nav>
+            <ul id="gnb">
+                <li><a href="./about%20us.html">About Us</a></li>
+                <li><a href="./Products.html">Products</a></li>
+                <li><a href="./Gallery.html">Gallery</a></li>
+                <li><a href="./Customer%20Support.html">Customer Support</a></li>
+            </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="eng">ENG</button>
+                <button class="lang-btn" data-lang="kor">KOR</button>
+            </div>
+
+            <ul class="util">
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Doc Hero -->
+    <section class="doc-hero">
+        <div class="inner">
+            <p class="eyebrow">PRIVACY POLICY</p>
+            <h1>Privacy Policy</h1>
+            <p class="doc-meta">Effective <mark class="todo">[date], 2026</mark></p>
+        </div>
+    </section>
+
+    <section class="doc-section">
+        <div class="inner">
+            <article class="doc">
+                <p class="doc-intro">SONGIN INDUSTRY complies with the Personal Information Protection Act of Korea and related laws. This policy explains what personal information we process and why.</p>
+                <h2><span>Article 1</span>Purpose of processing</h2>
+                <p>SONGIN INDUSTRY Co., Ltd. (the “Company”) processes personal information only for the purposes below and will obtain separate consent where required by the Personal Information Protection Act of Korea if the purpose changes.</p>
+                <ul>
+                    <li>Answering product and quotation enquiries</li>
+                    <li>Site surveys, scheduling delivery/installation and performing contracts</li>
+                    <li>Receiving and handling after-sales service requests</li>
+                </ul>
+                <h2><span>Article 2</span>Information processed and how it is collected</h2>
+                <p>This website (songininc.com) has no membership, log-in or online enquiry form and does not collect visitors’ personal information directly.</p>
+                <p>When you contact us by phone, e-mail or fax, we may collect:</p>
+                <ul>
+                    <li>Required: name, organisation, contact details (phone or e-mail), enquiry details</li>
+                    <li>For delivery / after-sales: delivery or installation address, on-site contact</li>
+                </ul>
+                <p>The following may be generated automatically while using the website:</p>
+                <ul>
+                    <li>IP address, browser information and access time processed by our hosting provider (GitHub Pages) and font/icon services (Google Fonts, cdnjs) under their own policies</li>
+                    <li>Your language choice is stored only in your browser’s localStorage and is never sent to us. The Company does not use cookies.</li>
+                </ul>
+                <h2><span>Article 3</span>Retention period</h2>
+                <p>Personal information is destroyed without delay once its purpose is fulfilled, except:</p>
+                <ul>
+                    <li>Enquiry records: <mark class="todo">1 year</mark> after the enquiry is closed</li>
+                    <li>Contract and delivery records: for the periods required by the Commercial Act, the Framework Act on National Taxes and other laws</li>
+                </ul>
+                <h2><span>Article 4</span>Provision to third parties</h2>
+                <p>The Company does not provide personal information to third parties except with the data subject’s consent or where permitted by law (Articles 17 and 18 of the Personal Information Protection Act).</p>
+                <h2><span>Article 5</span>Outsourcing</h2>
+                <p>The Company does not currently outsource the processing of personal information. If it does (e.g. to installation partners), the partner and the task will be disclosed in this policy. <mark class="todo">(list partners if customer contacts are shared)</mark></p>
+                <h2><span>Article 6</span>Destruction</h2>
+                <ul>
+                    <li>Procedure: information is destroyed without delay once the retention period ends.</li>
+                    <li>Method: electronic files are deleted irreversibly; paper documents are shredded or incinerated.</li>
+                </ul>
+                <h2><span>Article 7</span>Your rights</h2>
+                <p>You may at any time request access to, correction, deletion or suspension of processing of your personal information by phone (043-733-9505) or e-mail (<a href="mailto:songin02656@naver.com">songin02656@naver.com</a>). Requests may also be made through a legal representative or an authorised agent.</p>
+                <h2><span>Article 8</span>Security measures</h2>
+                <ul>
+                    <li>Minimising and training staff who handle personal information</li>
+                    <li>Access control and locks for PCs and documents containing personal information</li>
+                    <li>Regular review of enquiry records and destruction after the retention period</li>
+                </ul>
+                <h2><span>Article 9</span>Privacy officer</h2>
+                <table>
+                    <tr><th>Name / title</th><td><mark class="todo">[Name] / [Title]</mark></td></tr>
+                    <tr><th>Phone</th><td>043-733-9505</td></tr>
+                    <tr><th>E-mail</th><td><a href="mailto:songin02656@naver.com">songin02656@naver.com</a></td></tr>
+                </table>
+                <h2><span>Article 10</span>Remedies</h2>
+                <p>You may seek remedies or advice from: Personal Information Dispute Mediation Committee (1833-6972, www.kopico.go.kr), Personal Information Infringement Report Center (118, privacy.kisa.or.kr), Supreme Prosecutors’ Office (1301), Korean National Police Agency Cyber Bureau (182).</p>
+                <h2><span>Article 11</span>Changes to this policy</h2>
+                <p>This policy applies from <mark class="todo">[date], 2026</mark>. Any changes will be announced on this website at least 7 days before they take effect. In case of any discrepancy, the Korean version prevails.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SONGIN INDUSTRY</h3>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
+                    <address>
+                        389-11, Okcheondong-i-ro,<br>
+                        Okcheon-gun, Chungcheongbuk-do<br>
+                        TEL: 043-733-9505
+                    </address>
+                </div>
+                <div class="footer-col">
+                    <h5>About Us</h5>
+                    <ul>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SONGIN INDUSTRY. All rights reserved.</p>
+                <div class="footer-langs">
+                    <a href="./privacy.html">ENG</a>
+                    <a href="./privacy-kor.html">KOR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const gnb = document.getElementById('gnb');
+        const header = document.getElementById('header');
+
+        menuToggle.addEventListener('click', () => {
+            gnb.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#gnb a').forEach(link => {
+            link.addEventListener('click', () => {
+                gnb.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.pageYOffset > 100);
+        });
+    </script>
+</body>
+</html>

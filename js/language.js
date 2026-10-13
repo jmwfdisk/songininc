@@ -8,10 +8,14 @@ const languageMap = {
     'Products-kor.html': { kor: 'Products-kor.html', eng: 'Products.html' },
     'Gallery.html': { kor: 'Gallery-kor.html', eng: 'Gallery.html' },
     'Gallery-kor.html': { kor: 'Gallery-kor.html', eng: 'Gallery.html' },
-    'Community.html': { kor: 'Community-kor.html', eng: 'Community.html' },
-    'Community-kor.html': { kor: 'Community-kor.html', eng: 'Community.html' },
     'Customer Support.html': { kor: 'Customer-Support-kor.html', eng: 'Customer Support.html' },
-    'Customer-Support-kor.html': { kor: 'Customer-Support-kor.html', eng: 'Customer Support.html' }
+    'Customer-Support-kor.html': { kor: 'Customer-Support-kor.html', eng: 'Customer Support.html' },
+    'privacy.html': { kor: 'privacy-kor.html', eng: 'privacy.html' },
+    'privacy-kor.html': { kor: 'privacy-kor.html', eng: 'privacy.html' },
+    'terms.html': { kor: 'terms-kor.html', eng: 'terms.html' },
+    'terms-kor.html': { kor: 'terms-kor.html', eng: 'terms.html' },
+    'sitemap.html': { kor: 'sitemap-kor.html', eng: 'sitemap.html' },
+    'sitemap-kor.html': { kor: 'sitemap-kor.html', eng: 'sitemap.html' }
 };
 
 function getCurrentLanguage() {

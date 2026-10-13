@@ -11,124 +11,366 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/language.js" defer></script>
     <style>
+        /* ===== About — cosmos-style layout ===== */
+
+        /* Hero: light, centered, giant display title */
         .about-hero {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(124, 58, 237, 0.9) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 80px;
-            color: white;
+            margin-top: var(--header-h);
+            padding: 120px 0 80px;
             text-align: center;
         }
 
-        .about-hero h1 {
-            font-size: clamp(36px, 6vw, 56px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            padding-bottom: 0;
+        .about-hero .eyebrow {
+            padding: 6px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-pill);
+            background: var(--card);
+            color: var(--ink-2);
+            margin-bottom: 32px;
         }
 
-        .about-hero h1::after {
+        /* Beats the generic `section .inner h1` rule */
+        section.about-hero .inner h1.about-title {
+            font-size: clamp(48px, 8vw, 112px);
+            font-weight: 700;
+            line-height: 0.98;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            text-align: center;
+            max-width: 11em;
+            margin: 0 auto 28px;
+            padding: 0;
+            text-wrap: balance;
+        }
+
+        section.about-hero .inner h1.about-title::after {
             display: none;
         }
 
-        .about-hero p {
-            font-size: clamp(18px, 2.5vw, 24px);
-            opacity: 0.95;
+        .about-lead {
+            font-size: clamp(17px, 1.4vw, 20px);
+            line-height: 1.6;
+            color: var(--ink-2);
+            max-width: 600px;
+            margin: 0 auto;
+            text-wrap: pretty;
         }
 
-        .about-content {
-            padding-top: 50px;
-            padding-bottom: 20px;
+        /* Media mosaic: rounded square cards on surface */
+        .about-media {
+            padding: 0 0 140px;
         }
 
-        .about-section {
-            margin-bottom: 40px;
+        .media-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;
+            aspect-ratio: 16 / 9;
         }
 
-        .about-section h2 {
-            font-size: clamp(28px, 4vw, 40px);
+        .media-card {
+            position: relative;
+            margin: 0;
+            border-radius: var(--radius-xl);
+            background: var(--surface);
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .media-card--main {
+            grid-row: 1 / span 2;
+        }
+
+        .media-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease);
+        }
+
+        .media-card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Section labels */
+        .about-label {
+            display: block;
+        }
+
+        .about-display {
+            font-size: clamp(40px, 6vw, 88px);
             font-weight: 700;
-            margin-bottom: 30px;
-            color: var(--text-dark);
-            text-align: center;
+            line-height: 1;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            text-wrap: balance;
         }
 
-        .about-section p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-light);
-            max-width: 800px;
-            margin: 0 auto 20px;
+        /* Story: big statement left, copy right, hairline on top */
+        .about-story {
+            padding: 0 0 140px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 5fr 7fr;
+            gap: 48px 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--line);
+        }
+
+        .story-body p {
+            font-size: clamp(17px, 1.4vw, 20px);
+            line-height: 1.7;
+            color: var(--ink-2);
+            max-width: 680px;
+            text-wrap: pretty;
+        }
+
+        .story-body p + p {
+            margin-top: 24px;
+        }
+
+        /* Facts: monochrome stat row, big numbers + mono labels */
+        .about-facts {
+            padding: 0 0 160px;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .fact {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-end;
+            gap: 16px;
+            padding: 48px 32px;
+            border-left: 1px solid var(--line);
+        }
+
+        .fact:first-child {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .fact-value {
+            font-size: clamp(56px, 7vw, 104px);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+        }
+
+        .fact-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+
+        /* Values: square surface tiles with monochrome icons */
+        .about-values {
+            padding: 0 0 160px;
+        }
+
+        .values-head {
             text-align: center;
+            margin-bottom: 64px;
         }
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px 24px;
         }
 
-        .value-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .value-card i {
-            font-size: 48px;
-            color: var(--primary-color);
+        .value-tile {
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius-lg);
+            background: var(--brand-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
+            overflow: hidden;
+            transition: background-color 0.4s var(--ease);
+        }
+
+        .value-tile i {
+            font-size: clamp(44px, 5vw, 72px);
+            color: var(--brand-ink);
+            transition: transform 0.6s var(--ease);
+        }
+
+        .value-card:hover .value-tile {
+            background: #F9E2BC;
+        }
+
+        .value-card:hover .value-tile i {
+            transform: scale(1.04);
         }
 
         .value-card h3 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-dark);
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 8px;
         }
 
         .value-card p {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
-            color: var(--text-light);
+            color: var(--ink-2);
         }
 
-        .stats-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, #e0e7ff 100%);
-            padding: 80px 0;
-            margin: 80px 0;
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .stats-grid {
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 72px 0 48px;
+            }
+
+            .about-media,
+            .about-story {
+                padding-bottom: 80px;
+            }
+
+            .about-facts,
+            .about-values {
+                padding-bottom: 96px;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                aspect-ratio: auto;
+                gap: 12px;
+            }
+
+            .media-card {
+                border-radius: var(--radius-lg);
+                aspect-ratio: 1 / 1;
+            }
+
+            .media-card--main {
+                grid-row: auto;
+                grid-column: 1 / -1;
+                aspect-ratio: 4 / 3;
+            }
+
+            .story-grid {
+                gap: 32px;
+                padding-top: 32px;
+            }
+
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fact,
+            .fact:first-child {
+                padding: 32px 0;
+                border-left: none;
+            }
+
+            .fact + .fact {
+                border-top: 1px solid var(--line);
+            }
+
+            .values-head {
+                margin-bottom: 40px;
+            }
+
+            .values-grid {
+                gap: 32px 12px;
+            }
+
+            .value-card h3 {
+                font-size: 18px;
+            }
+
+            .value-card p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-tile {
+                aspect-ratio: 2 / 1;
+            }
+        }
+
+        /* ----- Certifications (catalogue) ----- */
+        .about-certs {
+            padding: 0 0 120px;
+        }
+        .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .cert-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            padding: 28px 16px 24px;
+        }
+        .cert-card img {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+        .cert-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .cert-card p {
+            margin-top: 4px;
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brand-ink);
+        }
+        @media (max-width: 768px) {
+            .about-certs { padding-bottom: 80px; }
+            .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
         }
 
-        .stat-item h3 {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+        /* Single full-width aerial photo (replaces the 3-photo mosaic) */
+        .media-grid--single {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            aspect-ratio: 16 / 9;
         }
-
-        .stat-item p {
-            font-size: 18px;
-            color: var(--text-dark);
-            font-weight: 500;
+        .media-grid--single .media-card--main { grid-row: auto; }
+        .media-grid--single .media-card img { object-position: center 55%; }
+        @media (max-width: 768px) {
+            .media-grid--single { aspect-ratio: auto; }
         }
     </style>
 </head>
@@ -149,7 +391,6 @@
                     <li><a href="./about%20us.html">About Us</a></li>
                     <li><a href="./Products.html">Products</a></li>
                     <li><a href="./Gallery.html">Gallery</a></li>
-                    <li><a href="./Community.html">Community</a></li>
                     <li><a href="./Customer%20Support.html">Customer Support</a></li>
                 </ul>
             </nav>
@@ -175,16 +416,29 @@
     <!-- About Hero -->
     <section class="about-hero">
         <div class="inner">
-            <h1>About SONGIN INDUSTRY</h1>
-            <p>Leading the Future of Office & School Furniture</p>
+            <p class="eyebrow">About Us</p>
+            <h1 class="about-title">About SONGIN INDUSTRY</h1>
+            <p class="about-lead">Leading the Future of Office &amp; School Furniture</p>
         </div>
     </section>
 
-    <!-- About Content -->
-    <section class="about-content">
-        <div class="inner">
-            <div class="about-section">
-                <h2>Our Story</h2>
+    <!-- Media Mosaic -->
+    <section class="about-media">
+        <div class="inner media-grid media-grid--single">
+            <figure class="media-card media-card--main">
+                <img src="./img/catalog/site/factory-aerial.jpg" alt="Aerial view of SONGIN INDUSTRY head office and factory, Okcheon, Chungbuk">
+            </figure>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="about-story" id="story">
+        <div class="inner"><div class="story-grid">
+            <div class="story-head">
+                <span class="eyebrow about-label">01</span>
+                <h2 class="about-display">Our Story</h2>
+            </div>
+            <div class="story-body">
                 <p>
                     SONGIN INDUSTRY has been at the forefront of furniture manufacturing, specializing in high-quality office and school furniture solutions. With decades of experience and a commitment to excellence, we have established ourselves as a trusted partner for educational institutions and businesses across South Korea.
                 </p>
@@ -192,31 +446,88 @@
                     Our mission is to create functional, durable, and aesthetically pleasing furniture that enhances learning and working environments. We combine traditional craftsmanship with modern technology, including cutting-edge robotic welding systems, to deliver products that meet the highest standards of quality and innovation.
                 </p>
             </div>
+        </div></div>
+    </section>
 
-            <div class="about-section">
-                <h2>Our Values</h2>
-                <div class="values-grid">
-                    <div class="value-card">
-                        <i class="fas fa-award"></i>
-                        <h3>Quality</h3>
-                        <p>We are committed to delivering products of the highest quality, built to last and exceed expectations.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>Innovation</h3>
-                        <p>We continuously invest in new technologies and processes to improve our products and services.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-heart"></i>
-                        <h3>Customer Focus</h3>
-                        <p>Our customers are at the heart of everything we do. We listen, adapt, and deliver solutions that meet their needs.</p>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-leaf"></i>
-                        <h3>Sustainability</h3>
-                        <p>We are committed to sustainable manufacturing practices and environmental responsibility.</p>
-                    </div>
+    <!-- Facts -->
+    <section class="about-facts">
+        <div class="inner">
+            <div class="facts-grid">
+                <div class="fact">
+                    <p class="fact-label">Years of expertise</p>
+                    <p class="fact-value">20+</p>
                 </div>
+                <div class="fact">
+                    <p class="fact-label">Korea's first robotic welding</p>
+                    <p class="fact-value">1st</p>
+                </div>
+                <div class="fact">
+                    <p class="fact-label">Made in Korea</p>
+                    <p class="fact-value">KR</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="about-values" id="values">
+        <div class="inner">
+            <div class="values-head">
+                <span class="eyebrow about-label">02</span>
+                <h2 class="about-display">Our Values</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-tile"><i class="fas fa-award"></i></div>
+                    <h3>Quality</h3>
+                    <p>We are committed to delivering products of the highest quality, built to last and exceed expectations.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-tile"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Innovation</h3>
+                    <p>We continuously invest in new technologies and processes to improve our products and services.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-tile"><i class="fas fa-heart"></i></div>
+                    <h3>Customer Focus</h3>
+                    <p>Our customers are at the heart of everything we do. We listen, adapt, and deliver solutions that meet their needs.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-tile"><i class="fas fa-leaf"></i></div>
+                    <h3>Sustainability</h3>
+                    <p>We are committed to sustainable manufacturing practices and environmental responsibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="about-certs" id="certs">
+        <div class="inner">
+            <div class="cat-head">
+                <div class="cat-head-title"><h2>Certification</h2></div>
+                <span class="cat-head-sub">Certifications</span>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-excellent.png" alt="" loading="lazy"><h3>Excellent Procurement Product</h3><p>S2 Series</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/cert-mas-v2.png" alt="" loading="lazy"><h3>Public Procurement (MAS)</h3><p>S1 Series</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-patent.png" alt="" loading="lazy"><h3>Patent</h3><p>No. 10-2624319</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-eco.png" alt="" loading="lazy"><h3>Eco-label</h3><p>31681</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-q.png" alt="" loading="lazy"><h3>Q-Mark quality</h3><p>2025-032</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-sps.png" alt="" loading="lazy"><h3>Group standard (SPS)</h3><p>KMFIC-072</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-iso.png" alt="" loading="lazy"><h3>ISO 9001 / 14001</h3><p>Quality · environment</p></div>
+                <div class="cert-card cat-box"><img src="./img/catalog/logo/logo-gpass.png" alt="" loading="lazy"><h3>G-PASS company</h3><p>PPS designated</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="inner">
+            <h2>Complete your space together</h2>
+            <div class="cta-actions">
+                <a href="./Customer%20Support.html" class="btn-primary">Request a Quote</a>
+                <a href="./Products.html" class="btn-outline-dark">View Products</a>
             </div>
         </div>
     </section>
@@ -227,7 +538,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>SONGIN INDUSTRY</h3>
-                    <p>South Korea's premier office and school furniture manufacturer — built on precision, quality, and care.</p>
+                    <p>South Korea's premier office and school furniture manufacturer<br>Built on precision, quality, and care.</p>
                     <address>
                         389-11, Okcheondong-i-ro,<br>
                         Okcheon-gun, Chungcheongbuk-do<br>
@@ -235,35 +546,45 @@
                     </address>
                 </div>
                 <div class="footer-col">
-                    <h5>Company</h5>
+                    <h5>About Us</h5>
                     <ul>
-                        <li><a href="./about%20us.html">About Us</a></li>
-                        <li><a href="./Community.html">Community</a></li>
-                        <li><a href="./Gallery.html">Gallery</a></li>
+                        <li><a href="./about%20us.html#story">Our story</a></li>
+                        <li><a href="./about%20us.html#values">Our values</a></li>
+                        <li><a href="./about%20us.html#certs">Certifications</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Products</h5>
                     <ul>
-                        <li><a href="./Products.html">School Furniture</a></li>
-                        <li><a href="./Products.html">Office Furniture</a></li>
-                        <li><a href="./Products.html">Custom Solutions</a></li>
+                        <li><a href="./Products.html#s2">S2 Series</a></li>
+                        <li><a href="./Products.html#s1">S1 Series</a></li>
+                        <li><a href="./Products.html#customizing">Customizing</a></li>
+                        <li><a href="./Products.html#dining">Features</a></li>
+                        <li><a href="./Products.html#function">Function &amp; tests</a></li>
+                        <li><a href="./Products.html#antibacterial">Antibacterial</a></li>
+                        <li><a href="./Products.html#cabinet">Cabinets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Gallery</h5>
+                    <ul>
+                        <li><a href="./Gallery.html">Delivery photos</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="./Customer%20Support.html">Contact Us</a></li>
-                        <li><a href="./Customer%20Support.html">Request a Quote</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#faq">FAQ</a></li>
+                        <li><a href="./Customer%20Support.html#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Legal</h5>
+                    <h5>Resources</h5>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="./catalogue.pdf">Catalogue (PDF)</a></li>
+                        <li><a href="./privacy.html">Privacy Policy</a></li>
+                        <li><a href="./terms.html">Terms of Use</a></li>
+                        <li><a href="./sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
