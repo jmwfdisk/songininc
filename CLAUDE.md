@@ -76,14 +76,13 @@ Legacy tokens (`--primary-color`, `--text-dark`, `--bg-light`, `--shadow-*` …)
 
 ## CSS Specificity Gotcha
 
-The global rule `section .inner h1` (specificity 0,1,2) overrides the homepage `.hero-title` class (0,1,0). The fix is already in `style.css` as a higher-specificity override:
+The global rule `section .inner h1` (specificity 0,1,2) overrides a bare class like `.hero-title` (0,1,0). The homepage uses a higher-specificity selector in `style.css`:
 
 ```css
-.hero-section .hero-inner h1.hero-title { /* resets font, margin, padding, position */ }
-.hero-section .hero-inner h1.hero-title::after { display: none; }
+.hero-section .hero-inner h1.hero-title { /* ... */ }
 ```
 
-If you add new `h1` elements inside sections, check that global `section .inner h1` styles don't conflict.
+Sub-page heroes do the same in their inline `<style>` (e.g. `section.products-intro .inner h1`). If you add new `h1` elements inside sections, scope them the same way.
 
 ## Scroll-Reveal Pattern
 
@@ -122,7 +121,6 @@ The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at t
 
 These are pre-existing — do not introduce workarounds that mask them:
 
-- **Customer Support has no contact form**: the pages contain only FAQ and "Get in Touch" contact-info sections. The inline `<style>` still has unused `.contact-form-*` / `.form-group` rules left over from a removed form. Any new form would need Formspree or similar (GitHub Pages has no backend).
-- **`js/ie.js` not loaded**: The file exists but is not referenced by any page. Do not rely on it for IE detection.
+- **Customer Support has no contact form**: the pages contain only FAQ and "Get in Touch" contact-info sections. Any new form would need Formspree or similar (GitHub Pages has no backend).- **`js/ie.js` not loaded**: The file exists but is not referenced by any page. Do not rely on it for IE detection.
 - **Language preference is only read on the English homepage**: `language.js` saves `'preferredLanguage'` on click. An inline script at the top of `index.html` redirects external first-time visitors to `index-kor.html` (Korean is the default landing language) unless the saved value is `'eng'` or the visitor came from an internal link (same-origin referrer). No other page reads the saved value.
 - **`news2.png` is 6.5 MB**: Causes slow mobile loads. Flag if touching image-related code.
