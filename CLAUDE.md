@@ -72,7 +72,7 @@ Legacy tokens (`--primary-color`, `--text-dark`, `--bg-light`, `--shadow-*` …)
 
 **Products page is catalogue data.** The S1/S2 model list (size, G2B number, price, chair colour), colour swatches, function/performance tests and antibacterial results in `Products.html` / `Products-kor.html` mirror the catalogue — keep both languages and the catalogue in sync when any value changes.
 
-**`DESIGN.md` and `DOC/03-design-system.md` are outdated** (they describe the original blue/purple design). Trust `css/style.css`.
+`DESIGN.md` and `DOC/03-design-system.md` describe this catalogue design (updated 2026-10-13); `css/style.css` is still the source of truth.
 
 ## CSS Specificity Gotcha
 
@@ -111,16 +111,18 @@ The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at t
 | File | Content |
 |------|---------|
 | `DOC/01-overview.md` | Project overview, tech stack, directory structure |
-| `DOC/02-pages.md` | Page inventory, section breakdown, content list |
-| `DOC/03-design-system.md` | CSS variables, typography, components (**outdated** — pre-catalogue design) |
+| `DOC/02-pages.md` | Page sections, anchor ids, product data table |
+| `DOC/03-design-system.md` | Catalogue design tokens, fonts, shared components |
 | `DOC/04-javascript.md` | JS file structure, language switcher, page-by-page interactions |
-| `DOC/05-assets.md` | Image/video inventory, file sizes, optimization recommendations |
-| `DOC/06-dev-status.md` | Development status, known issues, and to-do list |
+| `DOC/05-assets.md` | `img/catalog/` layout, source file locations, unused images |
+| `DOC/06-dev-status.md` | Current status and **next to-do list** — start here when resuming work |
+| `DOC/07-dev-log.md` | Dated development log (what was changed and why) |
 
 ## Known Issues
 
 These are pre-existing — do not introduce workarounds that mask them:
 
-- **Customer Support has no contact form**: the pages contain only FAQ and "Get in Touch" contact-info sections. Any new form would need Formspree or similar (GitHub Pages has no backend).- **`js/ie.js` not loaded**: The file exists but is not referenced by any page. Do not rely on it for IE detection.
+- **Customer Support has no contact form**: the pages contain only FAQ and "Get in Touch" contact-info sections. Any new form would need Formspree or similar (GitHub Pages has no backend).
+- **`js/ie.js` not loaded**: The file exists but is not referenced by any page. Do not rely on it for IE detection.
 - **Language preference is only read on the English homepage**: `language.js` saves `'preferredLanguage'` on click. An inline script at the top of `index.html` redirects external first-time visitors to `index-kor.html` (Korean is the default landing language) unless the saved value is `'eng'` or the visitor came from an internal link (same-origin referrer). No other page reads the saved value.
 - **`news2.png` is 6.5 MB**: Causes slow mobile loads. Flag if touching image-related code.
