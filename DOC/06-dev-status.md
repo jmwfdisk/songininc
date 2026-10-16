@@ -1,6 +1,6 @@
 # 개발 현황 · 다음에 할 일 — SONGIN INDUSTRY
 
-> 기준일: 2026-10-13 · 작업 내역은 [07-dev-log.md](./07-dev-log.md)
+> 기준일: 2026-10-16 · 작업 내역은 [07-dev-log.md](./07-dev-log.md)
 
 ---
 
@@ -8,7 +8,7 @@
 
 1. `git status`, `git log --oneline -3`, `git log origin/main --oneline -1` 로 푸시 안 된 커밋이 있는지 확인.
 2. 아래 **"다음에 할 일"** 의 🔴 항목부터 진행.
-3. 로컬 확인: `python3 -m http.server 8000` → `http://localhost:8000/index-kor.html`
+3. 로컬 확인: `python3 -m http.server 8080` → `http://localhost:8080/index-kor.html`
    (루트 `/` 로 열면 한국어 홈으로 자동 이동함 — 영문 확인은 ENG 버튼으로)
 4. 페이지는 항상 **영문 · 한글 쌍**으로 수정. 공통 헤더 · 푸터는 16개 파일에 모두 반영.
 
@@ -23,7 +23,7 @@
 | 제품 정보 | ✅ S1 · S2 16모델 G2B · 가격, 색상 31종, 시험 · 항균 결과 (카탈로그 10.13본 기준) |
 | 언어 | ✅ 첫 접속 한국어, ENG 선택 기억 |
 | 반응형 | ✅ 1440 / 1100 / 1024 / 768 / 390px 확인 |
-| 배포 | ✅ GitHub Pages (`37206da` 반영 확인) |
+| 배포 | ✅ GitHub Pages (`37206da` 반영 확인, `311396d` 푸시 완료) |
 | 정책 문서 | ✅ 시행일 2026-10-15 확정본 |
 | 문의 양식 | ❌ 없음 (전화 · 이메일만, GitHub Pages는 서버 없음) |
 

@@ -11,8 +11,8 @@ Corporate website for **송인산업 (SONGIN INDUSTRY)**, a South Korean office 
 Open any `.html` file directly in a browser, or serve with any HTTP server:
 
 ```bash
-# Python
-python3 -m http.server 8000
+# Python (port 8080 matches .claude/launch.json)
+python3 -m http.server 8080
 
 # Node (if installed)
 npx serve .
@@ -102,6 +102,7 @@ The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at t
 - `img/` — all images; `visual.mp4` is no longer used (the homepage video was removed)
 - `img/catalog/` — web-optimised images from the 2026 catalogue: `product/` (S1/S2 models, `thumb-*` crops for the home hero), `color/` (swatches), `logo/` (certification marks), `func/` (feature/test images), `site/` (delivery photos used in Gallery)
 - `img/SI/` — older site photos (`JANG/`, `chung buk/` are no longer shown in the gallery)
+- `backup/` — gitignored dated snapshots of the site from before big changes (e.g. `2026-10-13-before-catalog/`, which still has the removed Community pages). It is a reference only: don't edit it and don't include it when doing site-wide searches or replacements.
 - External CDNs: Font Awesome 6.4.0 (`<link>` in every page), Google Fonts Noto Sans KR + Montserrat (`@import` in `style.css`)
 
 ## Extended Documentation
