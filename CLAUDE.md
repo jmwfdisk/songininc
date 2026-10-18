@@ -18,7 +18,9 @@ python3 -m http.server 8080
 npx serve .
 ```
 
-No build, lint, or test commands exist.
+No build, lint, or test commands exist. Verification is manual: open the page in a browser and check both language variants at the responsive breakpoints.
+
+Open `http://localhost:8080/index-kor.html` for local checks. The root `/` (`index.html`) redirects first-time visitors to the Korean homepage, so use the ENG button to reach the English pages from there. `.claude/launch.json` (gitignored) defines the same server on port 8080.
 
 ## Bilingual Page Structure
 
@@ -47,7 +49,7 @@ Language switching is handled by `js/language.js`, which maps page names to thei
 
 **CSS (`css/style.css`):** Uses CSS custom properties for the design system. Responsive breakpoints at 1024px, 768px, and 480px. Hamburger menu activates below 768px. **Page-specific styles are in an inline `<style>` block inside each HTML file's `<head>`, not in `style.css`** — except the homepage (`index.html` / `index-kor.html`), which has no inline `<style>`; its styles (hero, news cards, why cards) live in `style.css`.
 
-**JS (`js/language.js`):** Language switcher only. All other interactivity (scroll effects, Intersection Observer animations, mobile menu toggle) is written inline in `<script>` tags at the bottom of each HTML file.
+**JS (`js/language.js`):** Language switcher only. All other interactivity is written inline in `<script>` tags at the bottom of each HTML file: the mobile menu toggle on every page, scroll-reveal on the homepage, a sticky `.prod-tab` nav with an `IntersectionObserver` scroll-spy over `.cat-section[id]` on Products, and `.filter-btn` category filtering plus a lightbox on Gallery.
 
 **JS (`js/ie.js`):** Detects Internet Explorer and shows an unsupported-browser notice.
 
@@ -94,7 +96,7 @@ Sub-page heroes do the same in their inline `<style>` (e.g. `section.products-in
 
 ## Deployment
 
-The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at the repo root maps the custom domain. Pushing to the `main` branch deploys automatically.
+The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at the repo root maps the custom domain. Pushing to the `main` branch deploys automatically. If `git push` fails with an authentication error, run `gh auth setup-git` once in the terminal.
 
 ## Assets
 
@@ -102,12 +104,13 @@ The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at t
 - `img/` — all images; `visual.mp4` is no longer used (the homepage video was removed)
 - `img/catalog/` — web-optimised images from the 2026 catalogue: `product/` (S1/S2 models, `thumb-*` crops for the home hero), `color/` (swatches), `logo/` (certification marks), `func/` (feature/test images), `site/` (delivery photos used in Gallery)
 - `img/SI/` — older site photos (`JANG/`, `chung buk/` are no longer shown in the gallery)
+- `img/우수/`, `img/일반/`, `img/무제 폴더/` and the loose `S1-*`/`S2-*` files in `img/` are leftover source images from before the catalogue redesign. Some are still referenced — grep all 16 HTML files before deleting any image.
 - `backup/` — gitignored dated snapshots of the site from before big changes (e.g. `2026-10-13-before-catalog/`, which still has the removed Community pages). It is a reference only: don't edit it and don't include it when doing site-wide searches or replacements.
 - External CDNs: Font Awesome 6.4.0 (`<link>` in every page), Google Fonts Noto Sans KR + Montserrat (`@import` in `style.css`)
 
 ## Extended Documentation
 
-`DOC/` contains detailed reference docs (Korean):
+`DOC/` contains detailed reference docs (Korean). The dev log and status file are maintained as part of the work: after a session that changes the site, add a dated entry at the **top** of `DOC/07-dev-log.md` (newest first) and update the status table and to-do list in `DOC/06-dev-status.md`.
 
 | File | Content |
 |------|---------|
