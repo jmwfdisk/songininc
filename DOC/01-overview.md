@@ -24,7 +24,8 @@
 ├── Customer Support.html / Customer-Support-kor.html  고객지원 (FAQ · 연락처)
 ├── privacy*.html / terms*.html / sitemap*.html         정책 · 사이트맵
 ├── sitemap.xml, robots.txt, CNAME, favicon.ico
-├── catalogue.pdf                              카탈로그 다운로드 (2026 10.13본 압축)
+├── catalogue.pdf                              한글 카탈로그 다운로드 (2026 10.13본 압축)
+├── catalogue-eng.pdf                          영문 카탈로그 다운로드 (영문 페이지 8개에서 링크)
 ├── css/style.css                              디자인 시스템 + 홈 스타일 + 공통 부품
 ├── js/language.js                             언어 전환 (ie.js는 미사용)
 ├── img/catalog/                               2026 카탈로그 이미지 (product/color/logo/func/site)

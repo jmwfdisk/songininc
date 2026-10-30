@@ -25,6 +25,10 @@ sips -s format jpeg -s formatOptions 82 -Z 1800 원본 --out img/catalog/site/�
 ## catalogue.pdf
 - 10.13본, **4.4MB** (원본 103MB를 200dpi 이미지로 다시 만든 것 — GitHub 100MB 제한). 글자 선택 · 검색 불가.
 
+## catalogue-eng.pdf
+- 영문판, **4.8MB** (원본 `송인산업 신 카달로그 디자인(영문판).pdf` 103MB → Ghostscript `/ebook` 150dpi). 12쪽. 원본 글자가 윤곽선이라 검색 불가.
+- 다시 만들 때: `gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -dColorImageResolution=150 -dGrayImageResolution=150 -dNOPAUSE -dBATCH -sOutputFile=catalogue-eng.pdf 원본.pdf`
+
 ## 이전 이미지 (`img/` 바로 아래)
-- 계속 사용: `logo.png`, `news.jpg`, `news2.png`(6.5MB — 압축 필요), `SI/S1-round/현천고등학교.png`
-- 미사용(2026-10-13 grep 확인, 삭제 전 재확인): `visual.mp4`, `SI/JANG/`, `SI/chung buk/`, `우수/`, `일반/`, `news4.*`, `ENG-P*.png`, `Cus.png`, `main.png`, `brand4.jpg`, `S1-*`, `S2-*`, `s1-B6(…).png`, `무제 폴더/`
+- 계속 사용: `logo.png`, `news.jpg`, `news2.png`(6.5MB — 압축 필요)
+- 미사용(2026-10-13 grep 확인, 삭제 전 재확인): `SI/S1-round/현천고등학교.png`(2026-10-30 갤러리에서 제거), `visual.mp4`, `SI/JANG/`, `SI/chung buk/`, `우수/`, `일반/`, `news4.*`, `ENG-P*.png`, `Cus.png`, `main.png`, `brand4.jpg`, `S1-*`, `S2-*`, `s1-B6(…).png`, `무제 폴더/`

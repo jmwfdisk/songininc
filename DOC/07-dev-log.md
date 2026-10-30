@@ -4,6 +4,46 @@
 
 ---
 
+## 2026-10-30 — 갤러리 S1 원형 마지막 사진 삭제
+
+- `Gallery.html` · `Gallery-kor.html`에서 마지막 칸 **"S1 원형 - 현천고등학교"**(`img/SI/S1-round/현천고등학교.png`) 삭제. 이제 S1 원형의 마지막 사진은 `site/extra-4.jpg`(S1-C6-1400 · 1800).
+- 필터(S1 원형)에는 다른 사진이 남아 있어서 동작은 그대로. 사진 개수를 표시하는 곳은 없음.
+- 이미지 파일은 남겨 둠 — 이제 어느 페이지에서도 안 씀 (05 미사용 목록에 추가).
+- 06의 "현천고등학교 사진 중복 여부" 할 일은 완료 처리.
+- 10-28 · 10-29 변경과 함께 커밋 · 푸시해 배포 (`7fb2e85` 포함).
+
+---
+
+## 2026-10-29 — 영문 카탈로그 · 영문 제품 가격 4개 통화
+
+- **`catalogue-eng.pdf` 추가**: 영문판 원본 103MB(GitHub 100MB 제한 초과) → Ghostscript 150dpi로 **4.8MB**. 12쪽, 원본과 화면 비교 확인.
+- 영문 페이지 8개의 카탈로그 링크(제품 페이지 다운로드 버튼 · 푸터 · 사이트맵)를 `catalogue-eng.pdf`로 변경. 한글 8개는 그대로 `catalogue.pdf`.
+- **영문 `Products.html` 가격**: 16모델 모두 영문 카탈로그대로 `₩ · $ · € · ₸` 표시 (예: S2-B4-1200 `₩804,000 · $600 · €540 · ₸272,000`). 영문판 원화는 국내가의 1.4배(수출가).
+  - 가격 안내 문구도 카탈로그대로 "Prices are for reference only and will be finalized through consultation."로 변경.
+  - 1440px · 390px 확인 — 모바일에서는 G2B 아래 줄로 가격이 넘어감. ₸ 글자 정상 표시.
+- 한글 `Products-kor.html`은 국내 조달가 그대로 (변경 없음) — **확정**: 한글 페이지에는 외화 가격을 넣지 않고 국내가만 표시.
+- 영문 카탈로그의 S1 일부 G2B 번호 뒤 `(1)` 표기(26236434(1) 등)는 사이트에 반영 안 함.
+- 영문판 원본 PDF는 글자가 윤곽선이라 텍스트 추출이 안 됨 → 가격은 200dpi로 렌더링한 쪽 이미지(3 · 4쪽)를 보고 옮겨 적음.
+- 도구: PDF 압축용 **Ghostscript**를 Homebrew로 설치 (`brew install ghostscript`). 다시 압축하는 명령은 [05-assets.md](./05-assets.md).
+- 문서: CLAUDE.md(Assets — PDF 2개 · 영문/한글 가격 기준), 01(디렉토리 구조), 02(영문 4개 통화 가격표 추가), 05(`catalogue-eng.pdf` 항목), 06(현황 · 할 일) 수정.
+- 배포: 2026-10-30에 10-30 갤러리 수정과 함께 커밋 · 푸시.
+
+---
+
+## 2026-10-28 — CLAUDE.md 보완 · 세션 종료 기록
+
+- 사이트 화면 · 코드 변경 없음 (문서만 수정).
+- `/init`으로 CLAUDE.md를 코드와 다시 대조 — 기존 내용은 모두 정확해서 새로 쓰지 않고 4가지만 추가:
+  - **세션 시작 절차**: `git log origin/main..main --oneline`으로 푸시 안 된 커밋부터 확인 → 06 "다음에 할 일" 읽기
+  - **전체 검색 범위**: 루트에서 `grep -l "…" *.html` → 라이브 16개만 잡히고 `backup/` · `DOC/` 제외
+  - **페이지 추가 시**: `language.js`의 `languageMap`, `sitemap.xml`, 사이트맵 페이지 2개에 모두 등록. 영문 href는 `about%20us.html`처럼 인코딩
+  - **배포 확인**: 저장소 `jmwfdisk/songininc`, 푸시 후 `curl -sI https://songininc.com`으로 반영 확인
+  - 스크롤 리빌: `prefers-reduced-motion`이어도 카드는 `.fade-in`이 붙어야 보인다는 점 명시
+- 2026-10-18 커밋 `7fb2e85`(CLAUDE.md 로컬 확인 · 인라인 JS · 문서 관리 안내 보강)는 아직 **푸시 안 됨** — 이번 변경과 함께 푸시 필요.
+- 확인 사항: 저장소에 README · Cursor · Copilot 규칙 파일 없음. `~/.codex/config.toml`(Codex 설정)은 있음 — 필요하면 `/import`로 가져오기.
+
+---
+
 ## 2026-10-16 — CLAUDE.md 점검 · 문서 정리
 
 - `/init`으로 CLAUDE.md를 코드와 대조 — 페이지 16개, `languageMap`, 카탈로그 부품, `ie.js` 미사용, `news2.png`(6.7MB), 첫 접속 이동 스크립트, 정책 문서 `mark.todo` 0개, `sitemap.xml` URL 16개 모두 일치.

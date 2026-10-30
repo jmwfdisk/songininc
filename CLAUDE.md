@@ -20,7 +20,11 @@ npx serve .
 
 No build, lint, or test commands exist. Verification is manual: open the page in a browser and check both language variants at the responsive breakpoints.
 
-Open `http://localhost:8080/index-kor.html` for local checks. The root `/` (`index.html`) redirects first-time visitors to the Korean homepage, so use the ENG button to reach the English pages from there. `.claude/launch.json` (gitignored) defines the same server on port 8080.
+Open `http://localhost:8080/index-kor.html` for local checks. The root `/` (`index.html`) redirects first-time visitors to the Korean homepage, so use the ENG button to reach the English pages from there. `.claude/launch.json` (gitignored, like the whole `.claude/` folder) defines the same server on port 8080.
+
+When resuming work, first run `git log origin/main..main --oneline` — commits are sometimes left unpushed, and nothing is live until they reach `origin/main`. Then read the to-do list in `DOC/06-dev-status.md`.
+
+Site-wide searches: `grep -l "pattern" *.html` at the repo root covers exactly the 16 live pages and skips `backup/` and `DOC/`.
 
 ## Bilingual Page Structure
 
@@ -37,7 +41,7 @@ Every page exists in two language variants. When editing content, **always updat
 | `terms.html` | `terms-kor.html` |
 | `sitemap.html` | `sitemap-kor.html` |
 
-Language switching is handled by `js/language.js`, which maps page names to their counterparts and stores the user's preference in `localStorage`. English filenames with spaces (e.g. `about us.html`) must be referenced as `%20`-encoded URLs in HTML `href` attributes, but the `languageMap` object in `language.js` uses literal spaces as keys (e.g. `'about us.html'`).
+Language switching is handled by `js/language.js`, which maps page names to their counterparts and stores the user's preference in `localStorage`. English filenames with spaces (e.g. `about us.html`) must be referenced as `%20`-encoded URLs in HTML `href` attributes (`href="about%20us.html"`), but the `languageMap` object in `language.js` uses literal spaces as keys (e.g. `'about us.html'`). Adding a page means adding both variants to that map, to `sitemap.xml`, and to both sitemap pages.
 
 ## Architecture
 
@@ -88,7 +92,7 @@ Sub-page heroes do the same in their inline `<style>` (e.g. `section.products-in
 
 ## Scroll-Reveal Pattern
 
-`.news-card` and `.why-card` are intentionally set to `opacity: 0; transform: translateY(24px)` in CSS. They become visible only when an `IntersectionObserver` (inline script at the bottom of the relevant HTML files) adds the `.fade-in` class. If cards appear invisible, verify the inline JS observer is present on that page.
+`.news-card` and `.why-card` are intentionally set to `opacity: 0; transform: translateY(24px)` in CSS. They become visible only when an `IntersectionObserver` (inline script at the bottom of `index.html` / `index-kor.html`) adds the `.fade-in` class. If cards appear invisible, verify the inline JS observer is present on that page. The global `prefers-reduced-motion` rule in `style.css` only shortens the transition; it does not remove the dependency on `.fade-in`.
 
 ## Policy / Sitemap Pages
 
@@ -96,11 +100,12 @@ Sub-page heroes do the same in their inline `<style>` (e.g. `section.products-in
 
 ## Deployment
 
-The site is hosted on **GitHub Pages** at `songininc.com`. The `CNAME` file at the repo root maps the custom domain. Pushing to the `main` branch deploys automatically. If `git push` fails with an authentication error, run `gh auth setup-git` once in the terminal.
+The site is hosted on **GitHub Pages** at `songininc.com` from the `jmwfdisk/songininc` repo. The `CNAME` file at the repo root maps the custom domain. Pushing to the `main` branch deploys automatically. If `git push` fails with an authentication error, run `gh auth setup-git` once in the terminal. After pushing, `curl -sI https://songininc.com` or a fresh load of the live site confirms the deploy (GitHub Pages usually takes about a minute).
 
 ## Assets
 
-- `catalogue.pdf` (repo root) — linked from "Download Catalogue" buttons on `Products.html` / `Products-kor.html`
+- `catalogue.pdf` (repo root) — Korean catalogue, linked from the "Download Catalogue" button and footer of the 8 Korean pages
+- `catalogue-eng.pdf` (repo root) — English catalogue (export prices in ₩ · $ · € · ₸), linked from the 8 English pages. `Products.html` prices mirror it; `Products-kor.html` keeps the domestic G2B prices from the Korean catalogue
 - `img/` — all images; `visual.mp4` is no longer used (the homepage video was removed)
 - `img/catalog/` — web-optimised images from the 2026 catalogue: `product/` (S1/S2 models, `thumb-*` crops for the home hero), `color/` (swatches), `logo/` (certification marks), `func/` (feature/test images), `site/` (delivery photos used in Gallery)
 - `img/SI/` — older site photos (`JANG/`, `chung buk/` are no longer shown in the gallery)
